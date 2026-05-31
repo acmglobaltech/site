@@ -261,6 +261,10 @@ img.leader-avatar-photo { object-fit: cover; object-position: 50% 20%; backgroun
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
 .reveal.in { opacity: 1; transform: none; }
 
+.form-alt { color: var(--text-mute); font-size: .85rem; margin-top: 12px; line-height: 1.6; }
+.form-alt a { color: var(--blue-lt); border-bottom: 1px dotted rgba(106,166,255,.5); }
+.form-alt a:hover { color: #fff; border-bottom-color: #fff; }
+
 /* ===== Responsive ===== */
 @media (max-width: 1000px) {
   .nav, .btn-nav { display: none; }

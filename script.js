@@ -116,15 +116,86 @@
     revealEls.forEach(function (el) { el.classList.add('in'); });
   }
 
-  /* --- Contact form --- */
+  /* ============================================================
+     Wix backend wiring
+     Swap the placeholders in WIX_CONFIG once the Wix site is published.
+     ------------------------------------------------------------
+     • WIX_BASE              Your Wix site root, no trailing slash.
+                             e.g. "https://michael.wixsite.com/acm-global-tech"
+                             or your custom domain "https://acmglobaltech.com"
+     • CONTACT_FORM_ENDPOINT Velo HTTP function URL. Wix exposes Velo HTTP
+                             functions at `${WIX_BASE}/_functions/<name>`.
+                             Name must match the export in backend/http-functions.js
+                             (provided below).
+     • BOOKINGS_URL          Public booking page for the "Discovery Call" service.
+                             Default Wix Bookings format is
+                             `${WIX_BASE}/book-online/<service-slug>`.
+     • PAYMENT_LINK_DEPOSIT  Hosted Wix Payment Link for the deposit / retainer offer.
+     • MEMBERS_LOGIN         Members area login URL.
+                             Default Wix format is `${WIX_BASE}/account/login`.
+     ============================================================ */
+  var WIX_CONFIG = {
+    WIX_BASE: 'https://YOUR-WIX-SITE.wixsite.com/acm',
+    CONTACT_FORM_ENDPOINT: 'https://YOUR-WIX-SITE.wixsite.com/acm/_functions/contact',
+    BOOKINGS_URL: 'https://YOUR-WIX-SITE.wixsite.com/acm/book-online/discovery-call',
+    PAYMENT_LINK_DEPOSIT: 'https://YOUR-WIX-SITE.wixsite.com/acm/payments/deposit',
+    MEMBERS_LOGIN: 'https://YOUR-WIX-SITE.wixsite.com/acm/account/login'
+  };
+
+  /* --- Discovery Call booking links --- */
+  document.querySelectorAll('a[data-wix="bookings"]').forEach(function (a) {
+    a.href = WIX_CONFIG.BOOKINGS_URL;
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
+  /* --- Members / Client portal link --- */
+  document.querySelectorAll('a[data-wix="members"]').forEach(function (a) {
+    a.href = WIX_CONFIG.MEMBERS_LOGIN;
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
+  /* --- Payment links --- */
+  document.querySelectorAll('a[data-wix="payment-deposit"]').forEach(function (a) {
+    a.href = WIX_CONFIG.PAYMENT_LINK_DEPOSIT;
+    a.target = '_blank';
+    a.rel = 'noopener';
+  });
+
+  /* --- Contact form → Wix CRM via Velo HTTP function --- */
   var form = document.getElementById('contactForm');
   var note = document.getElementById('formNote');
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (!form.checkValidity()) { form.reportValidity(); return; }
-      if (note) note.hidden = false;
-      form.reset();
+
+      var data = Object.fromEntries(new FormData(form).entries());
+      var submitBtn = form.querySelector('button[type=submit]');
+      var originalLabel = submitBtn ? submitBtn.textContent : '';
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+      fetch(WIX_CONFIG.CONTACT_FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+        .then(function () {
+          if (note) { note.hidden = false; note.textContent = "Thank you — we'll be in touch shortly to schedule your Discovery Call."; }
+          form.reset();
+        })
+        .catch(function (err) {
+          if (note) {
+            note.hidden = false;
+            note.textContent = 'Something went wrong. Email michael@acmglobaltech.com and we will respond directly.';
+          }
+          console.warn('contact submit failed:', err);
+        })
+        .finally(function () {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }
+        });
     });
   }
 
