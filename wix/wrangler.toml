@@ -1,0 +1,12 @@
+name = "acm-contact"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+# Non-secret config. The Wix API key is NOT here — it is set as a
+# secret with:  npx wrangler secret put WIX_API_KEY
+[vars]
+WIX_ACCOUNT_ID   = "379fb1dd-5d55-4243-878f-d782b1397fbc"
+WIX_SITE_ID      = "cb3bb9a2-6ded-4155-9463-a8eca41842b6"
+MESSAGE_FIELD_KEY = "custom.acm-message-xnwsqpcqvzusxbypusvuucv"
+LEAD_LABEL_KEY    = "custom.website-lead"
+ALLOWED_ORIGINS  = "https://hanzoai.github.io,https://www.acmglobaltech.com,https://acmglobaltech.com"

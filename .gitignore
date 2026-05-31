@@ -1,3 +1,14 @@
 .DS_Store
 *.log
 node_modules/
+
+# Secrets — never commit
+.dev.vars
+**/.dev.vars
+.env
+.env.*
+*.key
+
+# Wrangler local state/cache
+.wrangler/
+**/.wrangler/

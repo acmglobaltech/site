@@ -135,11 +135,14 @@
                              Default Wix format is `${WIX_BASE}/account/login`.
      ============================================================ */
   var WIX_CONFIG = {
-    WIX_BASE: 'https://YOUR-WIX-SITE.wixsite.com/acm',
-    CONTACT_FORM_ENDPOINT: 'https://YOUR-WIX-SITE.wixsite.com/acm/_functions/contact',
-    BOOKINGS_URL: 'https://YOUR-WIX-SITE.wixsite.com/acm/book-online/discovery-call',
-    PAYMENT_LINK_DEPOSIT: 'https://YOUR-WIX-SITE.wixsite.com/acm/payments/deposit',
-    MEMBERS_LOGIN: 'https://YOUR-WIX-SITE.wixsite.com/acm/account/login'
+    WIX_BASE: 'https://www.acmglobaltech.com',
+    // Contact form posts to the Cloudflare Worker proxy (holds the Wix API
+    // key server-side). After `npx wrangler deploy`, replace <subdomain>
+    // with the workers.dev subdomain it prints (or a custom route).
+    CONTACT_FORM_ENDPOINT: 'https://acm-contact.<subdomain>.workers.dev/contact',
+    BOOKINGS_URL: 'https://www.acmglobaltech.com/book-online/discovery-call',
+    PAYMENT_LINK_DEPOSIT: 'https://www.acmglobaltech.com/payments/deposit',
+    MEMBERS_LOGIN: 'https://www.acmglobaltech.com/account/login'
   };
 
   /* --- Discovery Call booking links --- */
@@ -239,7 +242,7 @@
           var dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 150) {
             var alpha = (1 - dist / 150) * 0.3;
-            ctx.strokeStyle = 'rgba(106,166,255,' + alpha + ')';
+            ctx.strokeStyle = 'rgba(137,162,255,' + alpha + ')';
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
@@ -251,8 +254,8 @@
         var pulse = 1.4 + Math.sin(t + n.p) * 1.0;
         ctx.beginPath();
         ctx.arc(n.x, n.y, pulse, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(120,175,255,0.9)';
-        ctx.shadowColor = 'rgba(80,140,255,0.9)';
+        ctx.fillStyle = 'rgba(137,162,255,0.9)';
+        ctx.shadowColor = 'rgba(31,79,255,0.9)';
         ctx.shadowBlur = 10;
         ctx.fill();
         ctx.shadowBlur = 0;
