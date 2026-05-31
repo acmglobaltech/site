@@ -7,11 +7,17 @@ wired for **Option A** (uses your Wix API key).
 | Capability      | Wired by                              | Setup |
 |-----------------|---------------------------------------|-------|
 | Contact form    | `fetch()` → Cloudflare Worker → Wix REST API | deploy `worker.js` (Option A) |
-| Discovery Call  | `<a data-wix="bookings">`             | create the Bookings service in Wix |
-| Payment Link    | `<a data-wix="payment-deposit">`      | create a Payment Link in Wix Payments |
-| Members / login | `<a data-wix="members">`              | enable Wix Members area |
+| All other CTAs  | `<a data-cta="…">` → funnel into the contact form | none — each creates a CRM lead tagged with the button's intent |
 
-All link URLs live in **one** place: `WIX_CONFIG` at the top of `../script.js`.
+**Funnel-to-CRM model.** The Wix site is headless, so every call-to-action —
+"Schedule a Discovery Call", "Pay a deposit", "Sign in to the client portal" —
+scrolls to the contact form and submits a CRM lead carrying a `cta` field with
+the button's intent (`Discovery Call` / `Deposit / Retainer` / `Client Portal
+Access`). No Wix Bookings / Payments / Members pages are required. If the Worker
+isn't deployed yet, the form falls back to a pre-filled `mailto:` so no lead is lost.
+
+`WIX_CONFIG` at the top of `../script.js` now holds just the Worker endpoint and
+the fallback contact email.
 
 **Wix site:** `acm-global-tech` · domain `https://www.acmglobaltech.com`
 · site id `cb3bb9a2-6ded-4155-9463-a8eca41842b6`
@@ -85,13 +91,19 @@ Use **either** Option A **or** Option B, not both.
 
 ---
 
-## Bookings / Payments / Members (both options)
+## Optional: real Wix Bookings / Payments / Members
 
-- **Bookings:** Wix Apps → Wix Bookings → add a "Discovery Call" service (30 min).
-  Its URL → `BOOKINGS_URL`.
-- **Payments:** Wix Dashboard → Payments → Payment Links → new link.
-  Its URL → `PAYMENT_LINK_DEPOSIT`.
-- **Members:** Wix Editor → Add → Members Area. Login is `/account/login`.
+The funnel-to-CRM model means none of these are required. If you later publish a
+full Wix site and want a button to deep-link instead of funneling to the form:
+
+- **Bookings:** Wix Apps → Wix Bookings → add a "Discovery Call" service (30 min),
+  then point the `data-cta="Discovery Call"` buttons at its `/book-online/<slug>` URL.
+- **Payments:** Wix Dashboard → Payments → Payment Links → new link; point
+  `data-cta="Deposit / Retainer"` at it.
+- **Members:** Wix Editor → Add → Members Area (login at `/account/login`); point
+  `data-cta="Client Portal Access"` at it.
+
+Until then, every button captures the lead in your CRM.
 
 ## CORS
 `wrangler.toml` → `ALLOWED_ORIGINS` lists who may POST the form. It currently

@@ -117,58 +117,102 @@
   }
 
   /* ============================================================
-     Wix backend wiring
-     Swap the placeholders in WIX_CONFIG once the Wix site is published.
+     Wix backend wiring — "funnel to CRM" model
      ------------------------------------------------------------
-     • WIX_BASE              Your Wix site root, no trailing slash.
-                             e.g. "https://michael.wixsite.com/acm-global-tech"
-                             or your custom domain "https://acmglobaltech.com"
-     • CONTACT_FORM_ENDPOINT Velo HTTP function URL. Wix exposes Velo HTTP
-                             functions at `${WIX_BASE}/_functions/<name>`.
-                             Name must match the export in backend/http-functions.js
-                             (provided below).
-     • BOOKINGS_URL          Public booking page for the "Discovery Call" service.
-                             Default Wix Bookings format is
-                             `${WIX_BASE}/book-online/<service-slug>`.
-     • PAYMENT_LINK_DEPOSIT  Hosted Wix Payment Link for the deposit / retainer offer.
-     • MEMBERS_LOGIN         Members area login URL.
-                             Default Wix format is `${WIX_BASE}/account/login`.
+     The Wix site here is headless: the only live Wix backend is
+     the CRM (Contacts). So every call-to-action funnels into the
+     contact form below and creates a CRM lead tagged with the
+     button's intent (the hidden `cta` field). No Wix Bookings /
+     Members / Payments pages are required.
+
+     Submit path:
+       1) POST the lead to CONTACT_FORM_ENDPOINT — a Cloudflare
+          Worker that holds the Wix API key and writes to Wix CRM.
+          Deploy it from wix/ :  npx wrangler deploy
+       2) If that endpoint isn't configured yet (still contains
+          "<subdomain>") or the POST fails, fall back to a
+          pre-filled mailto: so a lead is never lost.
      ============================================================ */
   var WIX_CONFIG = {
-    WIX_BASE: 'https://www.acmglobaltech.com',
-    // Contact form posts to the Cloudflare Worker proxy (holds the Wix API
-    // key server-side). After `npx wrangler deploy`, replace <subdomain>
-    // with the workers.dev subdomain it prints (or a custom route).
+    // After `npx wrangler deploy`, replace <subdomain> with the
+    // workers.dev subdomain it prints (or wire a custom route).
     CONTACT_FORM_ENDPOINT: 'https://acm-contact.<subdomain>.workers.dev/contact',
-    BOOKINGS_URL: 'https://www.acmglobaltech.com/book-online/discovery-call',
-    PAYMENT_LINK_DEPOSIT: 'https://www.acmglobaltech.com/payments/deposit',
-    MEMBERS_LOGIN: 'https://www.acmglobaltech.com/account/login'
+    CONTACT_EMAIL: 'michael@acmglobaltech.com'
   };
+  var ENDPOINT_READY = WIX_CONFIG.CONTACT_FORM_ENDPOINT.indexOf('<subdomain>') === -1;
 
-  /* --- Discovery Call booking links --- */
-  document.querySelectorAll('a[data-wix="bookings"]').forEach(function (a) {
-    a.href = WIX_CONFIG.BOOKINGS_URL;
-    a.target = '_blank';
-    a.rel = 'noopener';
-  });
-
-  /* --- Members / Client portal link --- */
-  document.querySelectorAll('a[data-wix="members"]').forEach(function (a) {
-    a.href = WIX_CONFIG.MEMBERS_LOGIN;
-    a.target = '_blank';
-    a.rel = 'noopener';
-  });
-
-  /* --- Payment links --- */
-  document.querySelectorAll('a[data-wix="payment-deposit"]').forEach(function (a) {
-    a.href = WIX_CONFIG.PAYMENT_LINK_DEPOSIT;
-    a.target = '_blank';
-    a.rel = 'noopener';
-  });
-
-  /* --- Contact form → Wix CRM via Velo HTTP function --- */
   var form = document.getElementById('contactForm');
   var note = document.getElementById('formNote');
+  var ctaField = document.getElementById('ctaField');
+  var ctaHint = document.getElementById('ctaHint');
+
+  /* Intent-specific copy, keyed by each button's data-cta value. */
+  var CTA_INTENT = {
+    'Discovery Call': { hint: '', message: '' },
+    'Deposit / Retainer': {
+      hint: 'Starting an engagement — send this and we\'ll reply with a secure deposit invoice.',
+      message: 'I\'d like to start an engagement and pay a deposit.'
+    },
+    'Client Portal Access': {
+      hint: 'Existing client — send this and we\'ll verify your account and share portal access.',
+      message: 'I\'m an existing client and need access to the client portal.'
+    }
+  };
+
+  function focusFirstEmpty() {
+    if (!form) return;
+    var order = ['name', 'email', 'message'];
+    for (var i = 0; i < order.length; i++) {
+      var el = form.elements[order[i]];
+      if (el && !el.value) { el.focus(); return; }
+    }
+  }
+
+  /* Every [data-cta] funnels into the contact form, tagged by intent. */
+  document.querySelectorAll('[data-cta]').forEach(function (el) {
+    el.addEventListener('click', function (e) {
+      var intent = el.getAttribute('data-cta') || 'Discovery Call';
+      var spec = CTA_INTENT[intent] || CTA_INTENT['Discovery Call'];
+      if (ctaField) ctaField.value = intent;
+      if (ctaHint) {
+        ctaHint.textContent = spec.hint || '';
+        ctaHint.hidden = !spec.hint;
+      }
+      // Pre-fill the message only if the visitor hasn't typed their own.
+      var msg = form && form.elements['message'];
+      if (msg && !msg.value && spec.message) msg.value = spec.message;
+
+      var contact = document.getElementById('contact');
+      if (contact) {
+        e.preventDefault();
+        contact.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
+        if (form) {
+          form.classList.add('cta-focus');
+          window.setTimeout(function () { form.classList.remove('cta-focus'); }, 1600);
+        }
+        window.setTimeout(focusFirstEmpty, reduceMotion ? 0 : 450);
+      }
+    });
+  });
+
+  /* --- Contact form → Wix CRM (Worker), with mailto fallback --- */
+  function buildMailto(data) {
+    var lines = [
+      'Name: ' + (data.name || ''),
+      'Email: ' + (data.email || ''),
+      'Phone: ' + (data.phone || ''),
+      'Company: ' + (data.company || ''),
+      'Interested in: ' + (data.interest || '(not specified)'),
+      'Request: ' + (data.cta || 'Discovery Call'),
+      '',
+      (data.message || '')
+    ];
+    var subject = 'Website enquiry — ' + (data.cta || 'Discovery Call') + (data.name ? ' — ' + data.name : '');
+    return 'mailto:' + WIX_CONFIG.CONTACT_EMAIL +
+      '?subject=' + encodeURIComponent(subject) +
+      '&body=' + encodeURIComponent(lines.join('\n'));
+  }
+
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -177,24 +221,31 @@
       var data = Object.fromEntries(new FormData(form).entries());
       var submitBtn = form.querySelector('button[type=submit]');
       var originalLabel = submitBtn ? submitBtn.textContent : '';
-      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
 
+      function showThanks() {
+        if (note) { note.hidden = false; note.textContent = "Thank you — we'll be in touch shortly to schedule your Discovery Call."; }
+        if (ctaHint) ctaHint.hidden = true;
+        form.reset();
+      }
+      function handoffToEmail() {
+        // No server yet (or it failed): open the visitor's mail client pre-filled.
+        if (note) { note.hidden = false; note.textContent = 'Opening your email app — or write to us directly at ' + WIX_CONFIG.CONTACT_EMAIL + '.'; }
+        window.location.href = buildMailto(data);
+      }
+
+      if (!ENDPOINT_READY) { handoffToEmail(); return; }
+
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
       fetch(WIX_CONFIG.CONTACT_FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       })
         .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
-        .then(function () {
-          if (note) { note.hidden = false; note.textContent = "Thank you — we'll be in touch shortly to schedule your Discovery Call."; }
-          form.reset();
-        })
+        .then(showThanks)
         .catch(function (err) {
-          if (note) {
-            note.hidden = false;
-            note.textContent = 'Something went wrong. Email michael@acmglobaltech.com and we will respond directly.';
-          }
-          console.warn('contact submit failed:', err);
+          console.warn('contact submit failed, handing off to email:', err);
+          handoffToEmail();
         })
         .finally(function () {
           if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = originalLabel; }

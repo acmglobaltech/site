@@ -31,7 +31,7 @@
         <a href="#contact">Contact</a>
       </nav>
 
-      <a href="#contact" class="btn btn-primary btn-nav" data-wix="bookings">Schedule a Discovery Call</a>
+      <a href="#contact" class="btn btn-primary btn-nav" data-cta="Discovery Call">Schedule a Discovery Call</a>
 
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -57,7 +57,7 @@
         <span>White-Label Ready</span>
       </div>
       <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary btn-lg" data-wix="bookings">Schedule a Discovery Call</a>
+        <a href="#contact" class="btn btn-primary btn-lg" data-cta="Discovery Call">Schedule a Discovery Call</a>
         <a href="#products" class="btn btn-ghost btn-lg">Explore Our Platform</a>
       </div>
     </div>
@@ -165,7 +165,7 @@
           <li>Private wallets &amp; non-custodial products</li>
           <li>Broker-dealer / ATS infrastructure</li>
         </ul>
-        <a href="#contact" class="btn btn-primary" data-wix="bookings">Schedule a Discovery Call</a>
+        <a href="#contact" class="btn btn-primary" data-cta="Discovery Call">Schedule a Discovery Call</a>
       </div>
       <div class="featured-visual" aria-hidden="true">
         <div class="card-stack">
@@ -326,6 +326,7 @@
       </div>
 
       <form class="glass contact-form" id="contactForm" novalidate>
+        <input type="hidden" name="cta" id="ctaField" value="Discovery Call" />
         <div class="field-row">
           <label class="field"><span>Name</span><input type="text" name="name" required /></label>
           <label class="field"><span>Company</span><input type="text" name="company" /></label>
@@ -347,11 +348,12 @@
           </select>
         </label>
         <label class="field"><span>Message</span><textarea name="message" rows="4"></textarea></label>
+        <p class="form-cta-hint" id="ctaHint" hidden></p>
         <button type="submit" class="btn btn-primary btn-lg btn-block">Schedule a 30-minute Discovery Call</button>
         <p class="form-note" id="formNote" hidden>Thank you — we'll be in touch shortly to schedule your Discovery Call.</p>
         <p class="form-alt">
-          Existing client? <a href="#" data-wix="members">Sign in to the client portal</a>.
-          Ready to start an engagement? <a href="#" data-wix="payment-deposit">Pay a deposit</a>.
+          Existing client? <a href="#contact" data-cta="Client Portal Access">Sign in to the client portal</a>.
+          Ready to start an engagement? <a href="#contact" data-cta="Deposit / Retainer">Pay a deposit</a>.
         </p>
       </form>
     </div>

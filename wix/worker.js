@@ -75,6 +75,7 @@ export default {
 
     const messageParts = [];
     if (data.message) messageParts.push(String(data.message));
+    if (data.cta) messageParts.push(`[request: ${data.cta}]`);
     if (data.interest) messageParts.push(`[interested in: ${data.interest}]`);
     if (messageParts.length) info.extendedFields.items[messageKey] = messageParts.join(' ');
 

@@ -49,7 +49,7 @@ export async function post_contact(request) {
         },
         extendedFields: {
           items: {
-            'custom.acmMessage': body.message || '',
+            'custom.acmMessage': [body.message, body.cta ? '[request: ' + body.cta + ']' : ''].filter(Boolean).join(' '),
             'custom.acmInterest': body.interest || ''
           }
         }
