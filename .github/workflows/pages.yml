@@ -1,0 +1,54 @@
+name: Build & deploy to GitHub Pages
+
+# Runs the static build (node build.mjs) and publishes to GitHub Pages on every
+# push to main — so contributors only commit src/ and the live site rebuilds
+# itself. Replaces the "deploy from branch" mode that required committing the
+# built HTML by hand.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; let an in-flight run finish (don't cancel a publish).
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build static site
+        run: node build.mjs
+      - name: Assemble publishable site (exclude source + repo internals)
+        run: |
+          mkdir -p _site
+          rsync -a \
+            --exclude='.git' --exclude='.github' --exclude='_site' \
+            --exclude='src' --exclude='build.mjs' --exclude='node_modules' \
+            --exclude='README.md' --exclude='*.log' \
+            ./ _site/
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
