@@ -284,6 +284,58 @@
     });
   }
 
+  /* --- Platform showcase carousel --- */
+  var scVp = document.getElementById('scViewport');
+  if (scVp) {
+    var scSlides = Array.prototype.slice.call(scVp.querySelectorAll('.sc-slide'));
+    var scDots = document.getElementById('scDots');
+    var scPrev = document.getElementById('scPrev');
+    var scNext = document.getElementById('scNext');
+    var scCurrent = 0;
+
+    scSlides.forEach(function (s, i) {
+      var d = document.createElement('button');
+      d.className = 'sc-dot';
+      d.type = 'button';
+      d.setAttribute('aria-label', 'Go to screen ' + (i + 1));
+      d.addEventListener('click', function () { scrollToIndex(i); });
+      scDots.appendChild(d);
+    });
+    var scDotEls = Array.prototype.slice.call(scDots.children);
+
+    function scrollToIndex(i) {
+      i = Math.max(0, Math.min(scSlides.length - 1, i));
+      var slide = scSlides[i];
+      var left = slide.offsetLeft - (scVp.clientWidth - slide.offsetWidth) / 2;
+      scVp.scrollTo({ left: left, behavior: reduceMotion ? 'auto' : 'smooth' });
+    }
+    function syncActive() {
+      var center = scVp.scrollLeft + scVp.clientWidth / 2;
+      var best = 0, bd = Infinity;
+      scSlides.forEach(function (s, i) {
+        var c = s.offsetLeft + s.offsetWidth / 2;
+        var dd = Math.abs(c - center);
+        if (dd < bd) { bd = dd; best = i; }
+      });
+      scCurrent = best;
+      scDotEls.forEach(function (d, i) { d.classList.toggle('on', i === best); });
+      if (scPrev) scPrev.disabled = best === 0;
+      if (scNext) scNext.disabled = best === scSlides.length - 1;
+    }
+    var scTick = false;
+    scVp.addEventListener('scroll', function () {
+      if (!scTick) { window.requestAnimationFrame(function () { syncActive(); scTick = false; }); scTick = true; }
+    }, { passive: true });
+    if (scPrev) scPrev.addEventListener('click', function () { scrollToIndex(scCurrent - 1); });
+    if (scNext) scNext.addEventListener('click', function () { scrollToIndex(scCurrent + 1); });
+    scVp.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight') { e.preventDefault(); scrollToIndex(scCurrent + 1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); scrollToIndex(scCurrent - 1); }
+    });
+    window.addEventListener('resize', syncActive);
+    syncActive();
+  }
+
   /* --- Hero data-flow lines (blue) --- */
   var canvas = document.getElementById('dataFlow');
   if (canvas && !reduceMotion) {
