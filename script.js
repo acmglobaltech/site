@@ -33,6 +33,34 @@
     });
   }
 
+  /* --- Mega-menu: hover dropdowns (desktop) + accordion (mobile) --- */
+  var navGroups = Array.prototype.slice.call(document.querySelectorAll('.nav-group'));
+  function isMobileNav() { return window.matchMedia('(max-width: 1100px)').matches; }
+  navGroups.forEach(function (g) {
+    var top = g.querySelector('.nav-top');
+    if (!top) return;
+    top.addEventListener('click', function (e) {
+      if (isMobileNav()) {
+        e.preventDefault();
+        var open = g.classList.toggle('open');
+        top.setAttribute('aria-expanded', open ? 'true' : 'false');
+        navGroups.forEach(function (o) { if (o !== g) o.classList.remove('open'); });
+      } else {
+        var href = top.getAttribute('data-href');
+        if (href) window.location.href = href;
+      }
+    });
+  });
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest('.nav-group')) navGroups.forEach(function (g) { g.classList.remove('open'); });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') navGroups.forEach(function (g) { g.classList.remove('open'); });
+  });
+  if (toggle) toggle.addEventListener('click', function () {
+    if (!nav || !nav.classList.contains('open')) navGroups.forEach(function (g) { g.classList.remove('open'); });
+  });
+
   /* --- Scroll spy --- */
   var sections = Array.prototype.slice.call(document.querySelectorAll('section[id], [id]'))
     .filter(function (el) { return el.id && document.querySelector('.nav a[href="#' + el.id + '"]'); });
@@ -318,6 +346,7 @@
         if (dd < bd) { bd = dd; best = i; }
       });
       scCurrent = best;
+      scSlides.forEach(function (s, i) { s.classList.toggle('active', i === best); });
       scDotEls.forEach(function (d, i) { d.classList.toggle('on', i === best); });
       if (scPrev) scPrev.disabled = best === 0;
       if (scNext) scNext.disabled = best === scSlides.length - 1;
@@ -334,6 +363,15 @@
     });
     window.addEventListener('resize', syncActive);
     syncActive();
+
+    /* Animate each screen in as it scrolls into view (vertical or horizontal). */
+    if (!reduceMotion && 'IntersectionObserver' in window) {
+      scVp.classList.add('sc-anim');
+      var scIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('sc-in'); });
+      }, { threshold: 0.35 });
+      scSlides.forEach(function (s) { scIO.observe(s); });
+    }
   }
 
   /* --- Hero data-flow lines (blue) --- */
