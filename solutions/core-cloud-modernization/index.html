@@ -96,6 +96,16 @@
           </div>
         </div>
         <div class="nav-group">
+          <button class="nav-top" data-href="/docs/" aria-expanded="false">Resources<span class="caret"></span></button>
+          <div class="nav-panel">
+            <a href="/docs/">Documentation</a>
+            <a href="/support/">Support &amp; Help</a>
+            <a href="/trust/">Trust &amp; Security</a>
+            <a href="/case-studies/">Case Studies</a>
+            <a href="/docs/" class="nav-all">All Resources &rarr;</a>
+          </div>
+        </div>
+        <div class="nav-group">
           <button class="nav-top" data-href="/company/" aria-expanded="false">Company<span class="caret"></span></button>
           <div class="nav-panel">
             <a href="/company/about/">About</a>
@@ -103,11 +113,13 @@
             <a href="/company/team/">Leadership Team</a>
             <a href="/company/ventures/">ACM Ventures</a>
             <a href="/company/careers/">Careers</a>
+            <a href="/get-started/">Get Started</a>
             <a href="/contact/">Contact</a>
             <a href="/company/" class="nav-all">All Company &rarr;</a>
           </div>
         </div>
       </nav>
+      <a href="/login/" class="nav-login">Client Login</a>
       <a href="/contact/" class="btn btn-primary btn-nav" data-cta="Discovery Call">Get in Touch</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -124,8 +136,6 @@
 <section class="section surface"><div class="container"><span class="tag"><span class="dot"></span> The Approach</span><h2 class="section-title">A phased path off the legacy stack</h2><p class="section-lead">We sit a modern, cloud-native layer alongside your existing core, migrate capability by capability, and decommission the old stack only when the new one has proven itself in production.</p><div class="solutions-grid"><div class="glass sol-card"><h3>1. Assess &amp; map</h3><p>We map your current core, integrations, data model, and regulatory obligations, then define a migration sequence ordered by risk and value.</p></div><div class="glass sol-card"><h3>2. Stand up the cloud core</h3><p>A cloud-native banking core is provisioned in parallel &mdash; deposits, lending, payments, and ledger &mdash; running next to your incumbent system, not on top of it.</p></div><div class="glass sol-card"><h3>3. Migrate in slices</h3><p>Products and account segments move in measured slices. Each slice is validated, reconciled, and reversible before the next one begins.</p></div><div class="glass sol-card"><h3>4. Run &amp; decommission</h3><p>Once a workload is proven on the new core, the legacy equivalent is retired. You shed maintenance load and licensing as you go, not all at the end.</p></div></div></div></section>
 
 <section class="section"><div class="container"><span class="tag"><span class="dot"></span> What You Get</span><h2 class="section-title">A cloud-native, client-owned platform</h2><p class="section-lead">Cloud banking migration with ACM is not a hosted copy of an old system. It is a complete, brandable banking ecosystem you own and control &mdash; a fit for <a href="/industries/credit-unions/">credit unions</a> and community and mid-sized banks alike.</p><ul class="bullets"><li><strong>Cloud-native core:</strong> elastic infrastructure that scales with demand instead of fixed, over-provisioned hardware.</li><li><strong>White-label and client-owned:</strong> the platform carries your brand, and the institution owns its stack and data &mdash; non-custodial options included.</li><li><strong>Real-time by default:</strong> real-time ledger, payments, and multi-currency FX across 200+ markets built into the core rather than bolted on.</li><li><strong>Post-quantum cryptography:</strong> long-lived financial records are protected against "harvest now, decrypt later" exposure from day one.</li><li><strong>Future-ready rails:</strong> RWA tokenization and stablecoin settlement are native to the platform, so you can adopt them when your strategy and regulators are ready.</li><li><strong>Compliance-ready foundation:</strong> built for regulated institutions and examiner scrutiny, with controls and audit trails designed in, not retrofitted.</li></ul></div></section>
-
-<section class="section surface"><div class="container"><span class="tag"><span class="dot"></span> The Economics</span><h2 class="section-title">Lower the cost of running the bank</h2><p class="section-lead">Legacy cores are expensive to operate and expensive to change. A cloud-native foundation targets a materially lower total cost of ownership while opening the door to new, fee-generating capabilities.</p><div class="kpi-grid"><div class="kpi"><span class="kpi-num">Up to 95%</span><span class="kpi-label">Lower infrastructure cost vs. legacy core stacks</span><span class="kpi-src">ACM platform</span></div><div class="kpi"><span class="kpi-num">$16T+</span><span class="kpi-label">Projected tokenized real-world assets by 2030</span><span class="kpi-src">Source: BCG</span></div><div class="kpi"><span class="kpi-num">$27.6T</span><span class="kpi-label">2024 stablecoin transfer volume, past Visa &amp; Mastercard combined</span><span class="kpi-src">Source: 2024 on-chain data</span></div></div><p>Modernization is not only a defensive cost play. The same cloud-native foundation that lowers your run-rate also positions the institution to participate in tokenized assets and stablecoin settlement as those markets scale.</p></div></section>
 
 <section class="section"><div class="container"><span class="tag"><span class="dot"></span> Delivery</span><h2 class="section-title">Built for speed, governed for risk</h2><p class="section-lead">Migration timelines are where most core projects fail. Our delivery model is engineered to compress them without cutting corners on controls.</p><p>The ACM Agile Speed Framework breaks modernization into short, measurable increments, each with a working outcome, a rollback path, and clear acceptance criteria. Leadership sees progress in production, not just in status reports.</p><p>Because the new core runs in parallel with the old one throughout, every step is reversible until you choose to decommission. That is what makes a phased program safer than a single-date cutover.</p><div class="hero-cta"><a class="btn btn-ghost" href="/capabilities/agile-speed-framework/">See the Agile Speed Framework</a></div></div></section>
 
@@ -146,6 +156,7 @@
         <div class="footer-contact">
           <a href="tel:+14072790314">+1 (407) 279-0314</a>
           <a href="mailto:info@acmglobaltech.com">info@acmglobaltech.com</a>
+          <a href="/login/" class="footer-login">Client Login &rarr;</a>
         </div>
         <p class="footer-partners">Hanzo.ai &amp; Lux Finance Ecosystem Partners</p>
       </div>
@@ -189,16 +200,24 @@
           <a href="/capabilities/white-label/">White-Label &amp; Ownership</a>
         </div>
         <div class="footer-col">
+          <h4><a href="/docs/">Resources</a></h4>
+          <a href="/docs/">Documentation</a>
+          <a href="/support/">Support &amp; Help</a>
+          <a href="/trust/">Trust &amp; Security</a>
+          <a href="/case-studies/">Case Studies</a>
+        </div>
+        <div class="footer-col">
           <h4><a href="/company/">Company</a></h4>
           <a href="/company/about/">About</a>
           <a href="/company/vision/">Our Vision</a>
           <a href="/company/team/">Leadership Team</a>
           <a href="/company/ventures/">ACM Ventures</a>
           <a href="/company/careers/">Careers</a>
+          <a href="/get-started/">Get Started</a>
           <a href="/contact/">Contact</a>
         </div>
     </div>
-    <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; Powering Global Transformation</div>
+    <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/trust/">Trust &amp; Security</a> &middot; Powering Global Transformation</div>
   </footer>
   <script src="/script.js?v=10"></script>
 </body>

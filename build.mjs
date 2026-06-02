@@ -57,12 +57,19 @@ const NAV = [
     ['Agile Speed Framework', '/capabilities/agile-speed-framework/'],
     ['White-Label & Ownership', '/capabilities/white-label/'],
   ]},
+  { label: 'Resources', href: '/docs/', items: [
+    ['Documentation', '/docs/'],
+    ['Support & Help', '/support/'],
+    ['Trust & Security', '/trust/'],
+    ['Case Studies', '/case-studies/'],
+  ]},
   { label: 'Company', href: '/company/', items: [
     ['About', '/company/about/'],
     ['Our Vision', '/company/vision/'],
     ['Leadership Team', '/company/team/'],
     ['ACM Ventures', '/company/ventures/'],
     ['Careers', '/company/careers/'],
+    ['Get Started', '/get-started/'],
     ['Contact', '/contact/'],
   ]},
 ];
@@ -99,6 +106,7 @@ function renderHeader(activeGroup) {
       <nav class="nav" id="primary-nav" aria-label="Primary">
         ${groups}
       </nav>
+      <a href="/login/" class="nav-login">Client Login</a>
       <a href="/contact/" class="btn btn-primary btn-nav" data-cta="Discovery Call">Get in Touch</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -125,12 +133,13 @@ function renderFooter() {
         <div class="footer-contact">
           <a href="tel:+14072790314">+1 (407) 279-0314</a>
           <a href="mailto:info@acmglobaltech.com">info@acmglobaltech.com</a>
+          <a href="/login/" class="footer-login">Client Login &rarr;</a>
         </div>
         <p class="footer-partners">Hanzo.ai &amp; Lux Finance Ecosystem Partners</p>
       </div>
         ${cols}
     </div>
-    <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; Powering Global Transformation</div>
+    <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/trust/">Trust &amp; Security</a> &middot; Powering Global Transformation</div>
   </footer>`;
 }
 

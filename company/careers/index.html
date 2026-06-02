@@ -96,6 +96,16 @@
           </div>
         </div>
         <div class="nav-group">
+          <button class="nav-top" data-href="/docs/" aria-expanded="false">Resources<span class="caret"></span></button>
+          <div class="nav-panel">
+            <a href="/docs/">Documentation</a>
+            <a href="/support/">Support &amp; Help</a>
+            <a href="/trust/">Trust &amp; Security</a>
+            <a href="/case-studies/">Case Studies</a>
+            <a href="/docs/" class="nav-all">All Resources &rarr;</a>
+          </div>
+        </div>
+        <div class="nav-group">
           <button class="nav-top active" data-href="/company/" aria-expanded="false">Company<span class="caret"></span></button>
           <div class="nav-panel">
             <a href="/company/about/">About</a>
@@ -103,11 +113,13 @@
             <a href="/company/team/">Leadership Team</a>
             <a href="/company/ventures/">ACM Ventures</a>
             <a href="/company/careers/">Careers</a>
+            <a href="/get-started/">Get Started</a>
             <a href="/contact/">Contact</a>
             <a href="/company/" class="nav-all">All Company &rarr;</a>
           </div>
         </div>
       </nav>
+      <a href="/login/" class="nav-login">Client Login</a>
       <a href="/contact/" class="btn btn-primary btn-nav" data-cta="Discovery Call">Get in Touch</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -124,8 +136,6 @@
 <section class="section surface"><div class="container"><span class="tag"><span class="dot"></span> How We Work</span><h2 class="section-title">An Agile Speed Framework, not a slogan</h2><p class="section-lead">We pair rapid delivery with the discipline regulated institutions require. The goal is to move quickly without cutting the corners that matter in banking.</p><div class="solutions-grid"><div class="glass sol-card"><h3>Ship in tight loops</h3><p>Small teams, short iterations, and frequent feedback. Our Agile Speed Framework is built to get working software in front of clients fast, then refine with real input.</p></div><div class="glass sol-card"><h3>Compliance by design</h3><p>We build for regulated institutions from the first commit. Security reviews, auditability, and clear controls are part of the work, not a phase bolted on at the end.</p></div><div class="glass sol-card"><h3>Own your surface</h3><p>Engineers and operators take real ownership of the systems they build and the boundaries between them. You see how your work reaches a client and a member.</p></div><div class="glass sol-card"><h3>Write for humans</h3><p>Clear documentation, clear tickets, clear decisions. We favor plain language so that the next person, and the next institution, can understand the system.</p></div></div></div></section>
 
 <section class="section"><div class="container"><span class="tag"><span class="dot"></span> Where You Could Work</span><h2 class="section-title">Areas we hire across</h2><p class="section-lead">We are a technology company at our core, and most roles sit close to the product. These are the broad areas where strong people tend to make the biggest difference.</p><ul class="bullets"><li><strong>Core banking and lending engineering:</strong> deposits, loan servicing, ledgers, and the data models that keep them correct.</li><li><strong>Payments and card issuing:</strong> real-time rails, mobile wallets, card programs, and the integrations that connect them.</li><li><strong>Exchange and digital assets:</strong> multi-currency FX across 200+ markets, real-world asset tokenization, and stablecoin settlement.</li><li><strong>Security and cryptography:</strong> post-quantum cryptography, key management, and the controls regulated institutions depend on.</li><li><strong>Applied AI and data:</strong> turning institutional data into decisions, automation, and product features that earn trust.</li><li><strong>Delivery, design, and client success:</strong> the people who turn a platform into a launched, branded product for each institution, including <a href="/industries/credit-unions/">credit unions</a> and community banks.</li></ul></div></section>
-
-<section class="section surface"><div class="container"><span class="tag"><span class="dot"></span> The Market</span><h2 class="section-title">The problems are large and concrete</h2><p class="section-lead">The shifts we are building for are not speculative. They are measured in trillions, and they are moving now.</p><div class="kpi-grid"><div class="kpi"><span class="kpi-num">$16T+</span><span class="kpi-label">Projected tokenized real-world assets by 2030</span><span class="kpi-src">Source: BCG</span></div><div class="kpi"><span class="kpi-num">$27.6T</span><span class="kpi-label">2024 stablecoin transfer volume, past Visa &amp; Mastercard combined</span><span class="kpi-src">Source: 2024 on-chain data</span></div><div class="kpi"><span class="kpi-num">~$570B/yr</span><span class="kpi-label">Estimated US healthcare administrative waste</span><span class="kpi-src">Source: JAMA / Health Affairs</span></div><div class="kpi"><span class="kpi-num">Up to 95%</span><span class="kpi-label">Targeted lower infrastructure cost vs. legacy core stacks</span><span class="kpi-src">ACM platform value proposition</span></div></div></div></section>
 
 <section class="section"><div class="container"><span class="tag"><span class="dot"></span> Working Here</span><h2 class="section-title">What you can expect</h2><p class="section-lead">We are based in Orlando and Jacksonville, Florida, and we build deliberately. Here is how we think about the people who join us.</p><div class="solutions-grid"><div class="glass sol-card"><h3>Hard, meaningful work</h3><p>You will work on systems where the details count and the stakes are real. The upside is craft that matters and problems worth your attention.</p></div><div class="glass sol-card"><h3>Direct access</h3><p>Leadership, including Founder and CEO Michael Gladczuk and Chief Scientist Zach Kelling, stays close to the work. Good ideas reach decision-makers quickly.</p></div><div class="glass sol-card"><h3>Room to grow</h3><p>Across a broad ecosystem, there is space to deepen a specialty or stretch into something new. We back people who take ownership.</p></div><div class="glass sol-card"><h3>Mission with reach</h3><p>Our tagline is Powering Global Transformation. The infrastructure you help build is meant to serve institutions and the communities they hold money for.</p></div></div></div></section>
 
@@ -146,6 +156,7 @@
         <div class="footer-contact">
           <a href="tel:+14072790314">+1 (407) 279-0314</a>
           <a href="mailto:info@acmglobaltech.com">info@acmglobaltech.com</a>
+          <a href="/login/" class="footer-login">Client Login &rarr;</a>
         </div>
         <p class="footer-partners">Hanzo.ai &amp; Lux Finance Ecosystem Partners</p>
       </div>
@@ -189,16 +200,24 @@
           <a href="/capabilities/white-label/">White-Label &amp; Ownership</a>
         </div>
         <div class="footer-col">
+          <h4><a href="/docs/">Resources</a></h4>
+          <a href="/docs/">Documentation</a>
+          <a href="/support/">Support &amp; Help</a>
+          <a href="/trust/">Trust &amp; Security</a>
+          <a href="/case-studies/">Case Studies</a>
+        </div>
+        <div class="footer-col">
           <h4><a href="/company/">Company</a></h4>
           <a href="/company/about/">About</a>
           <a href="/company/vision/">Our Vision</a>
           <a href="/company/team/">Leadership Team</a>
           <a href="/company/ventures/">ACM Ventures</a>
           <a href="/company/careers/">Careers</a>
+          <a href="/get-started/">Get Started</a>
           <a href="/contact/">Contact</a>
         </div>
     </div>
-    <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; Powering Global Transformation</div>
+    <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/trust/">Trust &amp; Security</a> &middot; Powering Global Transformation</div>
   </footer>
   <script src="/script.js?v=10"></script>
 </body>
