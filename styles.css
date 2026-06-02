@@ -778,3 +778,11 @@ a.sol-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-soft); bor
 .sol-card { position: relative; overflow: hidden; }
 .sol-card::before { content: ''; position: absolute; left: 0; top: 0; height: 3px; width: 100%; background: var(--grad-teal); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
 .sol-card:hover::before { transform: scaleX(1); }
+
+/* --- Balanced card grids: 3-up, with any incomplete last row centered --- */
+/* Odd counts (7, 5, 4, 8…) previously stranded a lone card on the left in the */
+/* grid layout; flex-wrap + justify-content:center keeps every section symmetrical. */
+.solutions-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; }
+.solutions-grid > * { flex: 1 1 280px; max-width: calc((100% - 40px) / 3); }
+@media (max-width: 980px) { .solutions-grid > * { max-width: calc((100% - 20px) / 2); } }
+@media (max-width: 620px) { .solutions-grid > * { max-width: 100%; } }
