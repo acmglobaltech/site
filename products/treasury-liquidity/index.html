@@ -306,8 +306,44 @@
           <label class="field"><span>Work email</span><input type="email" name="email" required /></label>
         </div>
         <label class="field"><span>Institution</span><input type="text" name="company" /></label>
+        <div class="field-row lead-qual">
+          <label class="field"><span>Institution type</span>
+            <select name="segment">
+              <option value="">Select&hellip;</option>
+              <option>Credit Union</option>
+              <option>Community / Mid-Sized Bank</option>
+              <option>Healthcare</option>
+              <option>Broker-Dealer</option>
+              <option>Fintech</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label class="field"><span>Assets / AUM</span>
+            <select name="assetSize">
+              <option value="">Select&hellip;</option>
+              <option>Under $500M</option>
+              <option>$500M&ndash;$2B</option>
+              <option>$2B&ndash;$10B</option>
+              <option>$10B+</option>
+            </select>
+          </label>
+        </div>
+        <label class="field"><span>Timeline</span>
+          <select name="timeline">
+            <option value="">Select&hellip;</option>
+            <option>Actively evaluating (&lt;90 days)</option>
+            <option>This year</option>
+            <option>Just exploring</option>
+          </select>
+        </label>
         <button type="submit" class="btn btn-primary btn-block" id="leadSubmit">Email it to me</button>
         <p class="lead-note" id="leadNote" hidden></p>
+        <div class="lead-proof">
+          <span><strong>70&rarr;20</strong> eng team</span>
+          <span><strong>$50K&rarr;$5K</strong> compute</span>
+          <span><strong>100&times;</strong> performance</span>
+          <span><strong>Trillions</strong> in securities</span>
+        </div>
         <p class="lead-fineprint">We'll only use this to share what you asked for and follow up. No spam &mdash; unsubscribe anytime.</p>
       </form>
     </div>

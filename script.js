@@ -596,19 +596,22 @@
     var lsubmit = document.getElementById('leadSubmit');
     var lastTrigger = null;
 
-    function openModal(t) {
-      if (kindEl) kindEl.textContent = t.getAttribute('data-lead-kind') || 'Resource';
-      if (titleEl) titleEl.textContent = t.getAttribute('data-lead-title') || 'Get the full details';
-      if (subEl) subEl.textContent = t.getAttribute('data-lead-sub') || "Tell us where to send it — we'll email it over.";
-      if (ctaEl) ctaEl.value = t.getAttribute('data-lead') || 'Resource';
-      if (lsubmit) lsubmit.textContent = t.getAttribute('data-lead-submit') || 'Email it to me';
+    function openWith(c) {
+      if (kindEl) kindEl.textContent = c.kind || 'Resource';
+      if (titleEl) titleEl.textContent = c.title || 'Get the full details';
+      if (subEl) subEl.textContent = c.sub || "Tell us where to send it — we'll email it over.";
+      if (ctaEl) ctaEl.value = c.lead || 'Resource';
+      if (lsubmit) lsubmit.textContent = c.submit || 'Email it to me';
       if (lnote) { lnote.hidden = true; lnote.textContent = ''; }
       lform.style.display = '';
       modal.hidden = false;
       document.documentElement.style.overflow = 'hidden';
-      lastTrigger = t;
       var nm = lform.elements['name'];
       if (nm) window.setTimeout(function () { nm.focus(); }, 60);
+    }
+    function openModal(t) {
+      lastTrigger = t;
+      openWith({ kind: t.getAttribute('data-lead-kind'), title: t.getAttribute('data-lead-title'), sub: t.getAttribute('data-lead-sub'), lead: t.getAttribute('data-lead'), submit: t.getAttribute('data-lead-submit') });
     }
     function closeModal() {
       modal.hidden = true;
@@ -627,6 +630,7 @@
       if (!lform.checkValidity()) { lform.reportValidity(); return; }
       if (lform.elements['website'] && lform.elements['website'].value) { closeModal(); return; }
       var data = Object.fromEntries(new FormData(lform).entries());
+      if (/90 days/.test(data.timeline || '')) data.cta = '[HOT] ' + (data.cta || 'Lead');
       data.message = 'Requested: ' + (data.cta || 'resource');
       var orig = lsubmit ? lsubmit.textContent : '';
       function succeed() {
@@ -642,5 +646,21 @@
         .catch(function () { window.location.href = buildMailto(data); succeed(); })
         .finally(function () { if (lsubmit) { lsubmit.disabled = false; lsubmit.textContent = orig; } });
     });
+
+    /* Exit-intent (desktop) + scroll-depth (mobile) soft capture, once per session */
+    var softFired = false;
+    function softCapture() {
+      if (softFired || !modal.hidden) return;
+      try { if (sessionStorage.getItem('acmSoft')) return; sessionStorage.setItem('acmSoft', '1'); } catch (e) { /* noop */ }
+      softFired = true;
+      openWith({ kind: 'Before you go', title: 'Before you go — get the ACM overview', sub: 'A one-page overview of the full white-label platform, sent to your inbox. No commitment.', lead: 'Soft capture — Platform overview', submit: 'Email me the overview' });
+    }
+    document.addEventListener('mouseout', function (e) { if (e.clientY <= 0 && !e.relatedTarget) softCapture(); });
+    if (window.matchMedia('(max-width: 1024px)').matches) {
+      window.addEventListener('scroll', function () {
+        var de = document.documentElement;
+        if ((window.scrollY + window.innerHeight) / de.scrollHeight > 0.7) softCapture();
+      }, { passive: true });
+    }
   })();
 })();

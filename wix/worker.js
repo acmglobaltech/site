@@ -79,6 +79,9 @@ export default {
     if (data.goal) messageParts.push(`[goal: ${data.goal}]`);
     if (data.interest) messageParts.push(`[interested in: ${data.interest}]`);
     if (data.preferredTime) messageParts.push(`[preferred time: ${data.preferredTime}]`);
+    if (data.segment) messageParts.push(`[segment: ${data.segment}]`);
+    if (data.assetSize) messageParts.push(`[assets: ${data.assetSize}]`);
+    if (data.timeline) messageParts.push(`[timeline: ${data.timeline}]`);
     if (messageParts.length) info.extendedFields.items[messageKey] = messageParts.join(' ');
 
     const wixResp = await fetch(`${WIX_API}/contacts/v4/contacts?allowDuplicates=true`, {

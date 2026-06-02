@@ -74,6 +74,9 @@ export async function post_contact(request) {
   if (body.goal) parts.push('[goal: ' + body.goal + ']');
   if (body.interest) parts.push('[interested in: ' + body.interest + ']');
   if (body.preferredTime) parts.push('[preferred time: ' + body.preferredTime + ']');
+  if (body.segment) parts.push('[segment: ' + body.segment + ']');
+  if (body.assetSize) parts.push('[assets: ' + body.assetSize + ']');
+  if (body.timeline) parts.push('[timeline: ' + body.timeline + ']');
 
   const info = {
     name: splitName(name),
