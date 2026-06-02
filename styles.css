@@ -644,3 +644,16 @@ img { max-width: 100%; display: block; }
 .trust-strip .container { display: flex; flex-wrap: wrap; gap: 12px 30px; padding: 15px 24px; justify-content: center; }
 .trust-strip span { position: relative; font-size: .82rem; font-weight: 600; color: var(--body); padding-left: 22px; }
 .trust-strip span::before { content: '✓'; position: absolute; left: 0; top: -1px; width: 15px; height: 15px; font-size: .6rem; display: grid; place-items: center; border-radius: 50%; color: #fff; background: var(--green); }
+
+/* ----- Ecosystem partner banner ----- */
+.partners-band { position: relative; z-index: 2; padding: 72px 0; text-align: center; background: linear-gradient(180deg, var(--white), var(--surface)); border-top: 1px solid var(--line); }
+.partners-band .tag { justify-content: center; }
+.partners-title { font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 3vw, 2.3rem); color: var(--ink); letter-spacing: -.6px; }
+.partners-lead { font-size: 1.05rem; color: var(--body); max-width: 720px; margin: 16px auto 0; }
+.partners-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; max-width: 880px; margin: 36px auto 0; }
+.partner-card { display: block; padding: 30px; text-align: left; transition: transform .2s, box-shadow .2s, border-color .2s; }
+.partner-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-pop); border-color: var(--blue-300); }
+.partner-mark { display: block; font-family: var(--display); font-weight: 800; font-size: 2rem; color: var(--ink); letter-spacing: -1px; margin-bottom: 6px; }
+.partner-card p { color: var(--body); font-size: .96rem; margin: 10px 0 16px; }
+.partner-link { font-weight: 600; color: var(--blue); }
+@media (max-width: 640px) { .partners-grid { grid-template-columns: 1fr; } }
