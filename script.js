@@ -134,9 +134,9 @@
           pre-filled mailto: so a lead is never lost.
      ============================================================ */
   var WIX_CONFIG = {
-    // After `npx wrangler deploy`, replace <subdomain> with the
-    // workers.dev subdomain it prints (or wire a custom route).
-    CONTACT_FORM_ENDPOINT: 'https://acm-contact.<subdomain>.workers.dev/contact',
+    // Velo HTTP function (wix/http-functions.js), published in the Wix site.
+    // /_functions/contact once published; /_functions-dev/contact to test pre-publish.
+    CONTACT_FORM_ENDPOINT: 'https://www.acmglobaltech.com/_functions/contact',
     CONTACT_EMAIL: 'info@acmglobaltech.com'
   };
   var ENDPOINT_READY = WIX_CONFIG.CONTACT_FORM_ENDPOINT.indexOf('<subdomain>') === -1;

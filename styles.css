@@ -249,6 +249,17 @@ img { max-width: 100%; display: block; }
 .vision-card { margin-top: 30px; padding: 36px 40px; }
 .vision-card p { color: var(--body); max-width: 1000px; }
 .vision-card p + p { margin-top: 16px; }
+.vision-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 30px; }
+.vision-pillar { padding: 28px; }
+.vision-pillar h3 { font-family: var(--display); font-size: 1.18rem; color: var(--ink); margin-bottom: 8px; }
+.vision-pillar p { font-size: .96rem; color: var(--body); }
+.vision-note { margin-top: 22px; font-size: .92rem; color: var(--mute); max-width: 860px; }
+
+/* Source tags + illustrative captions (credibility) */
+.kpi-src { display: block; font-size: .62rem; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--mute); margin-top: 8px; }
+.kpi-foot { margin-top: 18px; font-size: .74rem; color: var(--mute); text-align: center; }
+.illus-note { font-size: .72rem; color: var(--mute); text-align: center; margin-top: 10px; }
+.illus-note.metrics-caption { grid-column: 1 / -1; text-align: left; margin: 0 0 6px; }
 
 /* ===== KPI teaser band ===== */
 .kpi-band { position: relative; z-index: 2; background: var(--surface); border-block: 1px solid var(--line); padding: 30px 0; }
@@ -374,7 +385,7 @@ img { max-width: 100%; display: block; }
   .solutions-grid, .products-grid { grid-template-columns: repeat(2, 1fr); }
   .why-grid { grid-template-columns: repeat(2, 1fr); }
   .process-steps { grid-template-columns: repeat(2, 1fr); }
-  .ventures-grid, .insights-grid { grid-template-columns: 1fr; }
+  .ventures-grid, .insights-grid, .vision-grid { grid-template-columns: 1fr; }
   .kpi-grid { grid-template-columns: repeat(2, 1fr); }
   .kpi { border-right: 0; }
   .footer-inner { grid-template-columns: 1fr; }
