@@ -785,12 +785,19 @@ a.sol-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-soft); bor
    10 -> 2x5. flex-wrap + center keeps awkward primes (5/7/11) balanced, never
    stranded left. 3/4-up collapse to 2-up <=980px, all to 1-up <=620px. */
 .solutions-grid { display: flex; flex-wrap: wrap; justify-content: center; align-items: stretch; }
-.solutions-grid > * { flex: 1 1 260px; }
-.solutions-grid.cols-1 > * { max-width: 100%; }
-.solutions-grid.cols-2 > * { max-width: calc((100% - 20px) / 2); }
-.solutions-grid.cols-3 > * { max-width: calc((100% - 40px) / 3); }
-.solutions-grid.cols-4 > * { max-width: calc((100% - 60px) / 4); }
-@media (max-width: 980px) {
-  .solutions-grid.cols-3 > *, .solutions-grid.cols-4 > * { max-width: calc((100% - 20px) / 2); }
+.solutions-grid > * { flex-grow: 1; flex-shrink: 1; }
+.solutions-grid.cols-1 > * { flex-basis: 100%; max-width: 100%; }
+.solutions-grid.cols-2 > * { flex-basis: calc((100% - 20px) / 2); max-width: calc((100% - 20px) / 2); }
+.solutions-grid.cols-3 > * { flex-basis: calc((100% - 40px) / 3); max-width: calc((100% - 40px) / 3); }
+.solutions-grid.cols-4 > * { flex-basis: calc((100% - 60px) / 4); max-width: calc((100% - 60px) / 4); }
+/* Match the site's grid breakpoints: 3/4-up collapse to 2-up <=1100px, all to 1-up <=600px.
+   flex-basis is container-relative (not a px width) so N-per-row holds exactly at every
+   viewport with no premature wrapping; justify-content:center balances odd last rows. */
+@media (max-width: 1100px) {
+  .solutions-grid.cols-3 > *, .solutions-grid.cols-4 > * { flex-basis: calc((100% - 20px) / 2); max-width: calc((100% - 20px) / 2); }
 }
-@media (max-width: 620px) { .solutions-grid > * { max-width: 100%; } }
+@media (max-width: 600px) {
+  /* must match the .cols-N specificity (0,2,0) or the base cols-N rule out-ranks this */
+  .solutions-grid.cols-1 > *, .solutions-grid.cols-2 > *,
+  .solutions-grid.cols-3 > *, .solutions-grid.cols-4 > * { flex-basis: 100%; max-width: 100%; }
+}
