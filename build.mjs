@@ -333,6 +333,36 @@ function decorate(html) {
   return html.replace(/<div class="glass sol-card">\s*<h3>([\s\S]*?)<\/h3>/g,
     (m, t) => '<div class="glass sol-card"><span class="sol-ic">' + pickIcon(t) + '</span><h3>' + t + '</h3>');
 }
+function colsFor(n) {
+  // Pick a column count that tiles n cards into a complete rectangle (capped at 4).
+  // Primes (5/7/11) fall back to 3-up; the centered flex keeps their last row balanced.
+  const map = { 1: 1, 2: 2, 3: 3, 4: 2, 5: 3, 6: 3, 7: 3, 8: 4, 9: 3, 10: 2, 11: 3, 12: 3 };
+  if (n in map) return map[n];
+  if (n % 3 === 0) return 3;
+  if (n % 4 === 0) return 4;
+  if (n % 2 === 0) return 2;
+  return 3;
+}
+function balanceGrids(html) {
+  // Stamp each .solutions-grid with cols-N based on how many cards it holds, so the
+  // layout always tiles into a complete rectangle (no stranded orphan in the last row).
+  const open = /<div class="([^"]*\bsolutions-grid\b[^"]*)">/g;
+  let m, out = '', last = 0;
+  while ((m = open.exec(html))) {
+    const tagStart = m.index, tagEnd = open.lastIndex;
+    const dre = /<\/?div\b[^>]*>/g; dre.lastIndex = tagEnd;
+    let depth = 1, t, end = html.length;
+    while ((t = dre.exec(html))) {
+      if (t[0][1] === '/') { if (--depth === 0) { end = t.index; break; } }
+      else depth++;
+    }
+    const kids = (html.slice(tagEnd, end).match(/\bsol-card\b/g) || []).length;
+    const cls = (m[1].replace(/\s*\bcols-\d+\b/g, '').trim()) + ' cols-' + colsFor(kids);
+    out += html.slice(last, tagStart) + '<div class="' + cls + '">';
+    last = tagEnd;
+  }
+  return out + html.slice(last);
+}
 function trustStrip() {
   return '<div class="trust-strip"><div class="container"><span>Regulated-first architecture</span><span>Post-quantum cryptography</span><span>White-label &amp; client-owned</span><span>Hanzo.ai &amp; Lux Network ecosystem</span></div></div>';
 }
@@ -346,7 +376,7 @@ function renderPage(page) {
   const ogImage = ORIGIN + '/assets/og.png';
   const breadcrumb = slug ? renderBreadcrumb(trail) : '';
   const h1 = slug ? `<h1 class="visually-hidden">${esc(page.h1 || title)}</h1>` : '';
-  let content = decorate(page.contentHtml);
+  let content = balanceGrids(decorate(page.contentHtml));
   if (slug && content.includes('class="page-hero"')) {
     const i = content.indexOf('</section>');
     if (i !== -1) content = content.slice(0, i + 10) + '\n  ' + trustStrip() + '\n' + content.slice(i + 10);
