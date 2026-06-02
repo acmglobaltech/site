@@ -820,3 +820,11 @@ a.sol-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-soft); bor
 .lead-note { margin-top: 14px; padding: 12px 14px; background: rgba(var(--rgb-blue), 0.08); border: 1px solid rgba(var(--rgb-blue), 0.3); border-radius: 11px; color: var(--ink); font-weight: 600; font-size: .9rem; }
 .lead-fineprint { margin-top: 12px; font-size: .72rem; color: var(--mute); line-height: 1.45; }
 @media (max-width: 480px) { .lead-card { padding: 24px 20px; } .lead-form .field-row { grid-template-columns: 1fr; } }
+
+/* ===== Per-page "talk to an expert" CTA band ===== */
+.expert-cta { background: var(--surface); border-block: 1px solid var(--line); }
+.expert-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 48px 24px; flex-wrap: wrap; }
+.expert-cta-title { font-family: var(--display); font-weight: 800; font-size: clamp(1.4rem, 2.6vw, 1.9rem); color: var(--ink); letter-spacing: -.4px; }
+.expert-cta-sub { font-size: .98rem; color: var(--body); margin-top: 8px; max-width: 560px; }
+.expert-cta-btn { flex: 0 0 auto; }
+@media (max-width: 700px) { .expert-cta-inner { padding: 36px 18px; } }

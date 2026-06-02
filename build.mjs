@@ -184,6 +184,23 @@ function renderFooter() {
 }
 
 /* ---------- AI assistant (Hanzo-powered, site-wide) ---------- */
+/* ---------- Per-page "talk to an expert" CTA (opportunity capture) ---------- */
+function expertCta(page) {
+  const slug = page.slug || '';
+  if (!slug || ['privacy', 'terms', 'login', 'contact', 'get-started'].indexOf(slug) !== -1) return '';
+  const childMatch = NAV.flatMap((g) => g.items).find(([, h]) => h === '/' + slug + '/');
+  const navMatch = NAV.find((g) => g.href === '/' + slug + '/');
+  const topic = (childMatch && childMatch[0]) || (navMatch && navMatch.label) || page.h1 || page.title;
+  return `<section class="expert-cta"><div class="container expert-cta-inner">
+      <div class="expert-cta-copy">
+        <span class="tag"><span class="dot"></span> Talk to ACM</span>
+        <h2 class="expert-cta-title">Ready to talk about ${esc(topic)}?</h2>
+        <p class="expert-cta-sub">Get a tailored walkthrough and a straight answer on fit, timeline, and cost for your institution.</p>
+      </div>
+      <button class="btn btn-primary btn-lg expert-cta-btn" data-lead="Expert consult — ${esc(topic)}" data-lead-kind="Talk to ACM" data-lead-title="Talk to an expert about ${esc(topic)}" data-lead-sub="Tell us a bit about your institution and we'll connect you with the right ACM specialist — usually same day." data-lead-submit="Request my consult">Talk to an expert &rarr;</button>
+    </div></section>`;
+}
+
 function leadModal() {
   return `<div class="lead-modal" id="leadModal" hidden>
     <div class="lead-overlay" id="leadOverlay"></div>
@@ -440,6 +457,7 @@ function renderPage(page) {
 ${content}
     ${renderFaq(page.faq)}
   </main>
+  ${expertCta(page)}
   ${integrations()}
   ${partnerBanner()}
   ${renderFooter()}
