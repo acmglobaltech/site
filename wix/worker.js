@@ -76,7 +76,9 @@ export default {
     const messageParts = [];
     if (data.message) messageParts.push(String(data.message));
     if (data.cta) messageParts.push(`[request: ${data.cta}]`);
+    if (data.goal) messageParts.push(`[goal: ${data.goal}]`);
     if (data.interest) messageParts.push(`[interested in: ${data.interest}]`);
+    if (data.preferredTime) messageParts.push(`[preferred time: ${data.preferredTime}]`);
     if (messageParts.length) info.extendedFields.items[messageKey] = messageParts.join(' ');
 
     const wixResp = await fetch(`${WIX_API}/contacts/v4/contacts?allowDuplicates=true`, {

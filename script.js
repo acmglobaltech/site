@@ -81,7 +81,7 @@
 
   /* --- Reveal + stat count-up on scroll --- */
   var revealEls = document.querySelectorAll(
-    '.section, .slide-statement .statement, .statement-sub, .leader-card, .sol-card, .prod-card, .ind, .vert, .process-steps li, .why-card, .commit-card, .flagship, .stat'
+    '.section, .dashboard, .metric-card, .sol-card, .prod-card, .process-steps li, .why-card, .team-card, .pillar, .quote-card, .results-card'
   );
   revealEls.forEach(function (el) { el.classList.add('reveal'); });
 
@@ -137,7 +137,7 @@
     // After `npx wrangler deploy`, replace <subdomain> with the
     // workers.dev subdomain it prints (or wire a custom route).
     CONTACT_FORM_ENDPOINT: 'https://acm-contact.<subdomain>.workers.dev/contact',
-    CONTACT_EMAIL: 'michael@acmglobaltech.com'
+    CONTACT_EMAIL: 'info@acmglobaltech.com'
   };
   var ENDPOINT_READY = WIX_CONFIG.CONTACT_FORM_ENDPOINT.indexOf('<subdomain>') === -1;
 
@@ -150,14 +150,36 @@
   var CTA_INTENT = {
     'Discovery Call': { hint: '', message: '' },
     'Deposit / Retainer': {
-      hint: 'Starting an engagement — send this and we\'ll reply with a secure deposit invoice.',
+      hint: 'Starting an engagement: send this and we\'ll reply with a secure deposit invoice.',
       message: 'I\'d like to start an engagement and pay a deposit.'
     },
     'Client Portal Access': {
-      hint: 'Existing client — send this and we\'ll verify your account and share portal access.',
+      hint: 'Existing client: send this and we\'ll verify your account and share portal access.',
       message: 'I\'m an existing client and need access to the client portal.'
+    },
+    'Book a Meeting': {
+      hint: 'Pick "Book a meeting" below and add a couple of times that work; we\'ll confirm a slot.',
+      message: 'I\'d like to book a meeting.'
+    },
+    'ACM Ventures': {
+      hint: 'Tell us about your startup, stage, and round, and the ACM Ventures team will be in touch.',
+      message: 'I\'d like to pitch ACM Ventures.'
     }
   };
+
+  /* Booking: reveal the preferred-time field only when "Book a meeting" is chosen. */
+  var bookingField = document.getElementById('bookingField');
+  function syncBooking() {
+    var g = form && form.querySelector('input[name="goal"]:checked');
+    if (bookingField) bookingField.hidden = !(g && g.value === 'Book a meeting');
+  }
+  if (form) {
+    Array.prototype.forEach.call(form.querySelectorAll('input[name="goal"]'), function (r) {
+      r.addEventListener('change', syncBooking);
+    });
+  }
+  /* Map certain CTAs to a preselected "goal" chip. */
+  var GOAL_FOR_CTA = { 'Book a Meeting': 'Book a meeting', 'Discovery Call': 'Book a meeting' };
 
   function focusFirstEmpty() {
     if (!form) return;
@@ -182,6 +204,13 @@
       var msg = form && form.elements['message'];
       if (msg && !msg.value && spec.message) msg.value = spec.message;
 
+      // Preselect the matching goal chip (and reveal booking field) for some CTAs.
+      var goalVal = GOAL_FOR_CTA[intent];
+      if (goalVal && form) {
+        var gr = form.querySelector('input[name="goal"][value="' + goalVal + '"]');
+        if (gr) { gr.checked = true; syncBooking(); }
+      }
+
       var contact = document.getElementById('contact');
       if (contact) {
         e.preventDefault();
@@ -203,6 +232,8 @@
       'Phone: ' + (data.phone || ''),
       'Company: ' + (data.company || ''),
       'Interested in: ' + (data.interest || '(not specified)'),
+      'How we can help: ' + (data.goal || '(not specified)'),
+      'Preferred time: ' + (data.preferredTime || '(not specified)'),
       'Request: ' + (data.cta || 'Discovery Call'),
       '',
       (data.message || '')
@@ -223,13 +254,13 @@
       var originalLabel = submitBtn ? submitBtn.textContent : '';
 
       function showThanks() {
-        if (note) { note.hidden = false; note.textContent = "Thank you — we'll be in touch shortly to schedule your Discovery Call."; }
+        if (note) { note.hidden = false; note.textContent = "Thank you! We'll be in touch shortly to schedule your Discovery Call."; }
         if (ctaHint) ctaHint.hidden = true;
         form.reset();
       }
       function handoffToEmail() {
         // No server yet (or it failed): open the visitor's mail client pre-filled.
-        if (note) { note.hidden = false; note.textContent = 'Opening your email app — or write to us directly at ' + WIX_CONFIG.CONTACT_EMAIL + '.'; }
+        if (note) { note.hidden = false; note.textContent = 'Opening your email app, or write to us directly at ' + WIX_CONFIG.CONTACT_EMAIL + '.'; }
         window.location.href = buildMailto(data);
       }
 

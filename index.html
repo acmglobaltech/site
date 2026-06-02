@@ -3,35 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ACM Global Tech — Regulated Fintech Infrastructure &amp; AI Solutions</title>
-  <meta name="description" content="ACM Global Tech delivers fully developed, white-label regulated fintech infrastructure and AI solutions. Tokenization, stablecoins, broker-dealer rails, treasury, and AI-powered platforms for banks, investment firms, fintechs, and healthcare. SF Private License. Hanzo.ai & Lux Finance ecosystem partners." />
+  <title>ACM Global Tech | Simple Banking Technology for Credit Unions &amp; Mid-Sized Banks</title>
+  <meta name="description" content="ACM Global Tech delivers simple, people-first banking technology for credit unions and mid-sized banks. AI fraud protection, cloud-native core, lending modernization, member engagement, and data analytics: efficiency, security, and growth for financial institutions worldwide." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=5" />
 </head>
 <body>
+
+  <div class="bg-floaties" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
 
   <!-- ============ HEADER / NAV ============ -->
   <header class="header" id="header">
     <div class="container nav-wrap">
       <a href="#home" class="logo" aria-label="ACM Global Tech home">
-        <span class="logo-mark">ACM</span>
-        <span class="logo-text">Global Tech</span>
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="34" height="34" fill="none">
+            <path d="M20 3 34 11v18L20 37 6 29V11z" stroke="url(#hexg)" stroke-width="1.6" opacity=".5"/>
+            <path d="M20 9 29 14v10l-9 5-9-5V14z" stroke="url(#hexg)" stroke-width="1.6" opacity=".8"/>
+            <circle cx="20" cy="20" r="4.4" fill="url(#hexg)"/>
+            <defs><linearGradient id="hexg" x1="6" y1="3" x2="34" y2="37" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1F4FFF"/><stop offset="1" stop-color="#19C8D6"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span class="logo-text"><strong>ACM</strong> <span class="logo-accent">Global</span> Tech</span>
       </a>
 
       <nav class="nav" id="primary-nav">
-        <a href="#home">Home</a>
         <a href="#about">About</a>
-        <a href="#solutions">Solutions</a>
+        <a href="#what">What We Do</a>
         <a href="#products">Products</a>
-        <a href="#industries">Industries</a>
+        <a href="#ventures">Ventures</a>
+        <a href="#insights">Insights</a>
         <a href="#process">Process</a>
-        <a href="#why">Why ACM</a>
-        <a href="#contact">Contact</a>
+        <a href="#why">Why Us</a>
+        <a href="#team">Team</a>
       </nav>
 
-      <a href="#contact" class="btn btn-primary btn-nav" data-cta="Discovery Call">Schedule a Discovery Call</a>
+      <a href="#contact" class="btn btn-primary btn-nav" data-cta="Discovery Call">Get in Touch</a>
 
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -39,240 +49,362 @@
     </div>
   </header>
 
-  <!-- ============ HERO (slide) ============ -->
-  <section class="slide slide-hero parallax" id="home">
-    <div class="slide-bg" data-speed="0.3" style="background-image:url('assets/6.jpg')"></div>
-    <div class="slide-overlay"></div>
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="home">
     <canvas class="data-flow" id="dataFlow" aria-hidden="true"></canvas>
-    <div class="container slide-content hero-content">
-      <p class="eyebrow">Next-Generation AI Innovation Powered by Data-First Thinking</p>
-      <h1 class="hero-title">ACM <span class="grad">Global Tech</span></h1>
-      <p class="hero-lead">
-        We don't sell technology. We deliver tailored solutions that solve real
-        organizational problems and provide meaningful, measurable outcomes for our clients.
-      </p>
-      <div class="hero-badges">
-        <span>SF Private License</span>
-        <span>Full Regulatory Compliance</span>
-        <span>White-Label Ready</span>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="dot"></span> ACM Global Tech</p>
+        <h1 class="hero-title">Simple Banking Technology for <span class="grad">Credit Unions &amp; Mid-Sized Banks.</span></h1>
+        <p class="hero-lead">People-first solutions delivering true value: Efficiency, security, growth. Powering global transformation.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn btn-primary btn-lg" data-cta="Discovery Call">Schedule a Free Discovery Call →</a>
+          <a href="#products" class="btn btn-ghost btn-lg">Explore Our Products</a>
+        </div>
+        <div class="focus-areas">
+          <span class="focus-label">Focus Areas</span>
+          <span class="chip">Lending</span>
+          <span class="chip">Engagement</span>
+          <span class="chip">Modernization</span>
+        </div>
       </div>
-      <div class="hero-cta">
-        <a href="#contact" class="btn btn-primary btn-lg" data-cta="Discovery Call">Schedule a Discovery Call</a>
-        <a href="#products" class="btn btn-ghost btn-lg">Explore Our Platform</a>
+
+      <!-- Product dashboard mockup -->
+      <div class="dashboard reveal" aria-hidden="true">
+        <div class="dash-top">
+          <span class="dash-title"><i class="dot blue"></i> ACM Cloud Core</span>
+          <span class="dash-pill">Dashboard</span>
+        </div>
+        <div class="dash-grid">
+          <div class="dash-card dash-deploy">
+            <span class="dash-check">✓</span>
+            <div><strong>Deployment Complete</strong><span>Cloud Core v3.2 · Live</span></div>
+          </div>
+          <div class="dash-card dash-members">
+            <span class="dash-mini-label">Active Members</span>
+            <strong class="dash-num">48,291</strong>
+            <span class="delta up">▲ +8.1%</span>
+          </div>
+        </div>
+        <div class="dash-card dash-chart">
+          <div class="dash-chart-head"><strong>Lending Performance</strong><span>Jul 2025 to Jan 2026</span></div>
+          <div class="bars">
+            <span class="bar-pair"><i style="--h:48%"></i><i class="lt" style="--h:30%"></i></span>
+            <span class="bar-pair"><i style="--h:62%"></i><i class="lt" style="--h:40%"></i></span>
+            <span class="bar-pair"><i style="--h:55%"></i><i class="lt" style="--h:46%"></i></span>
+            <span class="bar-pair"><i style="--h:84%"></i><i class="lt" style="--h:52%"></i></span>
+            <span class="bar-pair"><i style="--h:72%"></i><i class="lt" style="--h:58%"></i></span>
+            <span class="bar-pair"><i style="--h:90%"></i><i class="lt" style="--h:64%"></i></span>
+            <span class="bar-pair"><i style="--h:100%"></i><i class="lt" style="--h:70%"></i></span>
+          </div>
+          <div class="bars-x"><span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span><span>Jan</span></div>
+        </div>
+        <div class="dash-card dash-activity">
+          <strong>Recent Loan Activity</strong>
+          <ul>
+            <li><i class="dot green"></i> Auto Loan <span>#4821</span></li>
+            <li><i class="dot amber"></i> Mortgage Refi <span>#4820</span></li>
+            <li><i class="dot blue"></i> Business Line <span>#4819</span></li>
+          </ul>
+        </div>
       </div>
     </div>
-    <a href="#stats" class="scroll-hint" aria-label="Scroll down"><span></span></a>
   </section>
 
-  <!-- ============ STATS BAR ============ -->
-  <section class="stats" id="stats" aria-label="Key statistics">
-    <div class="container stats-grid">
-      <div class="stat"><span class="stat-num" data-count="25" data-suffix="+">25+</span><span class="stat-label">Years Banking &amp; Fintech Leadership</span></div>
-      <div class="stat"><span class="stat-num" data-count="30" data-suffix="%+">30%+</span><span class="stat-label">Faster ROI via Agile Speed Framework</span></div>
-      <div class="stat"><span class="stat-num">SF</span><span class="stat-label">Private License &amp; Full Compliance</span></div>
-      <div class="stat"><span class="stat-num" data-count="100" data-suffix="%">100%</span><span class="stat-label">White-Label Products &amp; Infrastructure</span></div>
-      <div class="stat"><span class="stat-num" data-count="50" data-suffix="+">50+</span><span class="stat-label">Combined Years of Leadership</span></div>
+  <!-- ============ METRICS ============ -->
+  <section class="section metrics-sec" id="stats" aria-label="Performance metrics">
+    <div class="container metrics">
+      <article class="glass metric-card">
+        <header class="metric-head">
+          <span class="metric-eyebrow teal">Deposit Trends</span>
+        </header>
+        <h3 class="metric-title">Growth &amp; Stability</h3>
+        <div class="metric-hero">
+          <div class="mh-main">
+            <span class="mh-label">Total Deposits</span>
+            <span class="mh-big">$1.82B</span>
+          </div>
+          <div class="mh-yoy">
+            <span>YoY Growth</span>
+            <strong class="up">+8.6%</strong>
+          </div>
+          <svg class="spark" viewBox="0 0 240 64" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="sp1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1F4FFF"/><stop offset="1" stop-color="#19C8D6"/></linearGradient>
+              <linearGradient id="sp1f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(25,200,214,.28)"/><stop offset="1" stop-color="rgba(25,200,214,0)"/></linearGradient>
+            </defs>
+            <path d="M0,50 L40,46 L80,40 L120,36 L160,28 L200,22 L240,12 L240,64 L0,64 Z" fill="url(#sp1f)"/>
+            <path d="M0,50 L40,46 L80,40 L120,36 L160,28 L200,22 L240,12" fill="none" stroke="url(#sp1)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="metric-foot">
+          <div class="mini-stat"><span>Retention Rate</span><strong>96.2% <i class="d green"></i></strong><i class="bar green" style="--v:96%"></i></div>
+          <div class="mini-stat"><span>New Accounts</span><strong>+2.4K <i class="d blue"></i></strong><i class="bar blue" style="--v:60%"></i></div>
+        </div>
+      </article>
+
+      <article class="glass metric-card">
+        <header class="metric-head">
+          <span class="metric-eyebrow blue">Portfolio Insights</span>
+        </header>
+        <h3 class="metric-title">Growth Metrics</h3>
+        <div class="metric-hero">
+          <div class="mh-main">
+            <span class="mh-label">Efficiency Gain</span>
+            <span class="mh-big">+32.4%</span>
+          </div>
+          <div class="mh-yoy">
+            <span>Current ROI</span>
+            <strong class="teal-t">12.8x</strong>
+          </div>
+          <svg class="spark" viewBox="0 0 240 64" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0,46 L40,44 L80,42 L120,34 L160,30 L200,24 L240,18 L240,64 L0,64 Z" fill="url(#sp1f)"/>
+            <path d="M0,46 L40,44 L80,42 L120,34 L160,30 L200,24 L240,18" fill="none" stroke="url(#sp1)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="metric-foot">
+          <div class="mini-stat"><span>Risk Reduction</span><strong>35% <i class="d green"></i></strong><i class="bar green" style="--v:35%"></i></div>
+          <div class="mini-stat"><span>Cost Savings</span><strong>28% <i class="d blue"></i></strong><i class="bar blue" style="--v:28%"></i></div>
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- ============ STATEMENT SLIDE ============ -->
-  <section class="slide slide-statement parallax">
-    <div class="slide-bg" data-speed="0.25" style="background-image:url('assets/2.jpg')"></div>
-    <div class="slide-overlay overlay-strong"></div>
-    <div class="container slide-content center">
-      <h2 class="statement">We don't sell technology.<br><span class="grad">We solve real problems.</span></h2>
-      <p class="statement-sub">Tailored solutions that deliver meaningful, measurable outcomes — fully white-label, regulatory-ready, and yours to own.</p>
+  <!-- ============ KPI TEASER ============ -->
+  <section class="kpi-band" aria-label="Key metrics">
+    <div class="container kpi-grid">
+      <div class="kpi">
+        <span class="kpi-num">$1.8B+</span><span class="kpi-label">Deposits powered on ACM rails</span>
+        <svg class="spark sm" viewBox="0 0 160 30" preserveAspectRatio="none" aria-hidden="true"><path d="M0,24 L26,20 L53,22 L80,14 L106,16 L133,8 L160,6" fill="none" stroke="url(#sp1)" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="kpi">
+        <span class="kpi-num">48K+</span><span class="kpi-label">Active members served</span>
+        <svg class="spark sm" viewBox="0 0 160 30" preserveAspectRatio="none" aria-hidden="true"><path d="M0,22 L26,20 L53,16 L80,17 L106,11 L133,10 L160,4" fill="none" stroke="#19C8D6" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="kpi">
+        <span class="kpi-num">99.99%</span><span class="kpi-label">Platform uptime SLA</span>
+        <div class="blocks mini"><i style="--h:55%"></i><i style="--h:70%"></i><i style="--h:62%"></i><i style="--h:85%"></i><i style="--h:78%"></i><i style="--h:95%"></i></div>
+      </div>
+      <div class="kpi">
+        <span class="kpi-num">40-60%</span><span class="kpi-label">Lower infrastructure cost</span>
+        <svg class="spark sm" viewBox="0 0 160 30" preserveAspectRatio="none" aria-hidden="true"><path d="M0,6 L26,9 L53,8 L80,14 L106,15 L133,20 L160,22" fill="none" stroke="url(#sp1)" stroke-width="2" stroke-linecap="round"/></svg>
+      </div>
     </div>
   </section>
 
   <!-- ============ ABOUT ============ -->
   <section class="section" id="about">
-    <div class="container">
-      <span class="tag">About Us</span>
-      <h2 class="section-title">Building Enduring Partnerships Through People-First Innovation</h2>
-      <div class="about-grid">
-        <div class="about-copy">
-          <p>
-            Our people-first vision guides everything we do. We center every decision, every
-            solution, and every interaction around our clients — ensuring the work is
-            meaningful, deeply aligned with their goals, and always outcome-based.
-          </p>
-          <p>
-            At the heart of our approach is our AI Innovation Team and full engagement team. We
-            maintain full dedicated teams for Healthcare, Banking, Fintech, Broker-Dealer /
-            Investment Firms, and full custom product solutions.
-          </p>
-          <p>
-            We are now part of the <strong>Hanzo.ai</strong> and <strong>Lux Finance</strong>
-            ecosystems and hold our <strong>SF Private License</strong> with full regulatory
-            compliance — enabling clients to white-label our entire suite and deploy
-            production-ready solutions immediately.
-          </p>
-        </div>
-        <aside class="glass commit-card">
-          <h3>Our Commitment</h3>
-          <ul class="check-list">
-            <li>Data-first foundation for every solution</li>
-            <li>Agile Speed Framework with rapid skeleton deployments</li>
-            <li>Hybrid delivery (onshore + nearshore + offshore scale)</li>
-            <li>Post-quantum cryptography embedded across all solutions</li>
-            <li>Dedicated Innovation Lab Team future-proofing every solution</li>
-            <li>Measurable, sustainable business outcomes</li>
-          </ul>
-        </aside>
-      </div>
-
-      <h3 class="subhead">Leadership</h3>
-      <div class="leaders-grid">
-        <div class="glass leader-card">
-          <img class="leader-avatar leader-avatar-photo" src="assets/michael.jpg" alt="Michael Gladczuk, Founder & CEO" loading="lazy" />
-          <div>
-            <h3>Michael Gladczuk</h3>
-            <p class="leader-role">Founder &amp; CEO</p>
-            <p>25+ years leading large-scale digital transformations across banking, fintech, retail, healthcare, and e-commerce at Walmart, Bank of America, Tietoevry, and other global organizations.</p>
-          </div>
-        </div>
-        <div class="glass leader-card">
-          <div class="leader-avatar">ZK</div>
-          <div>
-            <h3>Zach Kellinger</h3>
-            <p class="leader-role">Chief Scientist</p>
-            <p>Leads the AI Innovation Team and the technical vision behind our regulated fintech platform — specializing in data-first architecture, agentic AI, blockchain infrastructure, and post-quantum cryptography.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FEATURED PLATFORM (slide) ============ -->
-  <section class="slide slide-featured parallax">
-    <div class="slide-bg" data-speed="0.3" style="background-image:url('assets/4.jpg')"></div>
-    <div class="slide-overlay"></div>
-    <div class="container slide-content featured-inner">
-      <div class="featured-copy">
-        <span class="tag tag-light">Flagship Platform</span>
-        <h2 class="featured-title">Regulated Fintech Infrastructure</h2>
-        <p>
-          A fully developed, AI-powered platform for banks, investment firms, fintechs,
-          and healthcare organizations — covering real-time treasury management, tokenized
-          assets, stablecoin operations, private wallets, and non-custodial products.
-          Deployed under your brand, on your timeline, under our SF Private License.
+    <div class="container about-grid">
+      <div class="about-left">
+        <span class="tag"><span class="dot"></span> About Us</span>
+        <h2 class="section-title">Building Enduring <span class="grad">Partnerships</span></h2>
+        <p class="section-lead">
+          Our people-first culture drives everything: empathy in engagement, collaboration in
+          co-creation, and simplicity in solutions. We strip away complexity to deliver true value:
+          20-30% efficiency gains, reduced risks, and sustainable growth across the full banking spectrum.
         </p>
-        <ul class="check-list">
-          <li>Real-time treasury &amp; liquidity management</li>
-          <li>Tokenized assets &amp; RWA issuance rails</li>
-          <li>Stablecoin issuance &amp; settlement</li>
-          <li>Private wallets &amp; non-custodial products</li>
-          <li>Broker-dealer / ATS infrastructure</li>
+        <p class="about-p">
+          We co-collaborate as your premier partner, emphasizing co-creation and co-solutions via
+          onshore / nearshore / offshore models. Our Agile Speed Framework ensures rapid production
+          and iterative excellence.
+        </p>
+        <ul class="bullets">
+          <li><strong>Client-Centered Excellence:</strong> feedback loops drive 25-40% higher satisfaction.</li>
+          <li><strong>Simplicity Over Complexity:</strong> intuitive tools for full-spectrum banking needs.</li>
+          <li><strong>Heart-Driven Legacy:</strong> family-inspired trust that builds long-term success.</li>
         </ul>
-        <a href="#contact" class="btn btn-primary" data-cta="Discovery Call">Schedule a Discovery Call</a>
+
+        <figure class="glass quote-card">
+          <img class="quote-avatar" src="assets/michael.jpg" alt="Michael Gladczuk, Founder &amp; CEO" loading="lazy" />
+          <div>
+            <blockquote>"In a world of change, ACM is your steadfast partner, delivering empathy and expertise."</blockquote>
+            <figcaption><strong>Michael Gladczuk</strong><span>Founder &amp; CEO</span></figcaption>
+          </div>
+        </figure>
       </div>
-      <div class="featured-visual" aria-hidden="true">
-        <div class="card-stack">
-          <div class="glass mini-card"><span class="dot"></span> 200+ countries supported <strong>FX</strong></div>
-          <div class="glass mini-card"><span class="dot"></span> Settlement throughput <strong>99.98%</strong></div>
-          <div class="glass mini-card"><span class="dot"></span> Infra cost reduction <strong>~99%</strong></div>
-        </div>
+
+      <div class="about-right">
+        <span class="tag"><span class="dot"></span> Our 4 Banking Pillars</span>
+        <ul class="pillars">
+          <li class="pillar">
+            <h3>AI &amp; Data Innovation</h3>
+            <p>Agentic AI, predictive analytics, and data unification that unlock actionable insight, driving 20-30% efficiency gains for your institution.</p>
+          </li>
+          <li class="pillar">
+            <h3>Innovative Lending</h3>
+            <p>Predictive scoring, automated approvals, and faster cycles that modernize your lending operation and boost revenue.</p>
+          </li>
+          <li class="pillar">
+            <h3>Cybersecurity &amp; Fraud Prevention</h3>
+            <p>Real-time detection and layered defense frameworks that cut risk by 35% and protect what matters most.</p>
+          </li>
+          <li class="pillar">
+            <h3>Digital Modernization</h3>
+            <p>Legacy upgrades, embedded finance, and cloud-native builds delivering 30% cost reductions and future-ready resilience.</p>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- ============ SOLUTIONS ============ -->
-  <section class="section" id="solutions">
+  <!-- ============ WHAT WE DO ============ -->
+  <section class="section surface" id="what">
     <div class="container">
-      <span class="tag">Solutions</span>
-      <h2 class="section-title">Full-Spectrum Solutions That Solve Real Organizational Problems</h2>
+      <span class="tag"><span class="dot"></span> What We Do</span>
+      <h2 class="section-title">Full-Spectrum Banking Solutions, Built Around People</h2>
       <p class="section-lead">
-        We combine data-first architecture, our Agile Speed Framework, and institutional-grade
-        infrastructure to ship production-ready solutions you can own and scale under your own brand.
+        We combine data-first architecture, our Agile Speed Framework, and institution-grade infrastructure
+        to ship production-ready solutions credit unions and community banks can own and scale.
       </p>
 
       <div class="solutions-grid">
-        <div class="glass sol-card"><h3>Custom AI Products &amp; Intelligent Automation</h3><p>End-to-end AI-powered products and intelligent process automation built around your problems.</p></div>
-        <div class="glass sol-card"><h3>Data-First Platforms &amp; Analytics</h3><p>Unified data foundations and advanced predictive analytics for measurable decisions.</p></div>
-        <div class="glass sol-card"><h3>Cloud Modernization &amp; Transformation</h3><p>Modernize legacy systems and scale through hyperautomation.</p></div>
-        <div class="glass sol-card"><h3>Hyperautomation &amp; IPA</h3><p>Intelligent process automation that drives dramatic efficiency gains.</p></div>
-        <div class="glass sol-card"><h3>Cybersecurity &amp; Post-Quantum</h3><p>Advanced cybersecurity with post-quantum cryptography embedded by default.</p></div>
-        <div class="glass sol-card"><h3>Blockchain, Tokenized Assets &amp; Stablecoins</h3><p>RWA issuance, tokenization, and stablecoin settlement infrastructure.</p></div>
-        <div class="glass sol-card"><h3>Full Back-End &amp; Private Wallets</h3><p>Complete back-end infrastructure with private wallets and non-custodial solutions.</p></div>
-        <div class="glass sol-card"><h3>White-Label Broker-Dealer Platforms</h3><p>Custom ATS / broker-dealer and investment firm platforms you brand and own.</p></div>
+        <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></span><h3>Lending Modernization</h3><p>Predictive scoring, automated approvals, and faster cycles for auto, mortgage, and business lending.</p></div>
+        <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3 2.7-5 5.5-5s5.5 2 5.5 5"/><path d="M16 6.2a3 3 0 0 1 0 5.6"/><path d="M20.5 20c0-2.2-1-3.7-2.7-4.6"/></svg></span><h3>Member Engagement</h3><p>Intelligent personalization that increases satisfaction, deepens relationships, and reduces churn.</p></div>
+        <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A3.5 3.5 0 0 1 18 18H7z"/></svg></span><h3>Core &amp; Cloud Modernization</h3><p>Cloud-native core infrastructure that boosts reliability and cuts operational cost.</p></div>
+        <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M3 20h18"/></svg></span><h3>Data &amp; Analytics</h3><p>Unified data foundations and predictive insight turning siloed information into decisions.</p></div>
+        <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span><h3>Cybersecurity &amp; Fraud</h3><p>Real-time fraud detection and layered defense, including post-quantum cryptography.</p></div>
+        <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M15 15h3"/></svg></span><h3>Embedded Finance</h3><p>Tokenized payments, treasury, and settlement rails you brand and own.</p></div>
       </div>
-
-      <h3 class="subhead">How This Powers Each Vertical</h3>
-      <div class="vertical-grid">
-        <div class="glass vert"><h4>Banking &amp; Credit Unions</h4><p>Core modernization, real-time liquidity management, tokenized deposits, stablecoin settlement, and compliant secondary markets — white-labeled under your brand.</p></div>
-        <div class="glass vert"><h4>Broker-Dealer &amp; Investment Firms</h4><p>Custom ATS/broker-dealer infrastructure, RWA issuance rails, transfer-agent workflows, and secondary liquidity.</p></div>
-        <div class="glass vert"><h4>Healthcare</h4><p>Secure tokenized payment rails, revenue-cycle liquidity management, administrative hyperautomation, and post-quantum data protection.</p></div>
-        <div class="glass vert"><h4>Fintech</h4><p>Full custom back-end infrastructure, issuance &amp; settlement rails, hyperautomation, and cybersecurity so you focus on growth.</p></div>
-        <div class="glass vert"><h4>Retail &amp; E-commerce</h4><p>Tokenized loyalty programs, stablecoin payments, supply-chain finance, and embedded finance infrastructure.</p></div>
-        <div class="glass vert"><h4>Logistics &amp; Manufacturing</h4><p>Supply-chain tokenization, real-time working-capital liquidity, and hyperautomation of trade finance workflows.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ STATEMENT SLIDE 2 ============ -->
-  <section class="slide slide-statement parallax">
-    <div class="slide-bg" data-speed="0.25" style="background-image:url('assets/3.jpg')"></div>
-    <div class="slide-overlay overlay-strong"></div>
-    <div class="container slide-content center">
-      <h2 class="statement"><span class="grad">~99%</span> infrastructure cost reduction</h2>
-      <p class="statement-sub">The same white-label chain and market infrastructure we operate can help you scale issuance, settlement, compliance, and treasury — far more efficiently, and without standing up your own stack.</p>
     </div>
   </section>
 
   <!-- ============ PRODUCTS ============ -->
   <section class="section" id="products">
     <div class="container">
-      <span class="tag">Products</span>
-      <h2 class="section-title">Our Custom-Built AI-Powered Product Suite</h2>
+      <span class="tag"><span class="dot"></span> Products</span>
+      <h2 class="section-title">Our AI-Powered Product Suite</h2>
       <p class="section-lead">
-        Every product is fully developed through our own custom development &amp; design process
-        and continuously enhanced by our Innovation Lab Team — fully customizable, white-label
-        ready, and built to deliver measurable outcomes.
+        Every product is fully developed through our own custom development and design process and
+        continuously enhanced by our Innovation Lab Team: customizable, white-label ready, and built
+        to deliver measurable outcomes.
       </p>
 
       <div class="glass flagship">
-        <span class="tag tag-light">Flagship Platform</span>
-        <h3>Regulated Fintech Infrastructure</h3>
-        <p>
-          Fully developed AI-powered platform that solves real-time treasury management,
-          tokenized assets, stablecoin operations, private wallets, broker-dealer infrastructure,
-          and non-custodial products for banks, investment firms, fintechs, and healthcare
-          organizations. White-labeled under your brand, deployed under our SF Private License.
-        </p>
+        <span class="tag-flag">Flagship Platform</span>
+        <h3>Our Regulated Fintech Infrastructure Platform</h3>
+        <p>Fully developed, AI-powered, white-label banking infrastructure: real-time treasury, tokenized assets, stablecoin operations, private wallets, and broker-dealer rails. Branded and owned by you, with up to 40-60% lower infrastructure cost.</p>
       </div>
 
       <div class="products-grid">
-        <div class="glass prod-card"><h4>ACM AI Shield</h4><p>Solves risk &amp; fraud problems with intelligent, real-time protection and post-quantum cybersecurity.</p></div>
-        <div class="glass prod-card"><h4>ACM Cloud Core</h4><p>Solves legacy modernization and scalability challenges through hyperautomation.</p></div>
-        <div class="glass prod-card"><h4>ACM Data Horizon</h4><p>Solves fragmented data and analytics problems with predictive, unified insights.</p></div>
-        <div class="glass prod-card"><h4>ACM Engage Pro</h4><p>Solves customer experience and engagement challenges with intelligent personalization.</p></div>
-        <div class="glass prod-card"><h4>ACM LendSmart</h4><p>Solves lending inefficiencies with automated, compliant workflows and hyperautomation.</p></div>
+        <article class="glass prod-card">
+          <div class="prod-head"><h3>ACM AI Shield</h3><span class="cat blue">Fraud Reduction</span></div>
+          <p>AI-powered fraud detection that protects your institution and your members in real time.</p>
+          <div class="prod-stat"><strong>99.7%</strong><span>Threat Detection</span></div>
+          <svg class="spark sm" viewBox="0 0 220 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,32 L30,28 L60,30 L90,22 L120,24 L150,16 L180,18 L220,8" fill="none" stroke="url(#sp1)" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </article>
+
+        <article class="glass prod-card">
+          <div class="prod-head"><h3>ACM Cloud Core</h3><span class="cat teal">Cost Savings</span></div>
+          <p>Cloud-native core infrastructure that reduces operational costs while boosting reliability.</p>
+          <div class="prod-stat"><strong>99.99%</strong><span>Uptime SLA</span></div>
+          <div class="blocks"><i style="--h:55%"></i><i style="--h:70%"></i><i style="--h:62%"></i><i style="--h:85%"></i><i style="--h:74%"></i><i style="--h:95%"></i><i style="--h:88%"></i></div>
+        </article>
+
+        <article class="glass prod-card">
+          <div class="prod-head"><h3>ACM Data Horizon</h3><span class="cat blue">Lending Insights</span></div>
+          <p>Unified data platform turning siloed information into actionable lending intelligence.</p>
+          <div class="prod-stat ring-stat">
+            <div><strong>3.2x</strong><span>Faster Insights</span></div>
+            <svg class="ring" viewBox="0 0 48 48" aria-hidden="true">
+              <circle cx="24" cy="24" r="19" fill="none" stroke="rgba(31,79,255,.14)" stroke-width="6"/>
+              <circle cx="24" cy="24" r="19" fill="none" stroke="url(#sp1)" stroke-width="6" stroke-linecap="round" stroke-dasharray="86 120" transform="rotate(-90 24 24)"/>
+            </svg>
+          </div>
+        </article>
+
+        <article class="glass prod-card">
+          <div class="prod-head"><h3>ACM Engage Pro</h3><span class="cat teal">Retention Boost</span></div>
+          <p>Customer engagement platform designed to increase satisfaction and reduce churn.</p>
+          <div class="prod-stat"><strong>+34%</strong><span>Member Retention</span></div>
+          <svg class="spark sm" viewBox="0 0 220 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 L30,28 L60,24 L90,26 L120,18 L150,20 L180,12 L220,10" fill="none" stroke="#19C8D6" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </article>
+
+        <article class="glass prod-card">
+          <div class="prod-head"><h3>ACM LendSmart</h3><span class="cat blue">Innovative Lending</span></div>
+          <p>Modern lending workflows with faster approvals and streamlined modernization.</p>
+          <div class="prod-stat"><strong>2.1x</strong><span>Faster Approvals</span></div>
+          <div class="blocks"><i style="--h:50%"></i><i style="--h:64%"></i><i style="--h:58%"></i><i style="--h:80%"></i><i style="--h:72%"></i><i style="--h:90%"></i><i style="--h:100%"></i></div>
+        </article>
+
+        <article class="glass prod-card">
+          <div class="prod-head"><h3>ACM CyberGuard</h3><span class="cat blue">Cybersecurity &amp; Fraud</span></div>
+          <p>Comprehensive cybersecurity and fraud prevention built for community banking.</p>
+          <div class="prod-stat"><strong>24/7</strong><span>Active Monitoring</span></div>
+          <svg class="spark sm" viewBox="0 0 220 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0,26 L30,28 L60,22 L90,24 L120,18 L150,22 L180,14 L220,16" fill="none" stroke="url(#sp1)" stroke-width="2.2" stroke-linecap="round"/></svg>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- ============ INDUSTRIES ============ -->
-  <section class="section" id="industries">
+  <!-- ============ ACM VENTURES ============ -->
+  <section class="section surface" id="ventures">
     <div class="container">
-      <span class="tag">Industries</span>
-      <h2 class="section-title">Industries We Serve</h2>
-      <div class="industries-grid">
-        <div class="glass ind">Banking &amp; Credit Unions</div>
-        <div class="glass ind">Broker-Dealer &amp; Investment Firms</div>
-        <div class="glass ind">Healthcare</div>
-        <div class="glass ind">Fintech</div>
-        <div class="glass ind">Retail &amp; E-commerce</div>
-        <div class="glass ind">Logistics &amp; Manufacturing</div>
-        <div class="glass ind">Professional Services</div>
+      <span class="tag"><span class="dot"></span> ACM Ventures</span>
+      <h2 class="section-title">Backing the Builders of <span class="grad">Modern Finance</span></h2>
+      <p class="section-lead">
+        Beyond building technology, ACM invests in early-stage startups shaping the future of banking,
+        AI, and financial infrastructure, pairing capital with our platform, expertise, and ecosystem.
+      </p>
+      <div class="ventures-grid">
+        <div class="glass vent-card">
+          <span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M10 21v-6h4v6"/></svg></span>
+          <h3>Fintech &amp; Banking</h3>
+          <p>Founders modernizing lending, payments, deposits, and core banking for community institutions.</p>
+        </div>
+        <div class="glass vent-card">
+          <span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></span>
+          <h3>AI &amp; Data</h3>
+          <p>Teams applying agentic AI, predictive analytics, and data infrastructure to real financial problems.</p>
+        </div>
+        <div class="glass vent-card">
+          <span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <h3>Infrastructure &amp; Security</h3>
+          <p>Builders advancing settlement rails, embedded finance, and post-quantum security.</p>
+        </div>
+      </div>
+      <a href="#contact" class="btn btn-primary" data-cta="ACM Ventures">Pitch ACM Ventures</a>
+    </div>
+  </section>
+
+  <!-- ============ INSIGHTS ============ -->
+  <section class="section" id="insights">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> Insights</span>
+      <h2 class="section-title">News, White Papers &amp; Case Studies</h2>
+      <p class="section-lead">Research, results, and perspective from the ACM team, trust built on evidence.</p>
+      <div class="insights-grid">
+        <article class="glass insight-col">
+          <span class="insight-kind blue">News</span>
+          <ul class="insight-list">
+            <li><span class="soon">Coming soon</span> ACM joins the Hanzo.ai &amp; Lux Finance ecosystems</li>
+            <li><span class="soon">Coming soon</span> Launching our Regulated Fintech Infrastructure Platform</li>
+            <li><span class="soon">Coming soon</span> ACM Ventures opens first investment cohort</li>
+          </ul>
+        </article>
+        <article class="glass insight-col">
+          <span class="insight-kind teal">White Papers</span>
+          <ul class="insight-list">
+            <li><span class="soon">Coming soon</span> Post-Quantum Security for Community Banking</li>
+            <li><span class="soon">Coming soon</span> The Agile Speed Framework, Explained</li>
+            <li><span class="soon">Coming soon</span> Data-First Architecture for Credit Unions</li>
+          </ul>
+        </article>
+        <article class="glass insight-col">
+          <span class="insight-kind blue">Case Studies</span>
+          <ul class="insight-list">
+            <li><span class="soon">Coming soon</span> 40-60% infrastructure cost reduction</li>
+            <li><span class="soon">Coming soon</span> +34% member retention with Engage Pro</li>
+            <li><span class="soon">Coming soon</span> 2.1x faster loan approvals with LendSmart</li>
+          </ul>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- ============ PROCESS ============ -->
-  <section class="section" id="process">
+  <section class="section surface" id="process">
     <div class="container">
-      <span class="tag">Our Process</span>
+      <span class="tag"><span class="dot"></span> Our Process</span>
       <h2 class="section-title">Agile Speed Framework</h2>
       <p class="section-lead">Our proprietary framework delivers instant speed to production and measurable results.</p>
       <ol class="process-steps">
@@ -280,32 +412,67 @@
         <li class="glass"><span class="step-num">2</span><div><h4>Strategy &amp; Design</h4><p>Co-create roadmaps focused on measurable outcomes.</p></div></li>
         <li class="glass"><span class="step-num">3</span><div><h4>Skeleton Deployment</h4><p>Rapid prototype for instant speed to production.</p></div></li>
         <li class="glass"><span class="step-num">4</span><div><h4>Feedback &amp; Iteration</h4><p>Real-time input for continuous refinement.</p></div></li>
-        <li class="glass"><span class="step-num">5</span><div><h4>Full Deployment &amp; Support</h4><p>Nationwide rollout with ongoing optimization.</p></div></li>
-        <li class="glass"><span class="step-num">6</span><div><h4>Measurement</h4><p>Track real business outcomes — efficiency, security, growth.</p></div></li>
+        <li class="glass"><span class="step-num">5</span><div><h4>Full Deployment &amp; Support</h4><p>Global rollout with ongoing optimization.</p></div></li>
+        <li class="glass"><span class="step-num">6</span><div><h4>Measurement</h4><p>Track real outcomes: efficiency, security, growth.</p></div></li>
       </ol>
     </div>
   </section>
 
   <!-- ============ WHY ============ -->
-  <section class="slide-why parallax" id="why">
-    <div class="slide-bg" data-speed="0.2" style="background-image:url('assets/5.jpg')"></div>
-    <div class="slide-overlay overlay-strong"></div>
-    <div class="container slide-content">
-      <span class="tag tag-light">Why ACM Global Tech</span>
-      <h2 class="section-title">Why Organizations Choose Us</h2>
+  <section class="section" id="why">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> Why ACM Global Tech</span>
+      <h2 class="section-title">Why Institutions Choose Us</h2>
       <div class="why-grid">
-        <div class="glass why-card"><h4>We Solve Problems</h4><p>We don't sell technology — we deliver tailored solutions that solve real organizational challenges.</p></div>
+        <div class="glass why-card"><h4>We Solve Problems</h4><p>We don't sell technology; we deliver tailored solutions that solve real organizational challenges.</p></div>
         <div class="glass why-card"><h4>Fully Developed</h4><p>Production-ready solutions with full custom development and design.</p></div>
-        <div class="glass why-card"><h4>Hyperautomation &amp; Security</h4><p>Advanced cybersecurity (incl. post-quantum) and efficiency built into every solution.</p></div>
-        <div class="glass why-card"><h4>Innovation Lab Team</h4><p>Constantly improving and future-proofing so you never worry about staying current.</p></div>
-        <div class="glass why-card"><h4>Regulatory-Ready</h4><p>SF Private License and full compliance.</p></div>
+        <div class="glass why-card"><h4>Hyperautomation &amp; Security</h4><p>Advanced cybersecurity (incl. post-quantum) and efficiency in every solution.</p></div>
+        <div class="glass why-card"><h4>Innovation Lab Team</h4><p>Constantly improving and future-proofing so you stay current.</p></div>
+        <div class="glass why-card"><h4>People-First</h4><p>Every engagement is outcome-based and member-centered.</p></div>
         <div class="glass why-card"><h4>White-Label Ownership</h4><p>Clients fully brand and own the solutions.</p></div>
         <div class="glass why-card"><h4>Speed</h4><p>Skeleton deployments deliver 30%+ faster ROI.</p></div>
-        <div class="glass why-card"><h4>Depth</h4><p>Dedicated teams across Healthcare, Banking, Fintech, Broker-Dealer, and Custom Products.</p></div>
-        <div class="glass why-card"><h4>Ecosystem Power</h4><p>Hanzo.ai + Lux Finance partners.</p></div>
-        <div class="glass why-card"><h4>People-First</h4><p>Every engagement is outcome-based and client-centered.</p></div>
-        <div class="glass why-card"><h4>Proven Leadership</h4><p>50+ combined years of real-world impact.</p></div>
-        <div class="glass why-card"><h4>Future-Proof</h4><p>Post-quantum cryptography embedded in every solution.</p></div>
+        <div class="glass why-card"><h4>Proven Leadership</h4><p>50+ combined years of real-world banking impact.</p></div>
+        <div class="glass why-card"><h4>Depth</h4><p>Dedicated teams across Banking, Fintech, Broker-Dealer, Healthcare, and Custom Products.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TEAM ============ -->
+  <section class="section surface" id="team">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> Team</span>
+      <h2 class="section-title">Leadership</h2>
+      <div class="team-grid">
+        <article class="glass team-card">
+          <img class="team-photo" src="assets/michael.jpg" alt="Michael Gladczuk, Founder &amp; CEO" loading="lazy" />
+          <div class="team-body">
+            <h3>Michael Gladczuk</h3>
+            <p class="team-role">Founder &amp; CEO</p>
+            <p>25+ years leading large-scale digital transformations across banking, fintech, retail, healthcare, and e-commerce at Walmart, Bank of America, Tietoevry, and other global organizations.</p>
+          </div>
+        </article>
+        <article class="glass team-card">
+          <img class="team-photo" src="assets/zach.jpg" alt="Zach Kelling, Chief Scientist" loading="lazy"
+               onerror="this.outerHTML='&lt;div class=&quot;team-photo team-initials&quot;&gt;ZK&lt;/div&gt;'" />
+          <div class="team-body">
+            <h3>Zach Kelling</h3>
+            <p class="team-role">Chief Scientist</p>
+            <p>Leads the AI Innovation Team and the technical vision behind our banking platform, specializing in data-first architecture, agentic AI, cloud-native infrastructure, and post-quantum cryptography.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEADERSHIP VISION ============ -->
+  <section class="section" id="vision">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> Vision</span>
+      <h2 class="section-title">Michael &amp; Zach: <span class="grad">Pondering Leadership</span></h2>
+      <div class="glass vision-card">
+        <p>Michael and Zach are co-thinkers, collaborators, and leadership enthusiasts dedicated to exploring the timeless and timely questions of what it means to lead in today's world. Together, they ponder leadership not as a title or checklist, but as a deeply human practice that blends courage, clarity, curiosity, and character.</p>
+        <p>With complementary perspectives shaped by real-world experience, diverse industries, and a shared passion for growth, Michael and Zach examine leadership through the lenses of decision-making, team dynamics, personal mastery, culture-building, and ethical influence. Whether unpacking classic wisdom from history's great leaders, analyzing modern case studies, or wrestling with the challenges of AI-era organizations, they bring thoughtful dialogue, intellectual honesty, and practical insight to every conversation.</p>
+        <p>Their joint mission is simple yet ambitious: help individuals and organizations move beyond superficial leadership tactics and into deeper, more intentional ways of showing up for their teams, their missions, and themselves. Through writing, conversations, workshops, or coaching, Michael &amp; Zach invite others to join them in pondering leadership with rigor, humility, and a sense of possibility.</p>
       </div>
     </div>
   </section>
@@ -314,43 +481,54 @@
   <section class="section" id="contact">
     <div class="container contact-inner">
       <div class="contact-copy">
-        <span class="tag">Contact</span>
-        <h2 class="section-title">Ready to solve your biggest challenges with AI-powered solutions?</h2>
-        <p class="section-lead">Jacksonville, FL &middot; Serving the United States with Global Efficiency</p>
+        <span class="tag"><span class="dot"></span> Contact</span>
+        <h2 class="section-title">Ready to simplify your banking technology?</h2>
+        <p class="section-lead">Orlando &amp; Jacksonville, FL · Powering Global Transformation</p>
         <ul class="contact-list">
           <li><strong>Office</strong> <a href="tel:+14072790314">+1 (407) 279-0314</a></li>
-          <li><strong>Mobile</strong> <a href="tel:+12039968812">+1 (203) 996-8812</a></li>
-          <li><strong>Email</strong> <a href="mailto:michael@acmglobaltech.com">michael@acmglobaltech.com</a></li>
+          <li><strong>Email</strong> <a href="mailto:info@acmglobaltech.com">info@acmglobaltech.com</a></li>
         </ul>
-        <p class="creed-tagline">Innovation That Empowers Your Organization.</p>
+        <p class="creed-tagline">Innovation That Empowers Your Institution.</p>
       </div>
 
       <form class="glass contact-form" id="contactForm" novalidate>
         <input type="hidden" name="cta" id="ctaField" value="Discovery Call" />
         <div class="field-row">
           <label class="field"><span>Name</span><input type="text" name="name" required /></label>
-          <label class="field"><span>Company</span><input type="text" name="company" /></label>
+          <label class="field"><span>Institution</span><input type="text" name="company" /></label>
         </div>
         <div class="field-row">
           <label class="field"><span>Email</span><input type="email" name="email" required /></label>
           <label class="field"><span>Phone</span><input type="tel" name="phone" /></label>
         </div>
-        <label class="field"><span>I'm interested in</span>
-          <select name="interest">
-            <option value="">Select an option…</option>
-            <option>Regulated Fintech Platform</option>
-            <option>White-Label Solutions</option>
-            <option>Broker-Dealer / ATS</option>
-            <option>Stablecoins &amp; Tokenization</option>
-            <option>Banking &amp; Healthcare</option>
-            <option>Custom AI Products</option>
-            <option>Other</option>
-          </select>
-        </label>
+        <div class="field">
+          <span>How can we help?</span>
+          <div class="chips-group" role="radiogroup" aria-label="How can we help?">
+            <label class="chip-radio"><input type="radio" name="goal" value="Connect now" /><span>Connect now</span></label>
+            <label class="chip-radio"><input type="radio" name="goal" value="Start my journey" /><span>Start my journey</span></label>
+            <label class="chip-radio"><input type="radio" name="goal" value="Help me plan my journey" /><span>Help me plan my journey</span></label>
+            <label class="chip-radio"><input type="radio" name="goal" value="Book a meeting" /><span>Book a meeting</span></label>
+            <label class="chip-radio"><input type="radio" name="goal" value="Just exploring" /><span>Just exploring</span></label>
+          </div>
+        </div>
+        <div class="field">
+          <span>I'm interested in</span>
+          <div class="chips-group" role="radiogroup" aria-label="I'm interested in">
+            <label class="chip-radio"><input type="radio" name="interest" value="Lending Modernization" /><span>Lending Modernization</span></label>
+            <label class="chip-radio"><input type="radio" name="interest" value="Member Engagement" /><span>Member Engagement</span></label>
+            <label class="chip-radio"><input type="radio" name="interest" value="Core &amp; Cloud Modernization" /><span>Core &amp; Cloud</span></label>
+            <label class="chip-radio"><input type="radio" name="interest" value="Cybersecurity &amp; Fraud" /><span>Cybersecurity &amp; Fraud</span></label>
+            <label class="chip-radio"><input type="radio" name="interest" value="Data &amp; Analytics" /><span>Data &amp; Analytics</span></label>
+            <label class="chip-radio"><input type="radio" name="interest" value="White-Label Products" /><span>White-Label Products</span></label>
+            <label class="chip-radio"><input type="radio" name="interest" value="ACM Ventures" /><span>ACM Ventures</span></label>
+            <label class="chip-radio"><input type="radio" name="interest" value="Other" /><span>Other</span></label>
+          </div>
+        </div>
+        <label class="field" id="bookingField" hidden><span>Preferred day &amp; time</span><input type="text" name="preferredTime" placeholder="e.g., Tuesday afternoons, ET" /></label>
         <label class="field"><span>Message</span><textarea name="message" rows="4"></textarea></label>
         <p class="form-cta-hint" id="ctaHint" hidden></p>
-        <button type="submit" class="btn btn-primary btn-lg btn-block">Schedule a 30-minute Discovery Call</button>
-        <p class="form-note" id="formNote" hidden>Thank you — we'll be in touch shortly to schedule your Discovery Call.</p>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Send My Request</button>
+        <p class="form-note" id="formNote" hidden>Thank you! We'll be in touch shortly to schedule your Discovery Call.</p>
         <p class="form-alt">
           Existing client? <a href="#contact" data-cta="Client Portal Access">Sign in to the client portal</a>.
           Ready to start an engagement? <a href="#contact" data-cta="Deposit / Retainer">Pay a deposit</a>.
@@ -364,29 +542,32 @@
     <div class="container footer-inner">
       <div>
         <a href="#home" class="logo logo-footer">
-          <span class="logo-mark">ACM</span><span class="logo-text">Global Tech</span>
+          <span class="logo-text"><strong>ACM</strong> <span class="logo-accent">Global</span> Tech</span>
         </a>
-        <p class="footer-tag">Innovation That Empowers Your Organization</p>
-        <p class="footer-meta">Orlando &amp; Jacksonville, FL · Serving the United States with Global Efficiency</p>
+        <p class="footer-tag">Simple banking technology for credit unions &amp; mid-sized banks</p>
+        <p class="footer-meta">Orlando &amp; Jacksonville, FL · Powering Global Transformation</p>
       </div>
       <nav class="footer-nav">
         <a href="#about">About</a>
-        <a href="#solutions">Solutions</a>
+        <a href="#what">What We Do</a>
         <a href="#products">Products</a>
-        <a href="#industries">Industries</a>
+        <a href="#ventures">Ventures</a>
+        <a href="#insights">Insights</a>
         <a href="#process">Process</a>
-        <a href="#why">Why ACM</a>
+        <a href="#why">Why Us</a>
+        <a href="#team">Team</a>
+        <a href="#vision">Vision</a>
         <a href="#contact">Contact</a>
       </nav>
       <div class="footer-contact">
         <a href="tel:+14072790314">+1 (407) 279-0314</a>
-        <a href="mailto:michael@acmglobaltech.com">michael@acmglobaltech.com</a>
+        <a href="mailto:info@acmglobaltech.com">info@acmglobaltech.com</a>
         <p class="footer-partners">Hanzo.ai &amp; Lux Finance Ecosystem Partners</p>
       </div>
     </div>
-    <div class="container copyright">© <span id="year"></span> ACM Global Tech. All rights reserved. · SF Private License · Full Regulatory Compliance</div>
+    <div class="container copyright">© <span id="year"></span> ACM Global Tech. All rights reserved. · People-First Banking Technology</div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>
