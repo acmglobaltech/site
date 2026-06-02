@@ -749,3 +749,11 @@ img { max-width: 100%; display: block; }
 @media (max-width: 1100px) { .nav.open .nav-panel.mega { grid-template-columns: 1fr; min-width: 0; padding: 6px 0 10px 12px; } }
 /* sub-700: collapse dark partner-band cards to one column (overrides the 2-col rule) */
 @media (max-width: 700px) { .partners-band .partners-grid { grid-template-columns: 1fr; } }
+
+/* ----- AI panel hidden fix + AI integrations strip ----- */
+.ai-panel[hidden] { display: none; }
+.integrations-band { position: relative; z-index: 2; padding: 30px 0; background: var(--white); border-top: 1px solid var(--line); }
+.integrations-eyebrow { text-align: center; font-size: .76rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--mute); }
+.integrations-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 30px; margin-top: 16px; }
+.integrations-row span { font-family: var(--display); font-weight: 700; font-size: 1.15rem; color: var(--ink); opacity: .5; transition: opacity .2s; }
+.integrations-row span:hover { opacity: 1; }

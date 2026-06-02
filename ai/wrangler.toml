@@ -1,0 +1,8 @@
+name = "acm-ai"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+[vars]
+HANZO_API_BASE = "https://api.hanzo.ai/v1"
+HANZO_MODEL = "gpt-4o-mini"
+ALLOWED_ORIGINS = "https://acmglobaltech.com,https://www.acmglobaltech.com,https://hanzoai.github.io"
+# Secret: npx wrangler secret put HANZO_API_KEY

@@ -551,8 +551,17 @@
     closeBtn.addEventListener('click', close);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) close(); });
 
-    function fallback() {
-      return "I'm being connected to ACM's Hanzo AI knowledge base. Meanwhile our team can help directly — email " + AI_CONFIG.email + " or use the contact form and we'll respond fast.";
+    var KB = {
+      'what does acm do': "ACM Global Tech delivers a complete, white-label banking ecosystem — core banking, payments, mobile wallets, exchange & FX, RWA tokenization, stablecoins, treasury, cards, a white-label PSP, and Banking-as-a-Service — for credit unions, mid-sized banks, and healthcare. You brand it and you own it.",
+      'how does pricing work': "Pricing is scoped to your institution and the modules you adopt — start with one (for example the banking core) and expand on your timeline. Share your size and goals at /get-started/ and we'll put together a proposal.",
+      'is the platform post quantum secure': "Yes — post-quantum cryptography is core to ACM. We build on the NIST PQC standards (ML-KEM / FIPS 203, ML-DSA / FIPS 204, SLH-DSA / FIPS 205) to protect long-lived financial records against harvest-now, decrypt-later attacks. More at /capabilities/post-quantum-security/."
+    };
+    function normalize(s) { return (s || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim(); }
+    function fallback(q) {
+      var k = normalize(q);
+      if (KB[k]) return KB[k];
+      for (var key in KB) { if (k.indexOf(key.split(' ')[0]) !== -1 && k.length > 3) return KB[key]; }
+      return "Happy to help. For a precise answer the fastest path is our team — email " + AI_CONFIG.email + " or use the contact form, and you can book a discovery call from any page.";
     }
     function ask(q) {
       add('user', q);
@@ -562,10 +571,10 @@
       if (AI_CONFIG.endpoint) {
         fetch(AI_CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ query: q }) })
           .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
-          .then(function (d) { thinking.classList.remove('thinking'); thinking.textContent = (d && (d.answer || d.text)) || fallback(); })
-          .catch(function () { thinking.classList.remove('thinking'); thinking.textContent = fallback(); });
+          .then(function (d) { thinking.classList.remove('thinking'); thinking.textContent = (d && (d.answer || d.text)) || fallback(q); })
+          .catch(function () { thinking.classList.remove('thinking'); thinking.textContent = fallback(q); });
       } else {
-        window.setTimeout(function () { thinking.classList.remove('thinking'); thinking.textContent = fallback(); }, 500);
+        window.setTimeout(function () { thinking.classList.remove('thinking'); thinking.textContent = fallback(q); }, 450);
       }
     }
     form.addEventListener('submit', function (e) { e.preventDefault(); var q = input.value.trim(); if (!q) return; input.value = ''; ask(q); });

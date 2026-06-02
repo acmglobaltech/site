@@ -10,8 +10,17 @@
   <url><loc>https://acmglobaltech.com/capabilities/rwa-stablecoins/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/capabilities/white-label/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/case-studies/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/case-studies/baas/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/case-studies/banking-core/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/case-studies/cards-issuing/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/case-studies/credit-union-core-modernization/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/case-studies/exchange-fx/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/case-studies/healthcare-payments/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/case-studies/mobile-wallet/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/case-studies/payments-stablecoins/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/case-studies/rwa-tokenization/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/case-studies/treasury-liquidity/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/case-studies/white-label-psp/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/company/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/company/about/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/company/careers/</loc><changefreq>weekly</changefreq></url>
@@ -31,6 +40,7 @@
   <url><loc>https://acmglobaltech.com/login/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/privacy/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/products/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/products/baas/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/products/banking-core/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/products/cards-issuing/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/products/exchange-fx/</loc><changefreq>weekly</changefreq></url>
@@ -38,6 +48,18 @@
   <url><loc>https://acmglobaltech.com/products/payments-stablecoins/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/products/rwa-tokenization/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/products/treasury-liquidity/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/products/white-label-psp/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/research/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/research/baas/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/research/banking-core/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/research/cards-issuing/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/research/exchange-fx/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/research/mobile-wallet/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/research/payments-stablecoins/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/research/post-quantum-banking/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/research/rwa-tokenization/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/research/treasury-liquidity/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/research/white-label-psp/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/solutions/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/solutions/core-cloud-modernization/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/solutions/cybersecurity-fraud/</loc><changefreq>weekly</changefreq></url>

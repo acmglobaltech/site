@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Treasury &amp; Liquidity White Paper | ACM Global Tech</title>
+  <meta name="description" content="Why intraday liquidity fails on batch-era systems, and how ACM rebuilds treasury on one real-time, regulated-first, post-quantum-ready ledger." />
+  <meta name="keywords" content="treasury and liquidity management, real-time treasury architecture, intraday liquidity, cash positioning for banks, stablecoin settlement, post-quantum cryptography banking, regulated-first banking platform, white-label treasury" />
+  <link rel="canonical" href="https://acmglobaltech.com/research/treasury-liquidity/" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ACM Global Tech" />
+  <meta property="og:title" content="Treasury &amp; Liquidity White Paper | ACM Global Tech" />
+  <meta property="og:description" content="Why intraday liquidity fails on batch-era systems, and how ACM rebuilds treasury on one real-time, regulated-first, post-quantum-ready ledger." />
+  <meta property="og:url" content="https://acmglobaltech.com/research/treasury-liquidity/" />
+  <meta property="og:image" content="https://acmglobaltech.com/assets/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Treasury &amp; Liquidity White Paper | ACM Global Tech" />
+  <meta name="twitter:description" content="Why intraday liquidity fails on batch-era systems, and how ACM rebuilds treasury on one real-time, regulated-first, post-quantum-ready ledger." />
+  <meta name="twitter:image" content="https://acmglobaltech.com/assets/og.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css?v=10" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Real-Time Treasury and Liquidity for Regulated Institutions: An ACM White Paper","description":"Why intraday liquidity fails on batch-era systems, and how ACM rebuilds treasury on one real-time, regulated-first, post-quantum-ready ledger.","url":"https://acmglobaltech.com/research/treasury-liquidity/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://acmglobaltech.com/research/"},{"@type":"ListItem","position":3,"name":"Real-Time Treasury and Liquidity for Regulated Institutions: An ACM White Paper","item":"https://acmglobaltech.com/research/treasury-liquidity/"}]}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is this different from ACM's Treasury & Liquidity product page?","acceptedAnswer":{"@type":"Answer","text":"This white paper sets out the architectural argument: why batch-era systems fail at intraday liquidity and how a single real-time ledger, regulated-first controls, and multi-rail settlement address it. The product page describes the working features. Both reflect the same platform; this page is for evaluators reasoning about the design."}},{"@type":"Question","name":"Why does post-quantum cryptography matter for treasury data specifically?","acceptedAnswer":{"@type":"Answer","text":"Settlement instructions, counterparty data, and treasury records stay sensitive for years, which exposes them to harvest-now, decrypt-later attacks. ACM builds toward the NIST post-quantum standards finalized in 2024 (ML-KEM/FIPS 203, ML-DSA/FIPS 204, SLH-DSA/FIPS 205) and designs for crypto-agility. Because the standards are recent, ACM aligns to and builds on them rather than claiming certification."}},{"@type":"Question","name":"Does adopting this require replacing our core?","acceptedAnswer":{"@type":"Answer","text":"No. ACM augments the existing estate through APIs and connectors and rolls out in phases under its Agile Speed Framework: read-only positioning first, then controls, then live settlement. The platform is designed to support SOC 2, ISO 27001, PCI-DSS, and HIPAA requirements, with data residency matched to the institution."}}]}</script>
+</head>
+<body>
+  <div class="bg-floaties" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  <header class="header" id="header">
+    <div class="container nav-wrap">
+      <a href="/" class="logo" aria-label="ACM Global Tech home">
+        <span class="logo-mark" aria-hidden="true">
+          <svg viewBox="0 0 40 40" width="34" height="34" fill="none">
+            <path d="M20 3 34 11v18L20 37 6 29V11z" stroke="url(#hexg)" stroke-width="1.6" opacity=".5"/>
+            <path d="M20 9 29 14v10l-9 5-9-5V14z" stroke="url(#hexg)" stroke-width="1.6" opacity=".8"/>
+            <circle cx="20" cy="20" r="4.4" fill="url(#hexg)"/>
+            <defs><linearGradient id="hexg" x1="6" y1="3" x2="34" y2="37" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#1F4FFF"/><stop offset="1" stop-color="#19C8D6"/></linearGradient></defs>
+          </svg>
+        </span>
+        <span class="logo-text"><strong>ACM</strong><span class="logo-suffix"><span class="logo-accent">Global</span> Tech</span></span>
+      </a>
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <div class="nav-group">
+          <button class="nav-top" data-href="/products/" aria-expanded="false">Products<span class="caret"></span></button>
+          <div class="nav-panel">
+            <a href="/products/banking-core/">Banking Core</a>
+            <a href="/products/mobile-wallet/">Mobile Wallet</a>
+            <a href="/products/exchange-fx/">Exchange &amp; FX</a>
+            <a href="/products/rwa-tokenization/">RWA Tokenization</a>
+            <a href="/products/payments-stablecoins/">Payments &amp; Stablecoins</a>
+            <a href="/products/cards-issuing/">Cards &amp; Issuing</a>
+            <a href="/products/treasury-liquidity/">Treasury &amp; Liquidity</a>
+            <a href="/products/white-label-psp/">White-Label PSP</a>
+            <a href="/products/baas/">Banking-as-a-Service</a>
+            <a href="/products/" class="nav-all">All Products &rarr;</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-top" data-href="/solutions/" aria-expanded="false">Solutions<span class="caret"></span></button>
+          <div class="nav-panel mega">
+            <div class="nav-col"><a class="nav-col-head" href="/solutions/">Solutions</a><a href="/solutions/lending-modernization/">Lending Modernization</a><a href="/solutions/member-engagement/">Member Engagement</a><a href="/solutions/core-cloud-modernization/">Core &amp; Cloud Modernization</a><a href="/solutions/data-analytics/">Data &amp; Analytics</a><a href="/solutions/cybersecurity-fraud/">Cybersecurity &amp; Fraud</a><a href="/solutions/embedded-finance/">Embedded Finance</a><a href="/solutions/healthcare-finance/">Healthcare Finance</a></div>
+            <div class="nav-col"><a class="nav-col-head" href="/industries/">Industries</a><a href="/industries/credit-unions/">Credit Unions</a><a href="/industries/community-mid-banks/">Community &amp; Mid-Sized Banks</a><a href="/industries/healthcare/">Healthcare</a><a href="/industries/broker-dealers/">Broker-Dealers</a><a href="/industries/fintechs/">Fintechs</a><a href="/industries/corporate-treasury/">Corporate Treasury</a></div>
+            <div class="nav-col"><a class="nav-col-head" href="/capabilities/">Capabilities</a><a href="/capabilities/ai-data/">AI &amp; Data</a><a href="/capabilities/rwa-stablecoins/">RWA &amp; Stablecoins</a><a href="/capabilities/fx-rates/">Industry-Leading FX</a><a href="/capabilities/post-quantum-security/">Post-Quantum Security</a><a href="/capabilities/hyperautomation/">Hyperautomation</a><a href="/capabilities/agile-speed-framework/">Agile Speed Framework</a><a href="/capabilities/white-label/">White-Label &amp; Ownership</a></div>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-top" data-href="/docs/" aria-expanded="false">Resources<span class="caret"></span></button>
+          <div class="nav-panel">
+            <a href="/docs/">Documentation</a>
+            <a href="/support/">Support &amp; Help</a>
+            <a href="/trust/">Trust &amp; Security</a>
+            <a href="/research/">Research</a>
+            <a href="/case-studies/">Case Studies</a>
+            <a href="/docs/" class="nav-all">All Resources &rarr;</a>
+          </div>
+        </div>
+        <div class="nav-group">
+          <button class="nav-top" data-href="/company/" aria-expanded="false">Company<span class="caret"></span></button>
+          <div class="nav-panel">
+            <a href="/company/about/">About</a>
+            <a href="/company/vision/">Our Vision</a>
+            <a href="/company/team/">Leadership Team</a>
+            <a href="/company/ventures/">ACM Ventures</a>
+            <a href="/company/careers/">Careers</a>
+            <a href="/get-started/">Get Started</a>
+            <a href="/contact/">Contact</a>
+            <a href="/company/" class="nav-all">All Company &rarr;</a>
+          </div>
+        </div>
+      </nav>
+      <a href="/login/" class="nav-login">Client Login</a>
+      <a href="/contact/" class="btn btn-primary btn-nav" data-cta="Discovery Call">Get in Touch</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="crumbs" aria-label="Breadcrumb"><div class="container"><a href="/">Home</a><span class="crumb-sep">/</span><a href="/research/">Research</a><span class="crumb-sep">/</span><span aria-current="page">Real-Time Treasury and Liquidity for Regulated Institutions: An ACM White Paper</span></div></nav>
+  <main id="main">
+    <h1 class="visually-hidden">Real-Time Treasury and Liquidity for Regulated Institutions: An ACM White Paper</h1>
+<section class="page-hero"><div class="container"><span class="tag"><span class="dot"></span> White Paper</span><h2 class="page-lead-title">Real-Time Treasury and Liquidity for Regulated Institutions</h2><p class="page-lead">A technical examination of why intraday liquidity management is breaking down on batch-era infrastructure, and how ACM rebuilds treasury on a single real-time ledger with regulated-first controls, post-quantum-protected records, and settlement that spans both traditional rails and tokenized assets.</p><div class="hero-cta"><a class="btn btn-primary" href="/get-started/" data-cta="Discovery Call">Schedule a discovery call</a> <a class="btn btn-ghost" href="/products/treasury-liquidity/">See the Treasury &amp; Liquidity product</a></div></div></section>
+  <div class="trust-strip"><div class="container"><span>Regulated-first architecture</span><span>Post-quantum cryptography</span><span>White-label &amp; client-owned</span><span>Hanzo.ai &amp; Lux Financial ecosystem</span></div></div>
+
+
+<section class="section"><div class="container"><span class="tag"><span class="dot"></span> Abstract</span><h2 class="section-title">Liquidity is a real-time discipline running on batch-era systems</h2><p class="section-lead">Treasury teams are asked to make intraday funding, collateral, and settlement decisions, yet most still work from positions that reconcile overnight. This paper sets out the structural problem, ACM's architecture, the security and compliance posture behind it, and how to deploy it without replacing the core.</p><p>The gap between how fast money now moves and how slowly most institutions can see it is widening. Instant payment rails, multi-currency flows, and tokenized settlement clear in seconds, while the systems of record treasury depends on still close the books in nightly batches. The result is a treasury function managing real-time risk with a rear-view mirror. The fix is architectural, not procedural: positions, controls, and settlement must share one ledger, in real time, on infrastructure that can be audited and that protects long-lived records against future cryptographic threats.</p></div></section>
+
+<section class="section surface"><div class="container"><span class="tag"><span class="dot"></span> The Problem</span><h2 class="section-title">Where batch-era treasury breaks down</h2><p class="section-lead">The failure modes are consistent across credit unions, community and mid-sized banks, and corporate treasury functions. They compound as flows accelerate.</p>
+<div class="solutions-grid">
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Fragmented positions</h3><p>Balances live across core systems, correspondent and nostro accounts, spreadsheets, and overnight files. No single view is current, so the true cash position is an estimate until the next reconciliation.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M3 20h18"/></svg></span><h3>Stale decision data</h3><p>By the time files land and positions reconcile, the intraday funding window has often closed. Teams hold precautionary buffers to cover what they cannot see, leaving working capital idle.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Manual controls</h3><p>Payment approvals, counterparty limits, and segregation of duties are frequently enforced through email, side systems, and convention rather than the platform that moves the money.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Reconciliation drag</h3><p>Effort that should fund analysis is spent matching statements and chasing breaks, because each rail and account keeps its own record to reassemble after the fact.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Multi-rail complexity</h3><p>Wires, ACH, FX across many markets, and tokenized settlement each carry their own tooling, cut-off times, and exceptions, multiplying operational surface area.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Examiner exposure</h3><p>When authority and audit trail are scattered, proving who moved funds, under what limit, and with what approval becomes a manual reconstruction when scrutiny is highest.</p></div>
+</div>
+</div></section>
+
+<section class="section"><div class="container"><span class="tag"><span class="dot"></span> Approach &amp; Architecture</span><h2 class="section-title">One real-time ledger, with treasury built in</h2><p class="section-lead">ACM treats treasury not as a tool to integrate but as a function of the core. Positioning, forecasting, controls, FX, and settlement operate against the same ledger that runs accounts, deposits, lending, and payments, so the numbers reconcile by design rather than after the fact.</p>
+<div class="solutions-grid">
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Shared real-time ledger</h3><p>A single event-driven ledger updates as transactions settle. Treasury reads the same source of truth as the rest of the platform, eliminating the file hand-offs and copies that create reconciliation breaks.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Intraday positioning &amp; forecasting</h3><p>Live, consolidated balances across accounts, entities, and currencies, with forward projections that blend scheduled flows, historical patterns, and current positions so funding gaps surface early.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Controls as code</h3><p>Counterparty limits, dual-control thresholds, and segregation of duties are enforced on every transaction by the platform, not by side processes, and every action is logged with actor, timestamp, and before-and-after state.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5"/><path d="M12 12v10"/></svg></span><h3>Multi-rail settlement</h3><p>Wires, ACH, multi-currency FX, and stablecoin settlement move through shared rails from one console, with non-custodial key options where an institution requires them.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Open connectivity</h3><p>APIs and connectors link correspondent accounts, payment rails, market-data feeds, and an existing core, so positions centralize without manual files.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>White-label and client-owned</h3><p>Deployed under the institution's brand as a single-tenant or private environment. It is owned, not rented as shared tenancy, and the data and configuration remain the institution's own.</p></div>
+</div>
+<p>The design follows from one principle: the system that records money and the system that moves money should be the same system, observed in real time. Cross-border and tokenized settlement run through the ecosystem's <a href="/products/payments-stablecoins/">payments and stablecoins</a> rails, and FX and tokenized-asset flows draw on settlement infrastructure from ecosystem partner Lux Financial.</p></div></section>
+
+<section class="section surface"><div class="container"><span class="tag"><span class="dot"></span> Security &amp; Compliance</span><h2 class="section-title">Engineered for the surface where one approval moves real funds</h2><p class="section-lead">Treasury is where risk, compliance, and operations meet. The posture below is designed for that pressure and to evidence itself under examination.</p>
+<ul class="bullets">
+<li><strong>Post-quantum cryptography:</strong> settlement instructions, counterparty data, and treasury records can stay sensitive for years. ACM builds toward the NIST post-quantum standards finalized in 2024 (ML-KEM / FIPS 203, ML-DSA / FIPS 204, and SLH-DSA / FIPS 205) and designs for crypto-agility so primitives can be rotated as guidance evolves. Because these standards are recent, ACM frames its work as aligning to and building on them rather than claiming certification.</li>
+<li><strong>Harvest-now, decrypt-later defense:</strong> adversaries can capture encrypted records today and decrypt them once quantum hardware matures. For long-lived financial data this is a present-day governance decision, addressed through a hybrid rollout that runs post-quantum alongside classical algorithms. See <a href="/capabilities/post-quantum-security/">post-quantum security</a> for the full program.</li>
+<li><strong>Threshold cryptography and non-custodial keys:</strong> signing authority for high-value movements can be split across parties so no single holder can unilaterally move funds, with non-custodial options where the institution must retain key control.</li>
+<li><strong>Controls and audit by design:</strong> role-based payment authority, maker-checker approvals, and an immutable audit trail are built in. The platform is designed to support SOC 2, ISO 27001, PCI-DSS, and HIPAA requirements for compliance-ready, examiner-ready treasury operations.</li>
+<li><strong>Identity integration:</strong> SAML/OIDC single sign-on, MFA, and automated deprovisioning bind treasury access to the institution's identity provider and risk policy rather than stale local accounts.</li>
+</ul>
+<p>Detail on ACM's controls, residency, and security program is collected under <a href="/trust/">Trust &amp; Security</a>.</p></div></section>
+
+<section class="section"><div class="container"><span class="tag"><span class="dot"></span> Integration &amp; Deployment</span><h2 class="section-title">Stand up value first, enable settlement in controlled phases</h2><p class="section-lead">Cash positions and counterparty exposures are sensitive, and treasury cannot tolerate a disruptive cutover. ACM's Agile Speed Framework sequences the rollout so each phase is reviewable.</p>
+<ul class="bullets">
+<li><strong>Phase one, visibility:</strong> connect accounts, rails, and the existing core to deliver real-time, read-only positioning, so the institution sees a single live picture before any authority moves to the platform.</li>
+<li><strong>Phase two, controls:</strong> configure counterparty limits, approval chains, and segregation of duties, mapping them to the institution's existing policy.</li>
+<li><strong>Phase three, settlement:</strong> enable outbound wires, ACH, FX, and tokenized settlement in measured steps, each gated by limits and dual control.</li>
+<li><strong>Deployment model:</strong> single-tenant or private environments with in-region data residency for balance, FX, and settlement records, deployed to match tenancy and integration requirements.</li>
+<li><strong>Coexistence:</strong> the platform augments the existing estate through APIs rather than requiring core replacement, so modernization proceeds without ripping out systems of record.</li>
+</ul>
+</div></section>
+
+<section class="section surface"><div class="container"><span class="tag"><span class="dot"></span> Outcomes</span><h2 class="section-title">What changes, framed honestly</h2><p class="section-lead">The outcomes below are the intended effects of the architecture. They are directional design goals for a given institution, not guaranteed results or published ACM benchmarks.</p>
+<div class="solutions-grid">
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>A single live position</h3><p>Real-time consolidation replaces overnight reconciliation, so funding and collateral decisions are made on current data rather than yesterday's files.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Less idle cash</h3><p>When the position is visible intraday, precautionary buffers held to cover blind spots can be reduced and working capital put to use, subject to each institution's policy and risk appetite.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Lower operating cost</h3><p>By consolidating onto modern, cloud-native infrastructure, ACM targets up to 95% lower infrastructure cost versus legacy core systems. This is an architectural target, and actual savings vary by environment and scope.</p></div>
+<div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Examiner-ready by default</h3><p>Because authority and audit trail live in the platform, evidencing who moved funds, under what limit, and with what approval is a query rather than a reconstruction.</p></div>
+</div>
+<p>The market context underscores the direction of travel. 2024 stablecoin transfer volume reached roughly $27.6 trillion, and BCG projects tokenized real-world assets could exceed $16 trillion by 2030, so treasury functions will increasingly settle across both traditional and tokenized rails. ACM's architecture is built so an institution can adopt those rails on infrastructure it owns and can prove to an examiner.</p>
+<p><strong>Further reading.</strong> Original ecosystem research on the AI and tokenized-finance infrastructure this architecture builds on: agentic AI and data papers at <a href="https://papers.hanzo.ai/" target="_blank" rel="noopener noreferrer">papers.hanzo.ai</a>; tokenized finance, exchange, and settlement infrastructure at <a href="https://lux.financial/" target="_blank" rel="noopener noreferrer">lux.financial</a>; and ACM's platform-wide approach in <a href="/capabilities/post-quantum-security/">post-quantum security</a>.</p></div></section>
+
+<section class="section cta-band"><div class="container"><h2 class="section-title">Pressure-test this architecture against your treasury</h2><p class="section-lead">Bring your current cash-positioning setup, rails, and funding challenges. We will map what a single, owned, real-time treasury platform would look like for your institution.</p><a class="btn btn-primary btn-lg" href="/get-started/" data-cta="Discovery Call">Schedule a discovery call</a></div></section>
+    <section class="section surface"><div class="container"><span class="tag"><span class="dot"></span> FAQ</span><h2 class="section-title">Frequently asked questions</h2><div class="faq-list">
+        <div class="glass faq-item"><h3>How is this different from ACM's Treasury &amp; Liquidity product page?</h3><p>This white paper sets out the architectural argument: why batch-era systems fail at intraday liquidity and how a single real-time ledger, regulated-first controls, and multi-rail settlement address it. The product page describes the working features. Both reflect the same platform; this page is for evaluators reasoning about the design.</p></div>
+        <div class="glass faq-item"><h3>Why does post-quantum cryptography matter for treasury data specifically?</h3><p>Settlement instructions, counterparty data, and treasury records stay sensitive for years, which exposes them to harvest-now, decrypt-later attacks. ACM builds toward the NIST post-quantum standards finalized in 2024 (ML-KEM/FIPS 203, ML-DSA/FIPS 204, SLH-DSA/FIPS 205) and designs for crypto-agility. Because the standards are recent, ACM aligns to and builds on them rather than claiming certification.</p></div>
+        <div class="glass faq-item"><h3>Does adopting this require replacing our core?</h3><p>No. ACM augments the existing estate through APIs and connectors and rolls out in phases under its Agile Speed Framework: read-only positioning first, then controls, then live settlement. The platform is designed to support SOC 2, ISO 27001, PCI-DSS, and HIPAA requirements, with data residency matched to the institution.</p></div>
+      </div></div></section>
+  </main>
+  <section class="integrations-band"><div class="container">
+      <p class="integrations-eyebrow">Model-agnostic &middot; integrates with the AI platforms you already trust</p>
+      <div class="integrations-row"><span>OpenAI</span><span>Anthropic</span><span>Google</span><span>Meta Llama</span><span>Mistral</span><span>Cohere</span><span>AWS</span><span>Hanzo AI</span></div>
+    </div></section>
+  <section class="partners-band"><div class="container">
+      <span class="tag"><span class="dot"></span> Ecosystem Partners</span>
+      <h2 class="partners-title">Backed by a world-class ecosystem</h2>
+      <p class="partners-lead">ACM Global Tech is an ecosystem partner of Hanzo.ai and Lux Financial &mdash; pairing enterprise-grade agentic AI with institutional tokenized-finance and settlement infrastructure.</p>
+      <div class="partners-grid">
+        <a class="partner-card" href="https://hanzo.ai/" target="_blank" rel="noopener noreferrer" aria-label="Visit Hanzo.ai">
+          <span class="partner-logo"><svg class="partner-mark-svg" viewBox="0 0 67 67" aria-hidden="true"><path d="M22.21 67V44.6369H0V67H22.21Z" fill="#fff"/><path d="M66.7038 22.3184H22.2534L0.0878906 44.6367H44.4634L66.7038 22.3184Z" fill="#fff"/><path d="M22.21 0H0V22.3184H22.21V0Z" fill="#fff"/><path d="M66.7198 0H44.5098V22.3184H66.7198V0Z" fill="#fff"/><path d="M66.7198 67V44.6369H44.5098V67H66.7198Z" fill="#fff"/></svg><span class="partner-name">Hanzo</span></span>
+          <p>Agentic AI and developer infrastructure powering ACM's AI &amp; data layer.</p>
+        </a>
+        <a class="partner-card" href="https://lux.financial/" target="_blank" rel="noopener noreferrer" aria-label="Visit Lux Financial">
+          <span class="partner-logo"><svg class="partner-mark-svg" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 85 L15 25 L85 25 Z" fill="#fff"/></svg><span class="partner-name">Lux Financial</span></span>
+          <p>Institutional tokenized-finance, exchange, and settlement rails behind ACM's RWA &amp; FX.</p>
+        </a>
+      </div>
+    </div></section>
+  <section class="footer-cta"><div class="container footer-cta-inner">
+      <div class="footer-cta-copy">
+        <h2>Ready to modernize your institution?</h2>
+        <p>Talk to ACM about a regulated, white-label banking stack &mdash; core, payments, wallets, exchange, and tokenized finance you own.</p>
+      </div>
+      <div class="footer-cta-actions">
+        <a href="/contact/" class="btn btn-primary btn-lg" data-cta="Discovery Call">Schedule a Discovery Call</a>
+        <a href="/get-started/" class="btn btn-ghost btn-lg">Get Started</a>
+      </div>
+    </div></section>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo logo-footer"><span class="logo-text"><strong>ACM</strong><span class="logo-suffix"><span class="logo-accent">Global</span> Tech</span></span></a>
+        <p class="footer-tag">A complete, white-label banking ecosystem for credit unions, banks &amp; healthcare.</p>
+        <form class="footer-news" id="footerNews" novalidate aria-label="Newsletter signup">
+          <label for="footerNewsEmail">Get ACM insights &amp; release notes</label>
+          <div class="footer-news-row">
+            <input type="email" id="footerNewsEmail" name="email" placeholder="you@institution.com" required />
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </div>
+          <p class="footer-news-note" id="footerNewsNote" hidden></p>
+        </form>
+        <p class="footer-meta">Orlando &amp; Jacksonville, FL &middot; Powering Global Transformation</p>
+        <div class="footer-contact">
+          <a href="tel:+14072790314">+1 (407) 279-0314</a>
+          <a href="mailto:info@acmglobaltech.com">info@acmglobaltech.com</a>
+          <a href="/login/" class="footer-login">Client Login &rarr;</a>
+        </div>
+      </div>
+        <div class="footer-col">
+          <h4><a href="/products/">Products</a></h4>
+          <a href="/products/banking-core/">Banking Core</a>
+          <a href="/products/mobile-wallet/">Mobile Wallet</a>
+          <a href="/products/exchange-fx/">Exchange &amp; FX</a>
+          <a href="/products/rwa-tokenization/">RWA Tokenization</a>
+          <a href="/products/payments-stablecoins/">Payments &amp; Stablecoins</a>
+          <a href="/products/cards-issuing/">Cards &amp; Issuing</a>
+          <a href="/products/treasury-liquidity/">Treasury &amp; Liquidity</a>
+          <a href="/products/white-label-psp/">White-Label PSP</a>
+          <a href="/products/baas/">Banking-as-a-Service</a>
+        </div>
+        <div class="footer-col">
+          <h4><a href="/solutions/">Solutions</a></h4>
+          <a href="/solutions/lending-modernization/">Lending Modernization</a>
+          <a href="/solutions/member-engagement/">Member Engagement</a>
+          <a href="/solutions/core-cloud-modernization/">Core &amp; Cloud Modernization</a>
+          <a href="/solutions/data-analytics/">Data &amp; Analytics</a>
+          <a href="/solutions/cybersecurity-fraud/">Cybersecurity &amp; Fraud</a>
+          <a href="/solutions/embedded-finance/">Embedded Finance</a>
+          <a href="/solutions/healthcare-finance/">Healthcare Finance</a>
+        </div>
+        <div class="footer-col">
+          <h4><a href="/industries/">Industries</a></h4>
+          <a href="/industries/credit-unions/">Credit Unions</a>
+          <a href="/industries/community-mid-banks/">Community &amp; Mid-Sized Banks</a>
+          <a href="/industries/healthcare/">Healthcare</a>
+          <a href="/industries/broker-dealers/">Broker-Dealers</a>
+          <a href="/industries/fintechs/">Fintechs</a>
+          <a href="/industries/corporate-treasury/">Corporate Treasury</a>
+        </div>
+        <div class="footer-col">
+          <h4><a href="/capabilities/">Capabilities</a></h4>
+          <a href="/capabilities/ai-data/">AI &amp; Data</a>
+          <a href="/capabilities/rwa-stablecoins/">RWA &amp; Stablecoins</a>
+          <a href="/capabilities/fx-rates/">Industry-Leading FX</a>
+          <a href="/capabilities/post-quantum-security/">Post-Quantum Security</a>
+          <a href="/capabilities/hyperautomation/">Hyperautomation</a>
+          <a href="/capabilities/agile-speed-framework/">Agile Speed Framework</a>
+          <a href="/capabilities/white-label/">White-Label &amp; Ownership</a>
+        </div>
+        <div class="footer-col">
+          <h4><a href="/docs/">Resources</a></h4>
+          <a href="/docs/">Documentation</a>
+          <a href="/support/">Support &amp; Help</a>
+          <a href="/trust/">Trust &amp; Security</a>
+          <a href="/research/">Research</a>
+          <a href="/case-studies/">Case Studies</a>
+        </div>
+        <div class="footer-col">
+          <h4><a href="/company/">Company</a></h4>
+          <a href="/company/about/">About</a>
+          <a href="/company/vision/">Our Vision</a>
+          <a href="/company/team/">Leadership Team</a>
+          <a href="/company/ventures/">ACM Ventures</a>
+          <a href="/company/careers/">Careers</a>
+          <a href="/get-started/">Get Started</a>
+          <a href="/contact/">Contact</a>
+        </div>
+    </div>
+    <div class="container footer-badges">
+      <span>Regulated-first architecture</span>
+      <span>Post-quantum cryptography</span>
+      <span>White-label &amp; client-owned</span>
+      <span>Hanzo.ai &amp; Lux Financial ecosystem</span>
+    </div>
+    <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/trust/">Trust &amp; Security</a> &middot; Powering Global Transformation</div>
+  </footer>
+  <div class="ai-assistant" id="aiAssistant">
+    <button class="ai-launcher" id="aiLauncher" aria-expanded="false" aria-controls="aiPanel" aria-label="Ask ACM AI">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 21l1.9-5.8A8.5 8.5 0 1 1 21 11.5z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg>
+      <span>Ask ACM&nbsp;AI</span>
+    </button>
+    <div class="ai-panel" id="aiPanel" role="dialog" aria-label="ACM AI assistant" hidden>
+      <div class="ai-head">
+        <span class="ai-title"><span class="ai-dot"></span> ACM AI <em>&middot; powered by Hanzo</em></span>
+        <button class="ai-close" id="aiClose" aria-label="Close assistant">&times;</button>
+      </div>
+      <div class="ai-log" id="aiLog" aria-live="polite"></div>
+      <div class="ai-suggest" id="aiSuggest">
+        <button type="button">What does ACM do?</button>
+        <button type="button">How does pricing work?</button>
+        <button type="button">Is the platform post-quantum secure?</button>
+      </div>
+      <form class="ai-input" id="aiForm">
+        <input type="text" id="aiText" placeholder="Ask about ACM&hellip;" autocomplete="off" aria-label="Message" />
+        <button type="submit" aria-label="Send message">&#8593;</button>
+      </form>
+    </div>
+  </div>
+  <script src="/script.js?v=10"></script>
+</body>
+</html>
