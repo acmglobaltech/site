@@ -438,4 +438,137 @@
     resize();
     requestAnimationFrame(draw);
   }
+  /* --- Hero: rotating audience word --- */
+  (function () {
+    var rot = document.querySelector('.hero-rotate[data-words]');
+    if (!rot || reduceMotion) return;
+    var words = rot.getAttribute('data-words').split('|');
+    if (words.length < 2) return;
+    var i = 0;
+    window.setInterval(function () {
+      i = (i + 1) % words.length;
+      rot.classList.add('swap');
+      window.setTimeout(function () { rot.textContent = words[i]; rot.classList.remove('swap'); }, 280);
+    }, 2600);
+  })();
+
+  /* --- Hero proof counters --- */
+  (function () {
+    var nums = document.querySelectorAll('.hero-proof [data-count]');
+    if (!nums.length) return;
+    function run(el) {
+      var target = parseFloat(el.getAttribute('data-count'));
+      var suffix = el.getAttribute('data-suffix') || '';
+      if (isNaN(target) || reduceMotion) { el.textContent = target + suffix; return; }
+      var start = null, dur = 1200;
+      function step(ts) { if (!start) start = ts; var p = Math.min((ts - start) / dur, 1); el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3))) + suffix; if (p < 1) requestAnimationFrame(step); }
+      requestAnimationFrame(step);
+    }
+    if ('IntersectionObserver' in window) {
+      var io2 = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { run(e.target); io2.unobserve(e.target); } }); }, { threshold: 0.5 });
+      nums.forEach(function (n) { io2.observe(n); });
+    } else { nums.forEach(run); }
+  })();
+
+  /* --- Platform showcase autoplay (pauses on interaction) --- */
+  (function () {
+    var vp = document.getElementById('scViewport');
+    if (!vp || reduceMotion) return;
+    var slides = vp.querySelectorAll('.sc-slide');
+    if (slides.length < 2) return;
+    var idx = 0, paused = false, timer = null;
+    function go() {
+      if (paused) return;
+      idx = (idx + 1) % slides.length;
+      var s = slides[idx];
+      vp.scrollTo({ left: s.offsetLeft - (vp.clientWidth - s.offsetWidth) / 2, behavior: 'smooth' });
+    }
+    function start() { stop(); timer = window.setInterval(go, 5000); }
+    function stop() { if (timer) { window.clearInterval(timer); timer = null; } }
+    ['pointerdown', 'wheel', 'keydown', 'mouseenter', 'touchstart'].forEach(function (ev) {
+      vp.addEventListener(ev, function () { paused = true; stop(); }, { passive: true });
+    });
+    vp.addEventListener('scroll', function () {
+      var c = vp.scrollLeft + vp.clientWidth / 2, best = 0, bd = Infinity;
+      slides.forEach(function (s, i) { var cc = s.offsetLeft + s.offsetWidth / 2, d = Math.abs(cc - c); if (d < bd) { bd = d; best = i; } });
+      idx = best;
+    }, { passive: true });
+    start();
+  })();
+
+  /* --- Footer newsletter -> Wix CRM (reuses contact endpoint, mailto-free) --- */
+  (function () {
+    var nf = document.getElementById('footerNews');
+    if (!nf) return;
+    var note = document.getElementById('footerNewsNote');
+    nf.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var field = nf.querySelector('input[name=email]');
+      var email = field ? field.value.trim() : '';
+      if (!email) return;
+      function done(msg) { if (note) { note.hidden = false; note.textContent = msg; } nf.reset(); }
+      var ready = (typeof ENDPOINT_READY !== 'undefined') && ENDPOINT_READY && (typeof WIX_CONFIG !== 'undefined');
+      if (ready) {
+        fetch(WIX_CONFIG.CONTACT_FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: email.split('@')[0], email: email, cta: 'Newsletter', message: 'Newsletter signup from footer' }) })
+          .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+          .then(function () { done('Thanks — you\'re subscribed.'); })
+          .catch(function () { done('Thanks! We\'ll reach you at ' + email + '.'); });
+      } else { done('Thanks! We\'ll add ' + email + ' to ACM insights.'); }
+    });
+  })();
+
+  /* --- ACM AI assistant (Hanzo-powered) ---
+     Point AI_CONFIG.endpoint at your Hanzo docs AI indexing / answer API to go live;
+     until then it greets, takes questions, and routes to the team. */
+  (function () {
+    var root = document.getElementById('aiAssistant');
+    if (!root) return;
+    var launcher = document.getElementById('aiLauncher');
+    var panel = document.getElementById('aiPanel');
+    var closeBtn = document.getElementById('aiClose');
+    var log = document.getElementById('aiLog');
+    var form = document.getElementById('aiForm');
+    var input = document.getElementById('aiText');
+    var suggest = document.getElementById('aiSuggest');
+    var AI_CONFIG = { endpoint: '', email: 'info@acmglobaltech.com' };
+    var greeted = false;
+
+    function add(role, text) {
+      var b = document.createElement('div');
+      b.className = 'ai-msg ' + role;
+      b.textContent = text;
+      log.appendChild(b);
+      log.scrollTop = log.scrollHeight;
+      return b;
+    }
+    function open() {
+      panel.hidden = false; launcher.setAttribute('aria-expanded', 'true'); root.classList.add('open');
+      if (!greeted) { greeted = true; add('bot', "Hi! I'm the ACM assistant. Ask about our platform, security, pricing, or booking a call."); }
+      window.setTimeout(function () { input.focus(); }, 50);
+    }
+    function close() { panel.hidden = true; launcher.setAttribute('aria-expanded', 'false'); root.classList.remove('open'); }
+    launcher.addEventListener('click', function () { panel.hidden ? open() : close(); });
+    closeBtn.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) close(); });
+
+    function fallback() {
+      return "I'm being connected to ACM's Hanzo AI knowledge base. Meanwhile our team can help directly — email " + AI_CONFIG.email + " or use the contact form and we'll respond fast.";
+    }
+    function ask(q) {
+      add('user', q);
+      if (suggest) suggest.style.display = 'none';
+      var thinking = add('bot', '…');
+      thinking.classList.add('thinking');
+      if (AI_CONFIG.endpoint) {
+        fetch(AI_CONFIG.endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ query: q }) })
+          .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+          .then(function (d) { thinking.classList.remove('thinking'); thinking.textContent = (d && (d.answer || d.text)) || fallback(); })
+          .catch(function () { thinking.classList.remove('thinking'); thinking.textContent = fallback(); });
+      } else {
+        window.setTimeout(function () { thinking.classList.remove('thinking'); thinking.textContent = fallback(); }, 500);
+      }
+    }
+    form.addEventListener('submit', function (e) { e.preventDefault(); var q = input.value.trim(); if (!q) return; input.value = ''; ask(q); });
+    if (suggest) Array.prototype.forEach.call(suggest.querySelectorAll('button'), function (b) { b.addEventListener('click', function () { ask(b.textContent); }); });
+  })();
 })();

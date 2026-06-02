@@ -77,16 +77,35 @@ const NAV = [
 const esc = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /* ---------- Header (mega-menu) ---------- */
+const byLabel = (l) => NAV.find((g) => g.label === l);
+// Header nav: Industries & Capabilities are nested inside the Solutions mega-panel.
+const HEADER_NAV = [
+  byLabel('Products'),
+  { label: 'Solutions', href: '/solutions/', columns: [
+    { label: 'Solutions', href: '/solutions/', items: byLabel('Solutions').items },
+    { label: 'Industries', href: '/industries/', items: byLabel('Industries').items },
+    { label: 'Capabilities', href: '/capabilities/', items: byLabel('Capabilities').items },
+  ] },
+  byLabel('Resources'),
+  byLabel('Company'),
+];
 function renderHeader(activeGroup) {
-  const groups = NAV.map((g) => {
-    const active = g.label === activeGroup ? ' active' : '';
-    const items = g.items.map(([l, h]) => `<a href="${h}">${esc(l)}</a>`).join('\n            ');
+  const groups = HEADER_NAV.map((g) => {
+    const active = (g.label === activeGroup || (g.columns && g.columns.some((c) => c.label === activeGroup))) ? ' active' : '';
+    let panel;
+    if (g.columns) {
+      panel = `<div class="nav-panel mega">
+            ` + g.columns.map((c) => `<div class="nav-col"><a class="nav-col-head" href="${c.href}">${esc(c.label)}</a>` + c.items.map(([l, h]) => `<a href="${h}">${esc(l)}</a>`).join('') + `</div>`).join('\n            ') + `
+          </div>`;
+    } else {
+      panel = `<div class="nav-panel">
+            ` + g.items.map(([l, h]) => `<a href="${h}">${esc(l)}</a>`).join('\n            ') + `
+            <a href="${g.href}" class="nav-all">All ${esc(g.label)} &rarr;</a>
+          </div>`;
+    }
     return `<div class="nav-group">
           <button class="nav-top${active}" data-href="${g.href}" aria-expanded="false">${esc(g.label)}<span class="caret"></span></button>
-          <div class="nav-panel">
-            ${items}
-            <a href="${g.href}" class="nav-all">All ${esc(g.label)} &rarr;</a>
-          </div>
+          ${panel}
         </div>`;
   }).join('\n        ');
   return `<header class="header" id="header">
@@ -101,7 +120,7 @@ function renderHeader(activeGroup) {
               <stop stop-color="#1F4FFF"/><stop offset="1" stop-color="#19C8D6"/></linearGradient></defs>
           </svg>
         </span>
-        <span class="logo-text"><strong>ACM</strong> <span class="logo-accent">Global</span> Tech</span>
+        <span class="logo-text"><strong>ACM</strong><span class="logo-suffix"><span class="logo-accent">Global</span> Tech</span></span>
       </a>
       <nav class="nav" id="primary-nav" aria-label="Primary">
         ${groups}
@@ -115,7 +134,7 @@ function renderHeader(activeGroup) {
   </header>`;
 }
 
-/* ---------- Footer (multi-column) ---------- */
+/* ---------- Footer (CTA band + multi-column + newsletter + badges) ---------- */
 function renderFooter() {
   const cols = NAV.map((g) => {
     const links = g.items.slice(0, 7).map(([l, h]) => `<a href="${h}">${esc(l)}</a>`).join('\n          ');
@@ -124,23 +143,72 @@ function renderFooter() {
           ${links}
         </div>`;
   }).join('\n        ');
-  return `<footer class="footer">
+  return `<section class="footer-cta"><div class="container footer-cta-inner">
+      <div class="footer-cta-copy">
+        <h2>Ready to modernize your institution?</h2>
+        <p>Talk to ACM about a regulated, white-label banking stack &mdash; core, payments, wallets, exchange, and tokenized finance you own.</p>
+      </div>
+      <div class="footer-cta-actions">
+        <a href="/contact/" class="btn btn-primary btn-lg" data-cta="Discovery Call">Schedule a Discovery Call</a>
+        <a href="/get-started/" class="btn btn-ghost btn-lg">Get Started</a>
+      </div>
+    </div></section>
+  <footer class="footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <a href="/" class="logo logo-footer"><span class="logo-text"><strong>ACM</strong> <span class="logo-accent">Global</span> Tech</span></a>
+        <a href="/" class="logo logo-footer"><span class="logo-text"><strong>ACM</strong><span class="logo-suffix"><span class="logo-accent">Global</span> Tech</span></span></a>
         <p class="footer-tag">A complete, white-label banking ecosystem for credit unions, banks &amp; healthcare.</p>
+        <form class="footer-news" id="footerNews" novalidate aria-label="Newsletter signup">
+          <label for="footerNewsEmail">Get ACM insights &amp; release notes</label>
+          <div class="footer-news-row">
+            <input type="email" id="footerNewsEmail" name="email" placeholder="you@institution.com" required />
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+          </div>
+          <p class="footer-news-note" id="footerNewsNote" hidden></p>
+        </form>
         <p class="footer-meta">Orlando &amp; Jacksonville, FL &middot; Powering Global Transformation</p>
         <div class="footer-contact">
           <a href="tel:+14072790314">+1 (407) 279-0314</a>
           <a href="mailto:info@acmglobaltech.com">info@acmglobaltech.com</a>
           <a href="/login/" class="footer-login">Client Login &rarr;</a>
         </div>
-        <p class="footer-partners">Hanzo.ai &amp; Lux Financial Ecosystem Partners</p>
       </div>
         ${cols}
     </div>
+    <div class="container footer-badges">
+      <span>Regulated-first architecture</span>
+      <span>Post-quantum cryptography</span>
+      <span>White-label &amp; client-owned</span>
+      <span>Hanzo.ai &amp; Lux Network ecosystem</span>
+    </div>
     <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/trust/">Trust &amp; Security</a> &middot; Powering Global Transformation</div>
   </footer>`;
+}
+
+/* ---------- AI assistant (Hanzo-powered, site-wide) ---------- */
+function aiWidget() {
+  return `<div class="ai-assistant" id="aiAssistant">
+    <button class="ai-launcher" id="aiLauncher" aria-expanded="false" aria-controls="aiPanel" aria-label="Ask ACM AI">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 21l1.9-5.8A8.5 8.5 0 1 1 21 11.5z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg>
+      <span>Ask ACM&nbsp;AI</span>
+    </button>
+    <div class="ai-panel" id="aiPanel" role="dialog" aria-label="ACM AI assistant" hidden>
+      <div class="ai-head">
+        <span class="ai-title"><span class="ai-dot"></span> ACM AI <em>&middot; powered by Hanzo</em></span>
+        <button class="ai-close" id="aiClose" aria-label="Close assistant">&times;</button>
+      </div>
+      <div class="ai-log" id="aiLog" aria-live="polite"></div>
+      <div class="ai-suggest" id="aiSuggest">
+        <button type="button">What does ACM do?</button>
+        <button type="button">How does pricing work?</button>
+        <button type="button">Is the platform post-quantum secure?</button>
+      </div>
+      <form class="ai-input" id="aiForm">
+        <input type="text" id="aiText" placeholder="Ask about ACM&hellip;" autocomplete="off" aria-label="Message" />
+        <button type="submit" aria-label="Send message">&#8593;</button>
+      </form>
+    </div>
+  </div>`;
 }
 
 /* ---------- Ecosystem partner banner (site-wide, before footer) ---------- */
@@ -148,14 +216,14 @@ function partnerBanner() {
   return `<section class="partners-band"><div class="container">
       <span class="tag"><span class="dot"></span> Ecosystem Partners</span>
       <h2 class="partners-title">Backed by a world-class ecosystem</h2>
-      <p class="partners-lead">ACM Global Tech is an ecosystem partner of Hanzo.ai and Lux Financial &mdash; pairing enterprise-grade agentic AI with institutional tokenized-finance and settlement infrastructure.</p>
+      <p class="partners-lead">ACM Global Tech is an ecosystem partner of Hanzo.ai and Lux Network &mdash; pairing enterprise-grade agentic AI with institutional tokenized-finance and settlement infrastructure.</p>
       <div class="partners-grid">
         <a class="partner-card" href="https://hanzo.ai/" target="_blank" rel="noopener noreferrer" aria-label="Visit Hanzo.ai">
           <span class="partner-logo"><svg class="partner-mark-svg" viewBox="0 0 67 67" aria-hidden="true"><path d="M22.21 67V44.6369H0V67H22.21Z" fill="#fff"/><path d="M66.7038 22.3184H22.2534L0.0878906 44.6367H44.4634L66.7038 22.3184Z" fill="#fff"/><path d="M22.21 0H0V22.3184H22.21V0Z" fill="#fff"/><path d="M66.7198 0H44.5098V22.3184H66.7198V0Z" fill="#fff"/><path d="M66.7198 67V44.6369H44.5098V67H66.7198Z" fill="#fff"/></svg><span class="partner-name">Hanzo</span></span>
           <p>Agentic AI and developer infrastructure powering ACM's AI &amp; data layer.</p>
         </a>
-        <a class="partner-card" href="https://lux.financial/" target="_blank" rel="noopener noreferrer" aria-label="Visit Lux Financial">
-          <span class="partner-logo"><svg class="partner-mark-svg" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 85 L15 25 L85 25 Z" fill="#fff"/></svg><span class="partner-name">Lux Financial</span></span>
+        <a class="partner-card" href="https://lux.network/" target="_blank" rel="noopener noreferrer" aria-label="Visit Lux Network">
+          <span class="partner-logo"><svg class="partner-mark-svg" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 85 L15 25 L85 25 Z" fill="#fff"/></svg><span class="partner-name">Lux Network</span></span>
           <p>Institutional tokenized-finance, exchange, and settlement rails behind ACM's RWA &amp; FX.</p>
         </a>
       </div>
@@ -258,7 +326,7 @@ function decorate(html) {
     (m, t) => '<div class="glass sol-card"><span class="sol-ic">' + pickIcon(t) + '</span><h3>' + t + '</h3>');
 }
 function trustStrip() {
-  return '<div class="trust-strip"><div class="container"><span>Regulated-first architecture</span><span>Post-quantum cryptography</span><span>White-label &amp; client-owned</span><span>Hanzo.ai &amp; Lux Financial ecosystem</span></div></div>';
+  return '<div class="trust-strip"><div class="container"><span>Regulated-first architecture</span><span>Post-quantum cryptography</span><span>White-label &amp; client-owned</span><span>Hanzo.ai &amp; Lux Network ecosystem</span></div></div>';
 }
 
 /* ---------- Full page ---------- */
@@ -312,6 +380,7 @@ ${content}
   </main>
   ${partnerBanner()}
   ${renderFooter()}
+  ${'' /* ACM AI assistant hidden until it's wired to index the site + docs. Restore: ${aiWidget()} */}
   <script src="/script.js?${ASSET_V}"></script>
 </body>
 </html>
