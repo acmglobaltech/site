@@ -195,6 +195,53 @@ function renderFaq(faq) {
   return `<section class="section surface"><div class="container"><span class="tag"><span class="dot"></span> FAQ</span><h2 class="section-title">Frequently asked questions</h2><div class="faq-list">\n        ${items}\n      </div></div></section>`;
 }
 
+/* ---------- Visual decoration: icons on feature cards + trust strip ---------- */
+const ICON_SVGS = {
+  shield: '<path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/>',
+  chart: '<path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M3 20h18"/>',
+  people: '<circle cx="9" cy="8" r="3"/><path d="M3.5 20c0-3 2.7-5 5.5-5s5.5 2 5.5 5"/><path d="M16 6.2a3 3 0 0 1 0 5.6"/><path d="M20.5 20c0-2.2-1-3.7-2.7-4.6"/>',
+  cloud: '<path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.6-1.5A3.5 3.5 0 0 1 18 18H7z"/>',
+  card: '<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/><path d="M15 15h3"/>',
+  swap: '<path d="M7 4 3 8l4 4"/><path d="M3 8h13"/><path d="M17 20l4-4-4-4"/><path d="M21 16H8"/>',
+  growth: '<path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/>',
+  cube: '<path d="M12 2 21 7v10l-9 5-9-5V7z"/><path d="M3 7l9 5 9-5"/><path d="M12 12v10"/>',
+  bank: '<path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M10 21v-6h4v6"/>',
+  heart: '<path d="M2 12h4l2-6 4 12 2-6h6"/>',
+  bolt: '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+  lock: '<rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+  badge: '<path d="M12 3l2.4 1.7 2.9-.3 1 2.8 2.6 1.3-.6 2.9 1.5 2.5-2 2.1-.3 2.9-2.9.4L12 22l-2.6-1.5-2.9-.4-.3-2.9-2-2.1L5.7 12 5 9.5l2.6-1.3 1-2.8 2.9.3z"/><path d="M9.5 12l1.8 1.8L15 10"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18z"/>',
+  diamond: '<path d="M12 3l9 9-9 9-9-9z"/>',
+};
+const ICON_RULES = [
+  [/secur|cyber|fraud|quantum|protect|threat|defen|incident/i, 'shield'],
+  [/complian|regulat|audit|kyc|aml|certif|govern/i, 'badge'],
+  [/lend|loan|credit|growth|revenue|roi|origination/i, 'growth'],
+  [/member|engage|customer|retention|people|experience|relationship/i, 'people'],
+  [/data|analytic|insight|\bai\b|intelligen|predict|model/i, 'chart'],
+  [/cloud|core|modern|infrastructure|platform|migrat|scal/i, 'cloud'],
+  [/card|issu/i, 'card'],
+  [/wallet|mobile|app\b/i, 'card'],
+  [/exchange|\bfx\b|currenc|cross-border|remittance/i, 'swap'],
+  [/token|\brwa\b|asset|stablecoin|settle|issuance/i, 'cube'],
+  [/payment|treasur|liquid|deposit|embedded finance/i, 'bank'],
+  [/bank|institution|union|broker|dealer/i, 'bank'],
+  [/health|patient|payer|provider|revenue cycle|claims/i, 'heart'],
+  [/speed|agile|deploy|automat|fast|hyperautomation|efficien|workflow/i, 'bolt'],
+  [/privacy|encrypt|data protection|residency|key/i, 'lock'],
+  [/global|world|international|ecosystem|network/i, 'globe'],
+];
+function svgIcon(k) { return '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + (ICON_SVGS[k] || ICON_SVGS.diamond) + '</svg>'; }
+function pickIcon(t) { const s = t.replace(/<[^>]+>/g, ''); for (const [re, k] of ICON_RULES) if (re.test(s)) return svgIcon(k); return svgIcon('diamond'); }
+function decorate(html) {
+  // Add an icon to plain feature cards that don't already have one.
+  return html.replace(/<div class="glass sol-card">\s*<h3>([\s\S]*?)<\/h3>/g,
+    (m, t) => '<div class="glass sol-card"><span class="sol-ic">' + pickIcon(t) + '</span><h3>' + t + '</h3>');
+}
+function trustStrip() {
+  return '<div class="trust-strip"><div class="container"><span>Regulated-first architecture</span><span>Post-quantum cryptography</span><span>White-label &amp; client-owned</span><span>Hanzo.ai &amp; Lux Finance ecosystem</span></div></div>';
+}
+
 /* ---------- Full page ---------- */
 function renderPage(page) {
   const slug = page.slug || '';
@@ -204,6 +251,11 @@ function renderPage(page) {
   const ogImage = ORIGIN + '/assets/og.png';
   const breadcrumb = slug ? renderBreadcrumb(trail) : '';
   const h1 = slug ? `<h1 class="visually-hidden">${esc(page.h1 || title)}</h1>` : '';
+  let content = decorate(page.contentHtml);
+  if (slug && content.includes('class="page-hero"')) {
+    const i = content.indexOf('</section>');
+    if (i !== -1) content = content.slice(0, i + 10) + '\n  ' + trustStrip() + '\n' + content.slice(i + 10);
+  }
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -236,7 +288,7 @@ function renderPage(page) {
   ${breadcrumb}
   <main id="main">
     ${h1}
-${page.contentHtml}
+${content}
     ${renderFaq(page.faq)}
   </main>
   ${renderFooter()}
