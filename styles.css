@@ -402,6 +402,14 @@ img { max-width: 100%; display: block; }
   .ventures-grid, .insights-grid { grid-template-columns: 1fr; }
   .chip-radio span { font-size: .84rem; padding: 8px 13px; }
   .quote-avatar { width: 120px; height: 140px; }
+  .prod-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .cat { white-space: normal; }
+  .prod-card, .sol-card, .vent-card { min-width: 0; }
+}
+
+@media (max-width: 400px) {
+  .hero-cta { flex-direction: column; align-items: stretch; }
+  .hero-cta .btn { width: 100%; white-space: normal; }
 }
 
 @media (prefers-reduced-motion: reduce) {
