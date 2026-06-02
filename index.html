@@ -72,6 +72,7 @@
             <a href="/support/">Support &amp; Help</a>
             <a href="/trust/">Trust &amp; Security</a>
             <a href="/research/">Research</a>
+            <a href="/news/">News</a>
             <a href="/case-studies/">Case Studies</a>
             <a href="/docs/" class="nav-all">All Resources &rarr;</a>
           </div>
@@ -112,12 +113,11 @@
           <a href="#contact" class="btn btn-primary btn-lg" data-cta="Discovery Call">Talk to our team →</a>
           <a href="#products" class="btn btn-ghost btn-lg">Explore the platform</a>
         </div>
-        <div class="focus-areas">
-          <span class="focus-label">Who We Serve</span>
-          <span class="chip">Banks</span>
-          <span class="chip">Credit Unions</span>
-          <span class="chip">Healthcare</span>
-          <span class="chip">Fortune 500</span>
+        <div class="hero-pillars">
+          <a class="hpill" href="/trust/"><strong>Regulated-first architecture</strong><span>Controls, auditability &amp; governance baked in from day one.</span></a>
+          <a class="hpill" href="/capabilities/post-quantum-security/"><strong>Post-quantum cryptography</strong><span>Layered, PQC-grade protection for members &amp; balances.</span></a>
+          <a class="hpill" href="/capabilities/white-label/"><strong>White-label &amp; client-owned</strong><span>You fully brand and own every deployment.</span></a>
+          <div class="hpill"><strong>Hanzo.ai &amp; Lux Financial ecosystem</strong><span>Enterprise agentic AI + tokenized settlement via <a href="https://hanzo.ai/" target="_blank" rel="noopener noreferrer">Hanzo.ai</a> &amp; <a href="https://lux.financial/" target="_blank" rel="noopener noreferrer">Lux Financial</a>.</span></div>
         </div>
         <div class="hero-proof">
           <div class="hero-proof-item"><strong class="hp-num" data-count="95" data-suffix="%">0%</strong><span>Lower infra cost vs. legacy core</span></div>
@@ -901,6 +901,7 @@
           <a href="/support/">Support &amp; Help</a>
           <a href="/trust/">Trust &amp; Security</a>
           <a href="/research/">Research</a>
+          <a href="/news/">News</a>
           <a href="/case-studies/">Case Studies</a>
         </div>
         <div class="footer-col">
@@ -916,28 +917,7 @@
     </div>
     <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/trust/">Trust &amp; Security</a> &middot; Powering Global Transformation</div>
   </footer>
-  <div class="ai-assistant" id="aiAssistant">
-    <button class="ai-launcher" id="aiLauncher" aria-expanded="false" aria-controls="aiPanel" aria-label="Ask ACM AI">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 21l1.9-5.8A8.5 8.5 0 1 1 21 11.5z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg>
-      <span>Ask ACM&nbsp;AI</span>
-    </button>
-    <div class="ai-panel" id="aiPanel" role="dialog" aria-label="ACM AI assistant" hidden>
-      <div class="ai-head">
-        <span class="ai-title"><span class="ai-dot"></span> ACM AI <em>&middot; powered by Hanzo</em></span>
-        <button class="ai-close" id="aiClose" aria-label="Close assistant">&times;</button>
-      </div>
-      <div class="ai-log" id="aiLog" aria-live="polite"></div>
-      <div class="ai-suggest" id="aiSuggest">
-        <button type="button">What does ACM do?</button>
-        <button type="button">How does pricing work?</button>
-        <button type="button">Is the platform post-quantum secure?</button>
-      </div>
-      <form class="ai-input" id="aiForm">
-        <input type="text" id="aiText" placeholder="Ask about ACM&hellip;" autocomplete="off" aria-label="Message" />
-        <button type="submit" aria-label="Send message">&#8593;</button>
-      </form>
-    </div>
-  </div>
+  
   <script src="/script.js?v=10"></script>
 </body>
 </html>

@@ -757,3 +757,24 @@ img { max-width: 100%; display: block; }
 .integrations-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px 30px; margin-top: 16px; }
 .integrations-row span { font-family: var(--display); font-weight: 700; font-size: 1.15rem; color: var(--ink); opacity: .5; transition: opacity .2s; }
 .integrations-row span:hover { opacity: 1; }
+
+/* --- Hero differentiator pillars (2x2, each links out) --- */
+.hero-pillars{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin:22px 0 4px; max-width:660px; }
+.hpill{ display:block; padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:rgba(var(--rgb-white),.55); transition:border-color .2s, transform .2s, box-shadow .2s; }
+a.hpill:hover{ border-color:var(--blue); transform:translateY(-2px); box-shadow:var(--shadow-soft); }
+.hpill>strong{ display:block; font-family:var(--display); font-size:.95rem; font-weight:700; color:var(--ink); }
+.hpill>span{ display:block; font-size:.82rem; color:var(--mute); margin-top:3px; line-height:1.45; }
+.hpill span a{ color:var(--blue); font-weight:600; }
+@media(max-width:760px){ .hero-pillars{ grid-template-columns:1fr; max-width:none; } }
+
+/* --- Clickable doc/section cards + link cue --- */
+a.sol-card{ display:block; transition:border-color .2s, transform .2s, box-shadow .2s; }
+a.sol-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-soft); border-color:var(--blue); }
+.sol-go{ display:inline-block; margin-top:12px; font-size:.82rem; font-weight:700; color:var(--blue); }
+
+/* ----- Visual polish: hero glow + card top-accent ----- */
+.page-hero { position: relative; overflow: hidden; }
+.page-hero::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(620px 320px at 90% -25%, rgba(var(--rgb-cyan), .10), transparent 60%), radial-gradient(520px 360px at -8% 120%, rgba(var(--rgb-blue), .07), transparent 60%); }
+.sol-card { position: relative; overflow: hidden; }
+.sol-card::before { content: ''; position: absolute; left: 0; top: 0; height: 3px; width: 100%; background: var(--grad-teal); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.sol-card:hover::before { transform: scaleX(1); }

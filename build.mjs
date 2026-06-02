@@ -64,6 +64,7 @@ const NAV = [
     ['Support & Help', '/support/'],
     ['Trust & Security', '/trust/'],
     ['Research', '/research/'],
+    ['News', '/news/'],
     ['Case Studies', '/case-studies/'],
   ]},
   { label: 'Company', href: '/company/', items: [
@@ -184,6 +185,7 @@ function renderFooter() {
 
 /* ---------- AI assistant (Hanzo-powered, site-wide) ---------- */
 function aiWidget() {
+  return ''; // ACM AI assistant hidden until it's wired to index the site + docs; delete this line to restore
   return `<div class="ai-assistant" id="aiAssistant">
     <button class="ai-launcher" id="aiLauncher" aria-expanded="false" aria-controls="aiPanel" aria-label="Ask ACM AI">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.2 7.6L3 21l1.9-5.8A8.5 8.5 0 1 1 21 11.5z"/><path d="M8 11h.01M12 11h.01M16 11h.01"/></svg>
