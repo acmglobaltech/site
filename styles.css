@@ -801,3 +801,22 @@ a.sol-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-soft); bor
   .solutions-grid.cols-1 > *, .solutions-grid.cols-2 > *,
   .solutions-grid.cols-3 > *, .solutions-grid.cols-4 > * { flex-basis: 100%; max-width: 100%; }
 }
+
+/* ===== Lead-capture triggers + email-gate modal ===== */
+.lead-trigger { display: inline-flex; align-items: center; gap: 4px; margin-top: 14px; padding: 0; border: 0; background: none; cursor: pointer; font-family: var(--font); font-size: .9rem; font-weight: 700; color: var(--blue); transition: gap .15s ease, color .15s ease; }
+.lead-trigger:hover { gap: 9px; color: var(--blue-600); }
+.lead-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+.lead-modal { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 20px; }
+.lead-modal[hidden] { display: none; }
+.lead-overlay { position: absolute; inset: 0; background: rgba(11, 20, 34, 0.55); backdrop-filter: blur(4px); animation: leadFade .2s ease; }
+@keyframes leadFade { from { opacity: 0; } to { opacity: 1; } }
+.lead-card { position: relative; z-index: 1; width: min(460px, 100%); padding: 32px; animation: leadPop .28s cubic-bezier(.2,.7,.2,1); }
+@keyframes leadPop { from { opacity: 0; transform: translateY(16px) scale(.97); } to { opacity: 1; transform: none; } }
+.lead-close { position: absolute; top: 14px; right: 16px; background: none; border: 0; font-size: 1.6rem; line-height: 1; color: var(--mute); cursor: pointer; }
+.lead-close:hover { color: var(--ink); }
+.lead-title { font-family: var(--display); font-weight: 800; font-size: 1.4rem; color: var(--ink); margin: 6px 0; letter-spacing: -.4px; }
+.lead-sub { font-size: .95rem; color: var(--body); margin-bottom: 18px; line-height: 1.5; }
+.lead-form .field { margin-bottom: 12px; }
+.lead-note { margin-top: 14px; padding: 12px 14px; background: rgba(var(--rgb-blue), 0.08); border: 1px solid rgba(var(--rgb-blue), 0.3); border-radius: 11px; color: var(--ink); font-weight: 600; font-size: .9rem; }
+.lead-fineprint { margin-top: 12px; font-size: .72rem; color: var(--mute); line-height: 1.45; }
+@media (max-width: 480px) { .lead-card { padding: 24px 20px; } .lead-form .field-row { grid-template-columns: 1fr; } }

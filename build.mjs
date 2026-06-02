@@ -184,6 +184,30 @@ function renderFooter() {
 }
 
 /* ---------- AI assistant (Hanzo-powered, site-wide) ---------- */
+function leadModal() {
+  return `<div class="lead-modal" id="leadModal" hidden>
+    <div class="lead-overlay" id="leadOverlay"></div>
+    <div class="lead-card glass" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+      <button class="lead-close" id="leadClose" aria-label="Close">&times;</button>
+      <span class="tag"><span class="dot"></span> <span id="leadKind">Resource</span></span>
+      <h3 class="lead-title" id="leadTitle">Get the full details</h3>
+      <p class="lead-sub" id="leadSub">Tell us where to send it &mdash; we'll email it right over.</p>
+      <form class="lead-form" id="leadForm" novalidate>
+        <input type="hidden" name="cta" id="leadCta" value="" />
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="lead-hp" />
+        <div class="field-row">
+          <label class="field"><span>Name</span><input type="text" name="name" required /></label>
+          <label class="field"><span>Work email</span><input type="email" name="email" required /></label>
+        </div>
+        <label class="field"><span>Institution</span><input type="text" name="company" /></label>
+        <button type="submit" class="btn btn-primary btn-block" id="leadSubmit">Email it to me</button>
+        <p class="lead-note" id="leadNote" hidden></p>
+        <p class="lead-fineprint">We'll only use this to share what you asked for and follow up. No spam &mdash; unsubscribe anytime.</p>
+      </form>
+    </div>
+  </div>`;
+}
+
 function aiWidget() {
   return ''; // ACM AI assistant hidden until it's wired to index the site + docs; delete this line to restore
   return `<div class="ai-assistant" id="aiAssistant">
@@ -420,6 +444,7 @@ ${content}
   ${partnerBanner()}
   ${renderFooter()}
   ${aiWidget()}
+  ${leadModal()}
   <script src="/script.js?${ASSET_V}"></script>
 </body>
 </html>

@@ -580,4 +580,67 @@
     form.addEventListener('submit', function (e) { e.preventDefault(); var q = input.value.trim(); if (!q) return; input.value = ''; ask(q); });
     if (suggest) Array.prototype.forEach.call(suggest.querySelectorAll('button'), function (b) { b.addEventListener('click', function () { ask(b.textContent); }); });
   })();
+
+  /* --- Lead-capture modal: email-gate case studies / white papers -> CRM --- */
+  (function () {
+    var modal = document.getElementById('leadModal');
+    if (!modal) return;
+    var overlay = document.getElementById('leadOverlay');
+    var closeBtn = document.getElementById('leadClose');
+    var titleEl = document.getElementById('leadTitle');
+    var subEl = document.getElementById('leadSub');
+    var kindEl = document.getElementById('leadKind');
+    var ctaEl = document.getElementById('leadCta');
+    var lform = document.getElementById('leadForm');
+    var lnote = document.getElementById('leadNote');
+    var lsubmit = document.getElementById('leadSubmit');
+    var lastTrigger = null;
+
+    function openModal(t) {
+      if (kindEl) kindEl.textContent = t.getAttribute('data-lead-kind') || 'Resource';
+      if (titleEl) titleEl.textContent = t.getAttribute('data-lead-title') || 'Get the full details';
+      if (subEl) subEl.textContent = t.getAttribute('data-lead-sub') || "Tell us where to send it — we'll email it over.";
+      if (ctaEl) ctaEl.value = t.getAttribute('data-lead') || 'Resource';
+      if (lsubmit) lsubmit.textContent = t.getAttribute('data-lead-submit') || 'Email it to me';
+      if (lnote) { lnote.hidden = true; lnote.textContent = ''; }
+      lform.style.display = '';
+      modal.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+      lastTrigger = t;
+      var nm = lform.elements['name'];
+      if (nm) window.setTimeout(function () { nm.focus(); }, 60);
+    }
+    function closeModal() {
+      modal.hidden = true;
+      document.documentElement.style.overflow = '';
+      if (lastTrigger) { try { lastTrigger.focus(); } catch (e) { /* noop */ } lastTrigger = null; }
+    }
+    document.querySelectorAll('[data-lead]').forEach(function (t) {
+      t.addEventListener('click', function (e) { e.preventDefault(); openModal(t); });
+    });
+    if (overlay) overlay.addEventListener('click', closeModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+
+    lform.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!lform.checkValidity()) { lform.reportValidity(); return; }
+      if (lform.elements['website'] && lform.elements['website'].value) { closeModal(); return; }
+      var data = Object.fromEntries(new FormData(lform).entries());
+      data.message = 'Requested: ' + (data.cta || 'resource');
+      var orig = lsubmit ? lsubmit.textContent : '';
+      function succeed() {
+        lform.style.display = 'none';
+        if (lnote) { lnote.hidden = false; lnote.textContent = "Thanks — it's on its way to " + (data.email || 'your inbox') + ". We'll follow up shortly."; }
+      }
+      var ready = (typeof ENDPOINT_READY !== 'undefined') && ENDPOINT_READY && (typeof WIX_CONFIG !== 'undefined');
+      if (!ready) { window.location.href = buildMailto(data); succeed(); return; }
+      if (lsubmit) { lsubmit.disabled = true; lsubmit.textContent = 'Sending…'; }
+      fetch(WIX_CONFIG.CONTACT_FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+        .then(succeed)
+        .catch(function () { window.location.href = buildMailto(data); succeed(); })
+        .finally(function () { if (lsubmit) { lsubmit.disabled = false; lsubmit.textContent = orig; } });
+    });
+  })();
 })();

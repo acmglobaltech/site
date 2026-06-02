@@ -615,6 +615,7 @@
             <li><strong>Trillions</strong> in digital securities integrated</li>
           </ul>
           <p class="insight-note">Anonymous engagement &mdash; client name and FINRA/SEC approval details available upon request.</p>
+          <button class="lead-trigger" data-lead="Case Study — Digital-securities exchange" data-lead-kind="Case Study" data-lead-title="Get the exchange case study" data-lead-sub="We'll email the full write-up — architecture, metrics, and (under NDA) the client + FINRA/SEC details." data-lead-submit="Email me the case study">Read the full case study &rarr;</button>
         </article>
         <article class="glass insight-col case">
           <span class="insight-kind blue">Case Study</span>
@@ -627,6 +628,7 @@
             <li><strong>Lower TCO</strong> across the full stack</li>
           </ul>
           <p class="insight-note">Anonymous engagement &mdash; regulatory and reference details available upon request.</p>
+          <button class="lead-trigger" data-lead="Case Study — Cross-border digital-asset infra" data-lead-kind="Case Study" data-lead-title="Get the cross-border case study" data-lead-sub="We'll email the full write-up — the Luxembourg + Isle of Man build, post-quantum approach, and TCO breakdown." data-lead-submit="Email me the case study">Read the full case study &rarr;</button>
         </article>
         <article class="glass insight-col">
           <span class="insight-kind teal">News</span>
@@ -645,6 +647,7 @@
             <li>In progress: The Agile Speed Framework, explained</li>
             <li>In progress: Data-first architecture for credit unions</li>
           </ul>
+          <button class="lead-trigger" data-lead="White Paper — Post-Quantum Security for Community Banking" data-lead-kind="White Paper" data-lead-title="Get the post-quantum white paper" data-lead-sub="We'll send the full paper the moment it's released, plus the migration checklist." data-lead-submit="Email me the white paper">Get the white paper &rarr;</button>
         </article>
       </div>
     </div>
@@ -920,6 +923,27 @@
     <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/trust/">Trust &amp; Security</a> &middot; Powering Global Transformation</div>
   </footer>
   
+  <div class="lead-modal" id="leadModal" hidden>
+    <div class="lead-overlay" id="leadOverlay"></div>
+    <div class="lead-card glass" role="dialog" aria-modal="true" aria-labelledby="leadTitle">
+      <button class="lead-close" id="leadClose" aria-label="Close">&times;</button>
+      <span class="tag"><span class="dot"></span> <span id="leadKind">Resource</span></span>
+      <h3 class="lead-title" id="leadTitle">Get the full details</h3>
+      <p class="lead-sub" id="leadSub">Tell us where to send it &mdash; we'll email it right over.</p>
+      <form class="lead-form" id="leadForm" novalidate>
+        <input type="hidden" name="cta" id="leadCta" value="" />
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="lead-hp" />
+        <div class="field-row">
+          <label class="field"><span>Name</span><input type="text" name="name" required /></label>
+          <label class="field"><span>Work email</span><input type="email" name="email" required /></label>
+        </div>
+        <label class="field"><span>Institution</span><input type="text" name="company" /></label>
+        <button type="submit" class="btn btn-primary btn-block" id="leadSubmit">Email it to me</button>
+        <p class="lead-note" id="leadNote" hidden></p>
+        <p class="lead-fineprint">We'll only use this to share what you asked for and follow up. No spam &mdash; unsubscribe anytime.</p>
+      </form>
+    </div>
+  </div>
   <script src="/script.js?v=10"></script>
 </body>
 </html>
