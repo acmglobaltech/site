@@ -4,6 +4,82 @@
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ============================================================
+     Analytics & advertising — GA4 + Meta Pixel, consent-gated
+     ------------------------------------------------------------
+     IDs arrive via window.ACM_ANALYTICS (injected in <head> by the
+     build only when configured). No IDs → this module is inert: no
+     banner, no third-party scripts, no events. When configured, tags
+     load only AFTER the visitor accepts (or instantly if the consent
+     banner is turned off). Every captured lead then fires GA4
+     `generate_lead` + Meta `Lead`, tagged with the opportunity,
+     institution segment, asset size, timeline, and hot/standard.
+     ============================================================ */
+  function acmTrackLead() { /* no-op until analytics is configured (below) */ }
+  (function () {
+    var cfg = window.ACM_ANALYTICS || {};
+    var GA4 = cfg.ga4 || '', PIXEL = cfg.metaPixel || '';
+    if (!GA4 && !PIXEL) return;                       // nothing configured → stay inert
+    var needConsent = cfg.consent !== false;
+    var STORE = 'acmConsent', active = false;
+
+    function recall() { try { return localStorage.getItem(STORE); } catch (e) { return null; } }
+    function remember(v) { try { localStorage.setItem(STORE, v); } catch (e) { /* private mode */ } }
+
+    function loadGA4() {
+      if (!GA4) return;
+      var s = document.createElement('script');
+      s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(GA4);
+      document.head.appendChild(s);
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('js', new Date());
+      window.gtag('config', GA4, { anonymize_ip: true });
+    }
+    function loadPixel() {
+      if (!PIXEL) return;
+      !function (f, b, e, v, n, t, s) {
+        if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments); };
+        if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0'; n.queue = [];
+        t = b.createElement(e); t.async = !0; t.src = v;
+        s = b.getElementsByTagName(e)[0]; s.parentNode.insertBefore(t, s);
+      }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', PIXEL); window.fbq('track', 'PageView');
+    }
+    function activate() { if (active) return; active = true; loadGA4(); loadPixel(); }
+
+    /* Real lead tracker — replaces the no-op once a pixel/GA4 is configured. */
+    acmTrackLead = function (d) {
+      d = d || {};
+      var hot = !!d.hot;
+      if (window.gtag) window.gtag('event', 'generate_lead', {
+        currency: 'USD', value: d.value || 0,
+        lead_source: d.source || 'website', lead_opportunity: d.opportunity || '',
+        institution_type: d.segment || '', asset_size: d.assetSize || '',
+        timeline: d.timeline || '', lead_quality: hot ? 'hot' : 'standard'
+      });
+      if (window.fbq) window.fbq('track', 'Lead', {
+        content_name: d.opportunity || d.source || 'Lead',
+        content_category: d.segment || d.source || '',
+        lead_quality: hot ? 'hot' : 'standard',
+        timeline: d.timeline || '', asset_size: d.assetSize || ''
+      });
+    };
+
+    var banner = document.getElementById('consentBanner');
+    function hideBanner() { if (banner) banner.hidden = true; }
+    var decision = recall();
+    if (!needConsent || decision === 'granted') { activate(); hideBanner(); }
+    else if (decision === 'denied') { hideBanner(); }
+    else if (banner) {
+      banner.hidden = false;
+      var ok = document.getElementById('consentAccept'), no = document.getElementById('consentDecline');
+      if (ok) ok.addEventListener('click', function () { remember('granted'); hideBanner(); activate(); });
+      if (no) no.addEventListener('click', function () { remember('denied'); hideBanner(); });
+    }
+    /* Consent required but no banner in the DOM → stay inert (privacy-safe default). */
+  })();
+
   /* --- Year --- */
   var yr = document.getElementById('year');
   if (yr) yr.textContent = new Date().getFullYear();
@@ -281,12 +357,22 @@
       var submitBtn = form.querySelector('button[type=submit]');
       var originalLabel = submitBtn ? submitBtn.textContent : '';
 
+      var ctaVal = data.cta || 'Discovery Call';
+      var leadFired = false;
+      function trackContactLead() {
+        if (leadFired) return; // one conversion per submit, whichever path captures it
+        leadFired = true;
+        var hot = /\[HOT\]/.test(ctaVal);
+        acmTrackLead({ source: 'contact_form', opportunity: ctaVal + (data.interest ? ' — ' + data.interest : ''), hot: hot, value: hot ? 100 : 25 });
+      }
       function showThanks() {
+        trackContactLead();
         if (note) { note.hidden = false; note.textContent = "Thank you! We'll be in touch shortly to schedule your Discovery Call."; }
         if (ctaHint) ctaHint.hidden = true;
         form.reset();
       }
       function handoffToEmail() {
+        trackContactLead();
         // No server yet (or it failed): open the visitor's mail client pre-filled.
         if (note) { note.hidden = false; note.textContent = 'Opening your email app, or write to us directly at ' + WIX_CONFIG.CONTACT_EMAIL + '.'; }
         window.location.href = buildMailto(data);
@@ -506,7 +592,7 @@
       var field = nf.querySelector('input[name=email]');
       var email = field ? field.value.trim() : '';
       if (!email) return;
-      function done(msg) { if (note) { note.hidden = false; note.textContent = msg; } nf.reset(); }
+      function done(msg) { acmTrackLead({ source: 'newsletter', opportunity: 'Newsletter', value: 5 }); if (note) { note.hidden = false; note.textContent = msg; } nf.reset(); }
       var ready = (typeof ENDPOINT_READY !== 'undefined') && ENDPOINT_READY && (typeof WIX_CONFIG !== 'undefined');
       if (ready) {
         fetch(WIX_CONFIG.CONTACT_FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: email.split('@')[0], email: email, cta: 'Newsletter', message: 'Newsletter signup from footer' }) })
@@ -634,6 +720,8 @@
       data.message = 'Requested: ' + (data.cta || 'resource');
       var orig = lsubmit ? lsubmit.textContent : '';
       function succeed() {
+        var hot = /\[HOT\]/.test(data.cta || '');
+        acmTrackLead({ source: 'lead_modal', opportunity: data.cta || 'Resource', segment: data.segment || '', assetSize: data.assetSize || '', timeline: data.timeline || '', hot: hot, value: hot ? 100 : 25 });
         lform.style.display = 'none';
         if (lnote) { lnote.hidden = false; lnote.textContent = "Thanks — it's on its way to " + (data.email || 'your inbox') + ". We'll follow up shortly."; }
       }

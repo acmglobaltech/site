@@ -18,7 +18,42 @@ import path from 'node:path';
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const SRC = path.join(ROOT, 'src', 'pages');
 const ORIGIN = 'https://acmglobaltech.com';
-const ASSET_V = 'v=10';
+const ASSET_V = 'v=11';
+
+/* ---------- Analytics & advertising (consent-gated, OFF by default) ----------
+ * Paste your IDs to switch measurement on. Empty = nothing loads: no tags in
+ * <head>, no consent banner, zero third-party requests — same gate as the AI /
+ * Worker keys. When set, tags fire only AFTER the visitor accepts (or instantly
+ * if `consentBanner` is false). Every captured lead then fires GA4
+ * `generate_lead` + Meta `Lead`, tagged with the opportunity, institution
+ * segment, asset size, timeline, and hot/standard quality.
+ *   ga4Id         — GA4 Measurement ID, e.g. "G-XXXXXXXXXX"
+ *   metaPixel     — Meta (Facebook) Pixel ID, the numeric ID
+ *   consentBanner — show a consent banner and hold tags until "Accept"
+ */
+const ANALYTICS = {
+  ga4Id: '',
+  metaPixel: '',
+  consentBanner: true,
+};
+const ANALYTICS_ON = !!(ANALYTICS.ga4Id || ANALYTICS.metaPixel);
+function analyticsConfigTag() {
+  if (!ANALYTICS_ON) return '';
+  const cfg = { ga4: ANALYTICS.ga4Id || '', metaPixel: ANALYTICS.metaPixel || '', consent: ANALYTICS.consentBanner !== false };
+  return `\n  <script>window.ACM_ANALYTICS=${JSON.stringify(cfg)};</script>`;
+}
+function consentBanner() {
+  if (!ANALYTICS_ON || ANALYTICS.consentBanner === false) return '';
+  return `<div class="consent" id="consentBanner" hidden>
+    <div class="consent-inner glass">
+      <p class="consent-copy">We use cookies to measure traffic and improve ACM Global Tech. Accept analytics &amp; marketing cookies, or decline &mdash; either way the site works the same. See our <a href="/privacy/">Privacy Policy</a>.</p>
+      <div class="consent-actions">
+        <button type="button" class="btn btn-ghost" id="consentDecline">Decline</button>
+        <button type="button" class="btn btn-primary" id="consentAccept">Accept</button>
+      </div>
+    </div>
+  </div>`;
+}
 
 /* ---------- Single source of truth: navigation ---------- */
 const NAV = [
@@ -481,7 +516,7 @@ function renderPage(page) {
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?${ASSET_V}" />
+  <link rel="stylesheet" href="/styles.css?${ASSET_V}" />${analyticsConfigTag()}
   ${jsonLd(page, trail, canonical)}
 </head>
 <body>
@@ -499,6 +534,7 @@ ${content}
   ${renderFooter()}
   ${aiWidget()}
   ${leadModal()}
+  ${consentBanner()}
   <script src="/script.js?${ASSET_V}"></script>
 </body>
 </html>
