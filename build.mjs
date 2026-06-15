@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* ============================================================
- * ACM Global Tech — static multi-page build
+ * ACM Global Tech, static multi-page build
  * ------------------------------------------------------------
  * Reads content fragments from src/pages/**.html (each with a
  * leading <!--META {json} --> block) and renders a full static
@@ -22,14 +22,14 @@ const ASSET_V = 'v=11';
 
 /* ---------- Analytics & advertising (consent-gated, OFF by default) ----------
  * Paste your IDs to switch measurement on. Empty = nothing loads: no tags in
- * <head>, no consent banner, zero third-party requests — same gate as the AI /
+ * <head>, no consent banner, zero third-party requests, same gate as the AI /
  * Worker keys. When set, tags fire only AFTER the visitor accepts (or instantly
  * if `consentBanner` is false). Every captured lead then fires GA4
  * `generate_lead` + Meta `Lead`, tagged with the opportunity, institution
  * segment, asset size, timeline, and hot/standard quality.
- *   ga4Id         — GA4 Measurement ID, e.g. "G-XXXXXXXXXX"
- *   metaPixel     — Meta (Facebook) Pixel ID, the numeric ID
- *   consentBanner — show a consent banner and hold tags until "Accept"
+ *   ga4Id, GA4 Measurement ID, e.g. "G-XXXXXXXXXX"
+ *   metaPixel, Meta (Facebook) Pixel ID, the numeric ID
+ *   consentBanner, show a consent banner and hold tags until "Accept"
  */
 const ANALYTICS = {
   ga4Id: '',
@@ -46,7 +46,7 @@ function consentBanner() {
   if (!ANALYTICS_ON || ANALYTICS.consentBanner === false) return '';
   return `<div class="consent" id="consentBanner" hidden>
     <div class="consent-inner glass">
-      <p class="consent-copy">We use cookies to measure traffic and improve ACM Global Tech. Accept analytics &amp; marketing cookies, or decline &mdash; either way the site works the same. See our <a href="/privacy/">Privacy Policy</a>.</p>
+      <p class="consent-copy">We use cookies to measure traffic and improve ACM Global Tech. Accept analytics &amp; marketing cookies, or decline. Either way, the site works the same. See our <a href="/privacy/">Privacy Policy</a>.</p>
       <div class="consent-actions">
         <button type="button" class="btn btn-ghost" id="consentDecline">Decline</button>
         <button type="button" class="btn btn-primary" id="consentAccept">Accept</button>
@@ -185,7 +185,7 @@ function renderFooter() {
   return `<section class="footer-cta"><div class="container footer-cta-inner">
       <div class="footer-cta-copy">
         <h2>Ready to modernize your institution?</h2>
-        <p>Talk to ACM about a regulated, white-label banking stack &mdash; core, payments, wallets, exchange, and tokenized finance you own.</p>
+        <p>Talk to ACM about a regulated, white-label banking stack, core, payments, wallets, exchange, and tokenized finance you own.</p>
       </div>
       <div class="footer-cta-actions">
         <a href="/contact/" class="btn btn-primary btn-lg" data-cta="Discovery Call">Schedule a Discovery Call</a>
@@ -232,7 +232,7 @@ function expertCta(page) {
         <h2 class="expert-cta-title">Ready to talk about ${esc(topic)}?</h2>
         <p class="expert-cta-sub">Get a tailored walkthrough and a straight answer on fit, timeline, and cost for your institution.</p>
       </div>
-      <button class="btn btn-primary btn-lg expert-cta-btn" data-lead="Expert consult — ${esc(topic)}" data-lead-kind="Talk to ACM" data-lead-title="Talk to an expert about ${esc(topic)}" data-lead-sub="Tell us a bit about your institution and we'll connect you with the right ACM specialist — usually same day." data-lead-submit="Request my consult">Talk to an expert &rarr;</button>
+      <button class="btn btn-primary btn-lg expert-cta-btn" data-lead="Expert consult, ${esc(topic)}" data-lead-kind="Talk to ACM" data-lead-title="Talk to an expert about ${esc(topic)}" data-lead-sub="Tell us a bit about your institution and we'll connect you with the right ACM specialist, usually same day." data-lead-submit="Request my consult">Talk to an expert &rarr;</button>
     </div></section>`;
 }
 
@@ -243,7 +243,7 @@ function leadModal() {
       <button class="lead-close" id="leadClose" aria-label="Close">&times;</button>
       <span class="tag"><span class="dot"></span> <span id="leadKind">Resource</span></span>
       <h3 class="lead-title" id="leadTitle">Get the full details</h3>
-      <p class="lead-sub" id="leadSub">Tell us where to send it &mdash; we'll email it right over.</p>
+      <p class="lead-sub" id="leadSub">Tell us where to send it and we'll email it right over.</p>
       <form class="lead-form" id="leadForm" novalidate>
         <input type="hidden" name="cta" id="leadCta" value="" />
         <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="lead-hp" />
@@ -290,7 +290,7 @@ function leadModal() {
           <span><strong>100&times;</strong> performance</span>
           <span><strong>Trillions</strong> in securities</span>
         </div>
-        <p class="lead-fineprint">We'll only use this to share what you asked for and follow up. No spam &mdash; unsubscribe anytime.</p>
+        <p class="lead-fineprint">We'll only use this to share what you asked for and follow up. No spam. Unsubscribe anytime.</p>
       </form>
     </div>
   </div>`;
@@ -336,7 +336,7 @@ function partnerBanner() {
   return `<section class="partners-band"><div class="container">
       <span class="tag"><span class="dot"></span> Ecosystem Partners</span>
       <h2 class="partners-title">Backed by a world-class ecosystem</h2>
-      <p class="partners-lead">ACM Global Tech is an ecosystem partner of Hanzo.ai and Lux Network &mdash; pairing enterprise-grade agentic AI with institutional tokenized-finance and settlement infrastructure.</p>
+      <p class="partners-lead">ACM Global Tech is an ecosystem partner of Hanzo.ai and Lux Network, pairing enterprise-grade agentic AI with institutional tokenized-finance and settlement infrastructure.</p>
       <div class="partners-grid">
         <a class="partner-card" href="https://hanzo.ai/" target="_blank" rel="noopener noreferrer" aria-label="Visit Hanzo.ai">
           <span class="partner-logo"><svg class="partner-mark-svg" viewBox="0 0 67 67" aria-hidden="true"><path d="M22.21 67V44.6369H0V67H22.21Z" fill="#fff"/><path d="M66.7038 22.3184H22.2534L0.0878906 44.6367H44.4634L66.7038 22.3184Z" fill="#fff"/><path d="M22.21 0H0V22.3184H22.21V0Z" fill="#fff"/><path d="M66.7198 0H44.5098V22.3184H66.7198V0Z" fill="#fff"/><path d="M66.7198 67V44.6369H44.5098V67H66.7198Z" fill="#fff"/></svg><span class="partner-name">Hanzo</span></span>

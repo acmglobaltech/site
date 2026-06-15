@@ -1,11 +1,11 @@
-/* ===== ACM Global Tech — interactions ===== */
+/* ===== ACM Global Tech, interactions ===== */
 (function () {
   'use strict';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ============================================================
-     Analytics & advertising — GA4 + Meta Pixel, consent-gated
+     Analytics & advertising, GA4 + Meta Pixel, consent-gated
      ------------------------------------------------------------
      IDs arrive via window.ACM_ANALYTICS (injected in <head> by the
      build only when configured). No IDs → this module is inert: no
@@ -48,7 +48,7 @@
     }
     function activate() { if (active) return; active = true; loadGA4(); loadPixel(); }
 
-    /* Real lead tracker — replaces the no-op once a pixel/GA4 is configured. */
+    /* Real lead tracker, replaces the no-op once a pixel/GA4 is configured. */
     acmTrackLead = function (d) {
       d = d || {};
       var hot = !!d.hot;
@@ -221,7 +221,7 @@
   }
 
   /* ============================================================
-     Wix backend wiring — "funnel to CRM" model
+     Wix backend wiring, "funnel to CRM" model
      ------------------------------------------------------------
      The Wix site here is headless: the only live Wix backend is
      the CRM (Contacts). So every call-to-action funnels into the
@@ -230,7 +230,7 @@
      Members / Payments pages are required.
 
      Submit path:
-       1) POST the lead to CONTACT_FORM_ENDPOINT — a Cloudflare
+       1) POST the lead to CONTACT_FORM_ENDPOINT, a Cloudflare
           Worker that holds the Wix API key and writes to Wix CRM.
           Deploy it from wix/ :  npx wrangler deploy
        2) If that endpoint isn't configured yet (still contains
@@ -342,7 +342,7 @@
       '',
       (data.message || '')
     ];
-    var subject = 'Website enquiry — ' + (data.cta || 'Discovery Call') + (data.name ? ' — ' + data.name : '');
+    var subject = 'Website enquiry, ' + (data.cta || 'Discovery Call') + (data.name ? ', ' + data.name : '');
     return 'mailto:' + WIX_CONFIG.CONTACT_EMAIL +
       '?subject=' + encodeURIComponent(subject) +
       '&body=' + encodeURIComponent(lines.join('\n'));
@@ -363,7 +363,7 @@
         if (leadFired) return; // one conversion per submit, whichever path captures it
         leadFired = true;
         var hot = /\[HOT\]/.test(ctaVal);
-        acmTrackLead({ source: 'contact_form', opportunity: ctaVal + (data.interest ? ' — ' + data.interest : ''), hot: hot, value: hot ? 100 : 25 });
+        acmTrackLead({ source: 'contact_form', opportunity: ctaVal + (data.interest ? ', ' + data.interest : ''), hot: hot, value: hot ? 100 : 25 });
       }
       function showThanks() {
         trackContactLead();
@@ -597,7 +597,7 @@
       if (ready) {
         fetch(WIX_CONFIG.CONTACT_FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: email.split('@')[0], email: email, cta: 'Newsletter', message: 'Newsletter signup from footer' }) })
           .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
-          .then(function () { done('Thanks — you\'re subscribed.'); })
+          .then(function () { done('Thanks, you\'re subscribed.'); })
           .catch(function () { done('Thanks! We\'ll reach you at ' + email + '.'); });
       } else { done('Thanks! We\'ll add ' + email + ' to ACM insights.'); }
     });
@@ -638,16 +638,16 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) close(); });
 
     var KB = {
-      'what does acm do': "ACM Global Tech delivers a complete, white-label banking ecosystem — core banking, payments, mobile wallets, exchange & FX, RWA tokenization, stablecoins, treasury, cards, a white-label PSP, and Banking-as-a-Service — for credit unions, mid-sized banks, and healthcare. You brand it and you own it.",
-      'how does pricing work': "Pricing is scoped to your institution and the modules you adopt — start with one (for example the banking core) and expand on your timeline. Share your size and goals at /get-started/ and we'll put together a proposal.",
-      'is the platform post quantum secure': "Yes — post-quantum cryptography is core to ACM. We build on the NIST PQC standards (ML-KEM / FIPS 203, ML-DSA / FIPS 204, SLH-DSA / FIPS 205) to protect long-lived financial records against harvest-now, decrypt-later attacks. More at /capabilities/post-quantum-security/."
+      'what does acm do': "ACM Global Tech delivers a complete, white-label banking ecosystem, core banking, payments, mobile wallets, exchange & FX, RWA tokenization, stablecoins, treasury, cards, a white-label PSP, and Banking-as-a-Service, for credit unions, mid-sized banks, and healthcare. You brand it and you own it.",
+      'how does pricing work': "Pricing is scoped to your institution and the modules you adopt, start with one (for example the banking core) and expand on your timeline. Share your size and goals at /get-started/ and we'll put together a proposal.",
+      'is the platform post quantum secure': "Yes, post-quantum cryptography is core to ACM. We build on the NIST PQC standards (ML-KEM / FIPS 203, ML-DSA / FIPS 204, SLH-DSA / FIPS 205) to protect long-lived financial records against harvest-now, decrypt-later attacks. More at /capabilities/post-quantum-security/."
     };
     function normalize(s) { return (s || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim(); }
     function fallback(q) {
       var k = normalize(q);
       if (KB[k]) return KB[k];
       for (var key in KB) { if (k.indexOf(key.split(' ')[0]) !== -1 && k.length > 3) return KB[key]; }
-      return "Happy to help. For a precise answer the fastest path is our team — email " + AI_CONFIG.email + " or use the contact form, and you can book a discovery call from any page.";
+      return "Happy to help. For a precise answer the fastest path is our team, email " + AI_CONFIG.email + " or use the contact form, and you can book a discovery call from any page.";
     }
     function ask(q) {
       add('user', q);
@@ -685,7 +685,7 @@
     function openWith(c) {
       if (kindEl) kindEl.textContent = c.kind || 'Resource';
       if (titleEl) titleEl.textContent = c.title || 'Get the full details';
-      if (subEl) subEl.textContent = c.sub || "Tell us where to send it — we'll email it over.";
+      if (subEl) subEl.textContent = c.sub || "Tell us where to send it, we'll email it over.";
       if (ctaEl) ctaEl.value = c.lead || 'Resource';
       if (lsubmit) lsubmit.textContent = c.submit || 'Email it to me';
       if (lnote) { lnote.hidden = true; lnote.textContent = ''; }
@@ -723,7 +723,7 @@
         var hot = /\[HOT\]/.test(data.cta || '');
         acmTrackLead({ source: 'lead_modal', opportunity: data.cta || 'Resource', segment: data.segment || '', assetSize: data.assetSize || '', timeline: data.timeline || '', hot: hot, value: hot ? 100 : 25 });
         lform.style.display = 'none';
-        if (lnote) { lnote.hidden = false; lnote.textContent = "Thanks — it's on its way to " + (data.email || 'your inbox') + ". We'll follow up shortly."; }
+        if (lnote) { lnote.hidden = false; lnote.textContent = "Thanks, it's on its way to " + (data.email || 'your inbox') + ". We'll follow up shortly."; }
       }
       var ready = (typeof ENDPOINT_READY !== 'undefined') && ENDPOINT_READY && (typeof WIX_CONFIG !== 'undefined');
       if (!ready) { window.location.href = buildMailto(data); succeed(); return; }
@@ -741,7 +741,7 @@
       if (softFired || !modal.hidden) return;
       try { if (sessionStorage.getItem('acmSoft')) return; sessionStorage.setItem('acmSoft', '1'); } catch (e) { /* noop */ }
       softFired = true;
-      openWith({ kind: 'Before you go', title: 'Before you go — get the ACM overview', sub: 'A one-page overview of the full white-label platform, sent to your inbox. No commitment.', lead: 'Soft capture — Platform overview', submit: 'Email me the overview' });
+      openWith({ kind: 'Before you go', title: 'Before you go, get the ACM overview', sub: 'A one-page overview of the full white-label platform, sent to your inbox. No commitment.', lead: 'Soft capture, Platform overview', submit: 'Email me the overview' });
     }
     document.addEventListener('mouseout', function (e) { if (e.clientY <= 0 && !e.relatedTarget) softCapture(); });
     if (window.matchMedia('(max-width: 1024px)').matches) {
