@@ -699,28 +699,30 @@
           <label class="field"><span>Email</span><input type="email" name="email" required /></label>
           <label class="field"><span>Phone</span><input type="tel" name="phone" /></label>
         </div>
-        <div class="field">
-          <span>How can we help?</span>
-          <div class="chips-group" role="radiogroup" aria-label="How can we help?">
-            <label class="chip-radio"><input type="radio" name="goal" value="Connect now" /><span>Connect now</span></label>
-            <label class="chip-radio"><input type="radio" name="goal" value="Start my journey" /><span>Start my journey</span></label>
-            <label class="chip-radio"><input type="radio" name="goal" value="Help me plan my journey" /><span>Help me plan my journey</span></label>
-            <label class="chip-radio"><input type="radio" name="goal" value="Book a meeting" /><span>Book a meeting</span></label>
-            <label class="chip-radio"><input type="radio" name="goal" value="Just exploring" /><span>Just exploring</span></label>
-          </div>
-        </div>
-        <div class="field">
-          <span>I'm interested in</span>
-          <div class="chips-group" role="radiogroup" aria-label="I'm interested in">
-            <label class="chip-radio"><input type="radio" name="interest" value="Lending Modernization" /><span>Lending Modernization</span></label>
-            <label class="chip-radio"><input type="radio" name="interest" value="Member Engagement" /><span>Member Engagement</span></label>
-            <label class="chip-radio"><input type="radio" name="interest" value="Core &amp; Cloud Modernization" /><span>Core &amp; Cloud</span></label>
-            <label class="chip-radio"><input type="radio" name="interest" value="Cybersecurity &amp; Fraud" /><span>Cybersecurity &amp; Fraud</span></label>
-            <label class="chip-radio"><input type="radio" name="interest" value="Data &amp; Analytics" /><span>Data &amp; Analytics</span></label>
-            <label class="chip-radio"><input type="radio" name="interest" value="White-Label Products" /><span>White-Label Products</span></label>
-            <label class="chip-radio"><input type="radio" name="interest" value="ACM Ventures" /><span>ACM Ventures</span></label>
-            <label class="chip-radio"><input type="radio" name="interest" value="Other" /><span>Other</span></label>
-          </div>
+        <div class="field-row">
+          <label class="field"><span>How can we help?</span>
+            <select name="goal" class="select">
+              <option value="" selected>Select an option…</option>
+              <option value="Connect now">Connect now</option>
+              <option value="Start my journey">Start my journey</option>
+              <option value="Help me plan my journey">Help me plan my journey</option>
+              <option value="Book a meeting">Book a meeting</option>
+              <option value="Just exploring">Just exploring</option>
+            </select>
+          </label>
+          <label class="field"><span>I'm interested in</span>
+            <select name="interest" class="select">
+              <option value="" selected>Select an option…</option>
+              <option value="Lending Modernization">Lending Modernization</option>
+              <option value="Member Engagement">Member Engagement</option>
+              <option value="Core &amp; Cloud Modernization">Core &amp; Cloud Modernization</option>
+              <option value="Cybersecurity &amp; Fraud">Cybersecurity &amp; Fraud</option>
+              <option value="Data &amp; Analytics">Data &amp; Analytics</option>
+              <option value="White-Label Products">White-Label Products</option>
+              <option value="ACM Ventures">ACM Ventures</option>
+              <option value="Other">Other</option>
+            </select>
+          </label>
         </div>
         <label class="field" id="bookingField" hidden><span>Preferred day &amp; time</span><input type="text" name="preferredTime" placeholder="e.g., Tuesday afternoons, ET" /></label>
         <label class="field"><span>Message</span><textarea name="message" rows="4"></textarea></label>

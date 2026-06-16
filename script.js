@@ -238,12 +238,30 @@
           pre-filled mailto: so a lead is never lost.
      ============================================================ */
   var WIX_CONFIG = {
-    // Velo HTTP function (wix/http-functions.js), published in the Wix site.
-    // /_functions/contact once published; /_functions-dev/contact to test pre-publish.
-    CONTACT_FORM_ENDPOINT: 'https://www.acmglobaltech.com/_functions/contact',
+    // Cloudflare Worker proxy (wix/worker.js): holds the Wix API key server-side
+    // and writes leads straight into Wix CRM. Base URL, routes hang off it:
+    //   POST {API}/contact   create/append a CRM lead (every form + CTA)
+    //   GET  {API}/slots     Wix Bookings availability (scheduler)
+    //   POST {API}/book      create a Wix Bookings booking
+    //   POST {API}/login     authenticate a client against Wix Members
+    API: 'https://acm-contact.zeekay.workers.dev',
     CONTACT_EMAIL: 'info@acmglobaltech.com'
   };
-  var ENDPOINT_READY = WIX_CONFIG.CONTACT_FORM_ENDPOINT.indexOf('<subdomain>') === -1;
+  WIX_CONFIG.CONTACT_FORM_ENDPOINT = WIX_CONFIG.API + '/contact';
+  // Live whenever the endpoint is a real https URL (no unresolved placeholder).
+  var ENDPOINT_READY = /^https:\/\//.test(WIX_CONFIG.CONTACT_FORM_ENDPOINT) &&
+    WIX_CONFIG.CONTACT_FORM_ENDPOINT.indexOf('<subdomain>') === -1;
+
+  /* One way to submit a lead: every form/CTA/popup routes through here.
+     Resolves on a confirmed CRM write; rejects so callers can fall back. */
+  function acmSubmitLead(data) {
+    if (!ENDPOINT_READY) return Promise.reject(new Error('endpoint not configured'));
+    return fetch(WIX_CONFIG.CONTACT_FORM_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    }).then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); });
+  }
 
   var form = document.getElementById('contactForm');
   var note = document.getElementById('formNote');
@@ -273,16 +291,12 @@
 
   /* Booking: reveal the preferred-time field only when "Book a meeting" is chosen. */
   var bookingField = document.getElementById('bookingField');
+  var goalSelect = form && form.elements['goal'];
   function syncBooking() {
-    var g = form && form.querySelector('input[name="goal"]:checked');
-    if (bookingField) bookingField.hidden = !(g && g.value === 'Book a meeting');
+    if (bookingField) bookingField.hidden = !(goalSelect && goalSelect.value === 'Book a meeting');
   }
-  if (form) {
-    Array.prototype.forEach.call(form.querySelectorAll('input[name="goal"]'), function (r) {
-      r.addEventListener('change', syncBooking);
-    });
-  }
-  /* Map certain CTAs to a preselected "goal" chip. */
+  if (goalSelect) goalSelect.addEventListener('change', syncBooking);
+  /* Map certain CTAs to a preselected "goal" option. */
   var GOAL_FOR_CTA = { 'Book a Meeting': 'Book a meeting', 'Discovery Call': 'Book a meeting' };
 
   function focusFirstEmpty() {
@@ -308,12 +322,9 @@
       var msg = form && form.elements['message'];
       if (msg && !msg.value && spec.message) msg.value = spec.message;
 
-      // Preselect the matching goal chip (and reveal booking field) for some CTAs.
+      // Preselect the matching goal option (and reveal booking field) for some CTAs.
       var goalVal = GOAL_FOR_CTA[intent];
-      if (goalVal && form) {
-        var gr = form.querySelector('input[name="goal"][value="' + goalVal + '"]');
-        if (gr) { gr.checked = true; syncBooking(); }
-      }
+      if (goalVal && goalSelect) { goalSelect.value = goalVal; syncBooking(); }
 
       var contact = document.getElementById('contact');
       if (contact) {
@@ -373,20 +384,18 @@
       }
       function handoffToEmail() {
         trackContactLead();
-        // No server yet (or it failed): open the visitor's mail client pre-filled.
-        if (note) { note.hidden = false; note.textContent = 'Opening your email app, or write to us directly at ' + WIX_CONFIG.CONTACT_EMAIL + '.'; }
-        window.location.href = buildMailto(data);
+        // Backend unreachable: show an inline message with a one-click prefilled
+        // email link. We never auto-open (hijack) the visitor's mail app.
+        if (note) {
+          note.hidden = false;
+          note.innerHTML = "We couldn't send that automatically. You can <a href=\"" + buildMailto(data) + "\">email your request directly</a>, or write to <a href=\"mailto:" + WIX_CONFIG.CONTACT_EMAIL + "\">" + WIX_CONFIG.CONTACT_EMAIL + "</a>.";
+        }
       }
 
       if (!ENDPOINT_READY) { handoffToEmail(); return; }
 
       if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
-      fetch(WIX_CONFIG.CONTACT_FORM_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-        .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+      acmSubmitLead(data)
         .then(showThanks)
         .catch(function (err) {
           console.warn('contact submit failed, handing off to email:', err);
@@ -593,13 +602,9 @@
       var email = field ? field.value.trim() : '';
       if (!email) return;
       function done(msg) { acmTrackLead({ source: 'newsletter', opportunity: 'Newsletter', value: 5 }); if (note) { note.hidden = false; note.textContent = msg; } nf.reset(); }
-      var ready = (typeof ENDPOINT_READY !== 'undefined') && ENDPOINT_READY && (typeof WIX_CONFIG !== 'undefined');
-      if (ready) {
-        fetch(WIX_CONFIG.CONTACT_FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: email.split('@')[0], email: email, cta: 'Newsletter', message: 'Newsletter signup from footer' }) })
-          .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
-          .then(function () { done('Thanks, you\'re subscribed.'); })
-          .catch(function () { done('Thanks! We\'ll reach you at ' + email + '.'); });
-      } else { done('Thanks! We\'ll add ' + email + ' to ACM insights.'); }
+      acmSubmitLead({ name: email.split('@')[0], email: email, cta: 'Newsletter', message: 'Newsletter signup from footer' })
+        .then(function () { done('Thanks, you\'re subscribed.'); })
+        .catch(function () { done('Thanks! We\'ll reach you at ' + email + '.'); });
     });
   })();
 
@@ -725,13 +730,13 @@
         lform.style.display = 'none';
         if (lnote) { lnote.hidden = false; lnote.textContent = "Thanks, it's on its way to " + (data.email || 'your inbox') + ". We'll follow up shortly."; }
       }
-      var ready = (typeof ENDPOINT_READY !== 'undefined') && ENDPOINT_READY && (typeof WIX_CONFIG !== 'undefined');
-      if (!ready) { window.location.href = buildMailto(data); succeed(); return; }
       if (lsubmit) { lsubmit.disabled = true; lsubmit.textContent = 'Sending…'; }
-      fetch(WIX_CONFIG.CONTACT_FORM_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
-        .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+      acmSubmitLead(data)
         .then(succeed)
-        .catch(function () { window.location.href = buildMailto(data); succeed(); })
+        .catch(function () {
+          // No auto-open and no false "on its way": offer a one-click prefilled link.
+          if (lnote) { lnote.hidden = false; lnote.innerHTML = "We couldn't send that automatically. You can <a href=\"" + buildMailto(data) + "\">email your request directly</a>."; }
+        })
         .finally(function () { if (lsubmit) { lsubmit.disabled = false; lsubmit.textContent = orig; } });
     });
 
