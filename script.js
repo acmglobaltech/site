@@ -463,18 +463,23 @@
       scCurrent = best;
       scSlides.forEach(function (s, i) { s.classList.toggle('active', i === best); });
       scDotEls.forEach(function (d, i) { d.classList.toggle('on', i === best); });
-      if (scPrev) scPrev.disabled = best === 0;
-      if (scNext) scNext.disabled = best === scSlides.length - 1;
+    }
+    /* Arrows + keys wrap around so the deck repeats: last → first, first → last. */
+    function step(delta) {
+      var n = scCurrent + delta;
+      if (n < 0) n = scSlides.length - 1;
+      else if (n >= scSlides.length) n = 0;
+      scrollToIndex(n);
     }
     var scTick = false;
     scVp.addEventListener('scroll', function () {
       if (!scTick) { window.requestAnimationFrame(function () { syncActive(); scTick = false; }); scTick = true; }
     }, { passive: true });
-    if (scPrev) scPrev.addEventListener('click', function () { scrollToIndex(scCurrent - 1); });
-    if (scNext) scNext.addEventListener('click', function () { scrollToIndex(scCurrent + 1); });
+    if (scPrev) scPrev.addEventListener('click', function () { step(-1); });
+    if (scNext) scNext.addEventListener('click', function () { step(1); });
     scVp.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowRight') { e.preventDefault(); scrollToIndex(scCurrent + 1); }
-      else if (e.key === 'ArrowLeft') { e.preventDefault(); scrollToIndex(scCurrent - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
+      else if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
     });
     window.addEventListener('resize', syncActive);
     syncActive();
