@@ -167,7 +167,9 @@ async function handleBook(request, env, cors) {
     contactDetails,
     totalParticipants: 1
   };
-  if (data.message) booking.additionalFields = [{ value: String(data.message) }];
+  // The visitor's message rides in the CRM mirror below, not on the booking:
+  // Wix Bookings `additionalFields` entries require the service form's custom
+  // field GUID `id` (not a free value), so we keep the booking minimal + valid.
 
   const resp = await fetch(BOOKINGS_URL, {
     method: 'POST',
