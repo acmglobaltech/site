@@ -247,9 +247,11 @@
     CONTACT_EMAIL: 'info@acmglobaltech.com',
     // Native Wix Members client portal (its own Wix site on a subdomain). The
     // "Sign in" buttons link straight here — Wix owns login + the dashboard, so
-    // there's no auth code on the static site. Goes live when the subdomain is
-    // connected in Wix; until then it resolves once DNS propagates.
-    PORTAL_URL: 'https://portal.acmglobaltech.com'
+    // there's no auth code on the static site.
+    PORTAL_URL: 'https://portal.acmglobaltech.com',
+    // Flip to true once portal.acmglobaltech.com is connected + published in Wix.
+    // While false, "Sign in" links fall back to Request access (no dead link).
+    PORTAL_LIVE: false
   };
   WIX_CONFIG.CONTACT_FORM_ENDPOINT = WIX_CONFIG.API + '/contact';
   // Live whenever the endpoint is a real https URL (no unresolved placeholder).
@@ -267,12 +269,12 @@
     }).then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); });
   }
 
-  /* Point every portal link at the configured Wix Members portal (one source). */
-  if (WIX_CONFIG.PORTAL_URL) {
-    document.querySelectorAll('[data-portal]').forEach(function (a) {
-      a.setAttribute('href', WIX_CONFIG.PORTAL_URL);
-    });
-  }
+  /* Point every portal link at the Wix Members portal once it's live; until then
+     fall back to Request access so "Sign in" is never a dead link (one source). */
+  (function () {
+    var dest = (WIX_CONFIG.PORTAL_LIVE && WIX_CONFIG.PORTAL_URL) ? WIX_CONFIG.PORTAL_URL : '/get-started/';
+    document.querySelectorAll('[data-portal]').forEach(function (a) { a.setAttribute('href', dest); });
+  })();
 
   var form = document.getElementById('contactForm');
   var note = document.getElementById('formNote');
