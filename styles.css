@@ -842,6 +842,7 @@ a.sol-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-soft); bor
 .sched-chosen { margin: 0 0 14px; font-weight: 700; color: var(--ink); }
 .sched-back { margin-top: 10px; background: none; border: 0; color: var(--blue); font-weight: 600; font-size: .9rem; cursor: pointer; }
 .sched-status { margin-top: 16px; padding: 14px; background: rgba(var(--rgb-blue), 0.06); border: 1px solid rgba(var(--rgb-blue), 0.25); border-radius: 11px; color: var(--ink); font-size: .92rem; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.sched-status[hidden] { display: none; }  /* class display:flex would otherwise override the hidden attribute */
 .btn-sm { padding: 7px 14px; font-size: .85rem; }
 @media (max-width: 480px) { .sched-card { padding: 24px 20px; } .sched-details .field-row { grid-template-columns: 1fr; } }
 
