@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=12" />
+  <link rel="stylesheet" href="/styles.css?v=13" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"ACM Global Tech client login","description":"Sign in to the secure ACM Global Tech client portal for your dashboards, private documentation, and support. Not a client yet? Request access.","url":"https://acmglobaltech.com/login/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"ACM Global Tech client login","item":"https://acmglobaltech.com/login/"}]}</script>
@@ -104,36 +104,92 @@
     <h1 class="visually-hidden">ACM Global Tech client login</h1>
 <section class="page-hero"><div class="container">
   <span class="tag"><span class="dot"></span> Client Portal</span>
-  <h2 class="page-lead-title">Sign in to your secure client portal</h2>
-  <p class="page-lead">Existing clients access dashboards, private API documentation and sandbox keys, environments, and support through the ACM secure portal, protected by unified sign-on and post-quantum cryptography.</p>
-  <div class="hero-cta">
-    <a class="btn btn-primary" href="/contact/" data-cta="Client Portal Access">Sign in to the portal</a>
-    <a class="btn btn-ghost" href="/get-started/">Request access</a>
-  </div>
+  <h2 class="page-lead-title">Your secure ACM client portal</h2>
+  <p class="page-lead">Existing clients access dashboards, private API documentation and sandbox keys, environments, and support, protected by unified sign-on and post-quantum cryptography.</p>
 </div></section>
   <div class="trust-strip"><div class="container"><span>Regulated-first architecture</span><span>Post-quantum cryptography</span><span>White-label &amp; client-owned</span><span>Hanzo.ai &amp; Lux Network ecosystem</span></div></div>
 
 
-<section class="section surface"><div class="container">
-  <span class="tag"><span class="dot"></span> What's Inside</span>
-  <h2 class="section-title">Everything your team needs, in one place</h2>
-  <p class="section-lead">The client portal is provisioned to your institution during onboarding. It keeps private materials behind authentication, separate from this public site.</p>
-  <div class="solutions-grid cols-2">
-    <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Private documentation</h3><p>Full API references, integration guides, and sandbox credentials, scoped to your environment.</p></div>
-    <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Dashboards</h3><p>Operational dashboards for the modules you run, with role-based access for your team.</p></div>
-    <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Support &amp; tickets</h3><p>Open and track tickets, reach your dedicated team, and escalate severity-1 issues.</p></div>
-    <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Unified sign-on</h3><p>One secure identity across your ACM environments, with least-privilege, role-based controls.</p></div>
-  </div>
-</div></section>
+<section class="section" id="clientPortal"><div class="container">
 
-<section class="section"><div class="container">
-  <span class="tag"><span class="dot"></span> Access</span>
-  <h2 class="section-title">Getting into the portal</h2>
-  <ul class="bullets">
-    <li><strong>Existing clients:</strong> use the sign-in link your onboarding team provided. Trouble signing in? <a href="/support/">Contact support</a>.</li>
-    <li><strong>New to ACM:</strong> <a href="/get-started/">request access</a> and we'll provision your portal as part of onboarding.</li>
-    <li><strong>Security:</strong> the portal is gated by authentication and is never indexed or exposed publicly. Read more in our <a href="/trust/">Trust &amp; Security Center</a>.</li>
-  </ul>
+  <!-- Logged-out: sign-in gate -->
+  <div id="portalGate">
+    <div class="portal-signin glass">
+      <span class="tag"><span class="dot"></span> Sign in</span>
+      <h2 class="section-title">Sign in to your account</h2>
+      <p class="section-lead">Use the ACM account your onboarding team set up. Your session is secured with Wix-managed identity and unified sign-on.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary btn-lg" id="portalSignIn">Sign in to the portal</button>
+        <a class="btn btn-ghost btn-lg" href="/get-started/">Request access</a>
+      </div>
+      <p class="portal-status" id="portalStatus" hidden></p>
+      <p class="portal-fineprint">Trouble signing in? <a href="/support/">Contact support</a> or email <a href="mailto:info@acmglobaltech.com">info@acmglobaltech.com</a>.</p>
+    </div>
+
+    <div class="portal-inside">
+      <span class="tag"><span class="dot"></span> What's Inside</span>
+      <h2 class="section-title">Everything your team needs, in one place</h2>
+      <p class="section-lead">The portal is provisioned to your institution during onboarding and keeps private materials behind authentication, separate from this public site.</p>
+      <div class="solutions-grid cols-2">
+        <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Private documentation</h3><p>Full API references, integration guides, and sandbox credentials, scoped to your environment.</p></div>
+        <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Dashboards</h3><p>Operational dashboards for the modules you run, with role-based access for your team.</p></div>
+        <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Support &amp; tickets</h3><p>Open and track tickets, reach your dedicated team, and escalate severity-1 issues.</p></div>
+        <div class="glass sol-card"><span class="sol-ic"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 9-9 9-9-9z"/></svg></span><h3>Unified sign-on</h3><p>One secure identity across your ACM environments, with least-privilege, role-based controls.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logged-in: client dashboard (sales tool + informational) -->
+  <div id="portalDashboard" hidden>
+    <div class="portal-welcome">
+      <div>
+        <span class="tag"><span class="dot"></span> Client Dashboard</span>
+        <h2 class="section-title">Welcome back<span id="portalMemberName"></span></h2>
+        <p class="section-lead">Your ACM engagement at a glance, the platform you run, what's live, and where to go next.</p>
+      </div>
+      <button class="btn btn-ghost" id="portalSignOut">Sign out</button>
+    </div>
+
+    <div class="portal-grid">
+      <article class="glass portal-card">
+        <span class="portal-card-kind">Your platform</span>
+        <h3>White-label banking &amp; payments</h3>
+        <p>Core banking, payments, wallets, exchange &amp; FX, cards, treasury, and BaaS, branded and owned by your institution.</p>
+        <a class="portal-link" href="/products/">Explore modules &rarr;</a>
+      </article>
+      <article class="glass portal-card">
+        <span class="portal-card-kind">Documentation</span>
+        <h3>API references &amp; sandbox keys</h3>
+        <p>Integration guides and environment-scoped credentials for your team's developers.</p>
+        <a class="portal-link" href="/docs/">Open documentation &rarr;</a>
+      </article>
+      <article class="glass portal-card">
+        <span class="portal-card-kind">Security</span>
+        <h3>Post-quantum by default</h3>
+        <p>NIST PQC (ML-KEM, ML-DSA, SLH-DSA) protecting long-lived financial records against harvest-now, decrypt-later.</p>
+        <a class="portal-link" href="/trust/">Trust &amp; Security Center &rarr;</a>
+      </article>
+      <article class="glass portal-card">
+        <span class="portal-card-kind">Services rendered</span>
+        <h3>What ACM delivers for you</h3>
+        <p>Implementation, modernization, and managed operations, the same playbook behind 70&rarr;20 eng-team and 100&times; performance outcomes.</p>
+        <a class="portal-link" href="/case-studies/">See client outcomes &rarr;</a>
+      </article>
+      <article class="glass portal-card">
+        <span class="portal-card-kind">Support</span>
+        <h3>Your dedicated team</h3>
+        <p>Open and track tickets and escalate severity-1 issues to your named ACM specialists.</p>
+        <a class="portal-link" href="/support/">Contact support &rarr;</a>
+      </article>
+      <article class="glass portal-card portal-card-cta">
+        <span class="portal-card-kind">Grow with ACM</span>
+        <h3>Add a module or book a review</h3>
+        <p>Expand your platform or schedule a quarterly business review with your account team.</p>
+        <button class="btn btn-primary" data-cta="Discovery Call">Book a review</button>
+      </article>
+    </div>
+  </div>
+
 </div></section>
     
   </main>
@@ -308,7 +364,36 @@
       </form>
     </div>
   </div>
+  <div class="sched-modal" id="schedModal" hidden>
+    <div class="sched-overlay" id="schedOverlay"></div>
+    <div class="sched-card glass" role="dialog" aria-modal="true" aria-labelledby="schedTitle">
+      <button class="lead-close" id="schedClose" aria-label="Close">&times;</button>
+      <span class="tag"><span class="dot"></span> Schedule</span>
+      <h3 class="lead-title" id="schedTitle">Book a discovery call</h3>
+      <p class="lead-sub" id="schedSub">Pick a time that suits you and we'll send a calendar invite.</p>
+      <div class="sched-loading" id="schedLoading" hidden>Loading available times&hellip;</div>
+      <div class="sched-slots" id="schedSlots" hidden></div>
+      <form class="lead-form sched-details" id="schedForm" hidden novalidate>
+        <input type="hidden" name="slot" id="schedSlotInput" />
+        <p class="sched-chosen" id="schedChosen"></p>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="lead-hp" />
+        <div class="field-row">
+          <label class="field"><span>Name</span><input type="text" name="name" required /></label>
+          <label class="field"><span>Work email</span><input type="email" name="email" required /></label>
+        </div>
+        <div class="field-row">
+          <label class="field"><span>Institution</span><input type="text" name="company" /></label>
+          <label class="field"><span>Phone</span><input type="tel" name="phone" /></label>
+        </div>
+        <label class="field"><span>Anything we should know?</span><textarea name="message" rows="2"></textarea></label>
+        <button type="submit" class="btn btn-primary btn-block" id="schedSubmit">Confirm booking</button>
+        <button type="button" class="sched-back" id="schedBack">&larr; Pick another time</button>
+      </form>
+      <div class="sched-status" id="schedStatus" hidden></div>
+      <p class="lead-note" id="schedNote" hidden></p>
+    </div>
+  </div>
   
-  <script src="/script.js?v=12"></script>
+  <script src="/script.js?v=13"></script>
 </body>
 </html>

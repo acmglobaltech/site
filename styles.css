@@ -827,6 +827,40 @@ a.sol-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-soft); bor
 .lead-fineprint { margin-top: 12px; font-size: .72rem; color: var(--mute); line-height: 1.45; }
 @media (max-width: 480px) { .lead-card { padding: 24px 20px; } .lead-form .field-row { grid-template-columns: 1fr; } }
 
+/* ===== Scheduler modal (Wix Bookings) ===== */
+.sched-modal { position: fixed; inset: 0; z-index: 80; display: grid; place-items: center; padding: 20px; }
+.sched-modal[hidden] { display: none; }
+.sched-overlay { position: absolute; inset: 0; background: rgba(11, 20, 34, 0.55); backdrop-filter: blur(4px); animation: leadFade .2s ease; }
+.sched-card { position: relative; z-index: 1; width: min(520px, 100%); padding: 32px; max-height: 88vh; overflow-y: auto; animation: leadPop .28s cubic-bezier(.2,.7,.2,1); }
+.sched-loading { padding: 18px 0; color: var(--mute); font-weight: 600; }
+.sched-slots { margin-top: 8px; }
+.sched-day { margin-top: 16px; }
+.sched-day h4 { margin: 0 0 8px; font-size: .82rem; font-weight: 700; color: var(--ink); }
+.sched-times { display: flex; flex-wrap: wrap; gap: 8px; }
+.sched-time { font-size: .88rem; font-weight: 600; color: var(--blue); background: #FAFCFF; border: 1px solid var(--line-2); padding: 9px 15px; border-radius: 999px; cursor: pointer; transition: border-color .15s, color .15s, background .15s, box-shadow .15s; }
+.sched-time:hover { color: var(--white); background: var(--grad-blue); border-color: transparent; box-shadow: 0 8px 18px -8px rgba(var(--rgb-blue), .6); }
+.sched-chosen { margin: 0 0 14px; font-weight: 700; color: var(--ink); }
+.sched-back { margin-top: 10px; background: none; border: 0; color: var(--blue); font-weight: 600; font-size: .9rem; cursor: pointer; }
+.sched-status { margin-top: 16px; padding: 14px; background: rgba(var(--rgb-blue), 0.06); border: 1px solid rgba(var(--rgb-blue), 0.25); border-radius: 11px; color: var(--ink); font-size: .92rem; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.btn-sm { padding: 7px 14px; font-size: .85rem; }
+@media (max-width: 480px) { .sched-card { padding: 24px 20px; } .sched-details .field-row { grid-template-columns: 1fr; } }
+
+/* ===== Client portal ===== */
+.portal-signin { max-width: 640px; margin: 0 auto 48px; padding: 36px; text-align: center; }
+.portal-signin .hero-cta { justify-content: center; margin-top: 22px; }
+.portal-status { margin-top: 16px; padding: 12px 14px; background: rgba(var(--rgb-blue), 0.08); border: 1px solid rgba(var(--rgb-blue), 0.3); border-radius: 11px; color: var(--ink); font-weight: 600; font-size: .9rem; }
+.portal-fineprint { margin-top: 16px; font-size: .8rem; color: var(--mute); }
+.portal-inside { margin-top: 8px; }
+.portal-welcome { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; }
+.portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.portal-card { padding: 24px; display: flex; flex-direction: column; gap: 8px; }
+.portal-card-kind { font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); }
+.portal-card h3 { margin: 0; font-size: 1.08rem; }
+.portal-card p { margin: 0; color: var(--body); font-size: .92rem; }
+.portal-link { margin-top: auto; font-weight: 600; color: var(--blue); font-size: .9rem; }
+.portal-card-cta { background: var(--grad-soft, rgba(var(--rgb-blue), 0.05)); }
+.portal-card-cta .btn { margin-top: 6px; align-self: flex-start; }
+
 /* ===== Per-page "talk to an expert" CTA band ===== */
 .expert-cta { background: var(--surface); border-block: 1px solid var(--line); }
 .expert-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 48px 24px; flex-wrap: wrap; }

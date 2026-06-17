@@ -1,110 +1,115 @@
 # ACM Global Tech — Wix integration
 
-The marketing site is a **static** site (GitHub Pages). It talks to **Wix** for
-the dynamic pieces. There are two ways to handle the contact form — this repo is
-wired for **Option A** (uses your Wix API key).
+The marketing site is a **static** site (GitHub Pages, domain `acmglobaltech.com`).
+It talks to **Wix** for the dynamic pieces through a single **Cloudflare Worker**
+that holds the Wix API key server-side (the static bundle is public, so the key
+can never live in it).
 
-| Capability      | Wired by                              | Setup |
-|-----------------|---------------------------------------|-------|
-| Contact form    | `fetch()` → Cloudflare Worker → Wix REST API | deploy `worker.js` (Option A) |
-| All other CTAs  | `<a data-cta="…">` → funnel into the contact form | none — each creates a CRM lead tagged with the button's intent |
+**One backend, one way.** Everything dynamic goes through the Worker:
 
-**Funnel-to-CRM model.** The Wix site is headless, so every call-to-action —
-"Schedule a Discovery Call", "Pay a deposit", "Sign in to the client portal" —
-scrolls to the contact form and submits a CRM lead carrying a `cta` field with
-the button's intent (`Discovery Call` / `Deposit / Retainer` / `Client Portal
-Access`). No Wix Bookings / Payments / Members pages are required. If the Worker
-isn't deployed yet, the form falls back to a pre-filled `mailto:` so no lead is lost.
+| Capability        | Route                  | Wix API                                   |
+|-------------------|------------------------|-------------------------------------------|
+| All forms + CTAs  | `POST /contact`        | CRM Contacts (`appendOrCreate`)           |
+| Scheduling        | `GET /slots`           | Bookings Availability Calendar            |
+| Scheduling        | `POST /book`           | Bookings Create Booking                   |
+| Client login      | *(none — client-side)* | Wix Members headless OAuth (`@wix/sdk`)   |
 
-`WIX_CONFIG` at the top of `../script.js` now holds just the Worker endpoint and
-the fallback contact email.
+- **Live Worker:** `https://acm-contact.zeekay.workers.dev`
+- **Wix site:** `acm-global-tech` · site id `cb3bb9a2-6ded-4155-9463-a8eca41842b6`
+  · account id `379fb1dd-5d55-4243-878f-d782b1397fbc`
+- Frontend config lives at the top of `../script.js` (`WIX_CONFIG`).
 
-**Wix site:** `acm-global-tech` · domain `https://www.acmglobaltech.com`
-· site id `cb3bb9a2-6ded-4155-9463-a8eca41842b6`
-· account id `379fb1dd-5d55-4243-878f-d782b1397fbc`
-
-These CRM fields were already created in your Wix account via the API:
+CRM custom fields already created in the Wix account:
 - Label **"Website Lead"** → `custom.website-lead`
 - Text field **"ACM Message"** → `custom.acm-message-xnwsqpcqvzusxbypusvuucv`
 
 ---
 
-## Option A — Cloudflare Worker proxy (uses the Wix API key) ✅ wired
-
-The Wix API key is a **secret**. It can never go in the static site (the bundle
-is public). The Worker holds it server-side and creates the CRM contact.
-
-Verified working locally end-to-end: form → Worker → contact appears in Wix CRM
-with name, email, phone, company, the "Website Lead" label, and the message.
-
-### Deploy (one time)
+## Deploy / update the Worker
 
 ```bash
 cd wix
-npx wrangler login                       # opens browser — log into your Cloudflare account
-npx wrangler secret put WIX_API_KEY      # paste the Wix API key when prompted
-npx wrangler deploy                      # prints the live URL, e.g.
-                                         #   https://acm-contact.<subdomain>.workers.dev
+export CLOUDFLARE_EMAIL=...            # global API key auth (or use an API token)
+export CLOUDFLARE_API_KEY=...
+export CLOUDFLARE_ACCOUNT_ID=94a3e3f299092abb1feda2a7481ea845
+npx wrangler deploy                    # pushes worker.js
+npx wrangler secret put WIX_API_KEY    # one time — paste the Wix API key
 ```
 
-Then put that URL (with `/contact`) into `../script.js`:
+`wrangler.toml` holds the non-secret config (account/site/field/label ids,
+allowed origins, optional `BOOKINGS_SERVICE_ID`). `.dev.vars` (gitignored) holds
+the key for `npx wrangler dev`.
 
-```js
-CONTACT_FORM_ENDPOINT: 'https://acm-contact.<subdomain>.workers.dev/contact',
-```
-
-Commit + push; GitHub Pages rebuilds in ~30s. Done.
-
-### Local dev / testing
-
-`.dev.vars` (gitignored) already holds the key for local runs:
+Quick check:
 
 ```bash
-cd wix
-npx wrangler dev --port 8787
-curl -X POST http://localhost:8787/contact \
-  -H 'Origin: https://hanzoai.github.io' -H 'Content-Type: application/json' \
-  -d '{"name":"Test","email":"t@example.com","interest":"Fintech","message":"hi"}'
+curl https://acm-contact.zeekay.workers.dev/                 # {"ok":true,...,"bookings":false}
+curl -X POST https://acm-contact.zeekay.workers.dev/contact \
+  -H 'Origin: https://acmglobaltech.com' -H 'Content-Type: application/json' \
+  -d '{"name":"Test","email":"t@example.com","interest":"White-Label Products"}'
 ```
 
-### Files
-- `worker.js` — the proxy (CORS, validation, honeypot, Wix REST call)
-- `wrangler.toml` — non-secret config (account/site/field/label ids, allowed origins)
-- `.dev.vars` — **local secret, never committed**
-
-### Rotate the key
-Set a new key value with `npx wrangler secret put WIX_API_KEY` and update
-`.dev.vars`. Nothing else changes.
+The contact form, signup popups, newsletter, and lead-capture modals all POST to
+`/contact` and create a CRM lead tagged **Website Lead**, with the request /
+goal / interest / preferred-time folded into the **ACM Message** field. No
+`mailto:` unless the network call itself fails.
 
 ---
 
-## Option B — Velo HTTP function (no API key) — alternative
+## Turn ON scheduling (Wix Bookings) — owner setup
 
-If you'd rather not run a Worker, `http-functions.js` does the same thing inside
-Wix itself (no key needed, because it runs server-side in Wix):
+The scheduler UI is wired to the real Bookings API but stays dormant (it falls
+back to the contact form) until the Bookings app is installed and a service
+exists. The API currently returns `APP_NOT_INSTALLED`.
 
-1. Wix Editor → **Dev Mode → Turn on Dev Mode**.
-2. Code tree → `backend` → new file `http-functions.js` → paste that file → **Publish**.
-3. Set `CONTACT_FORM_ENDPOINT` to `https://www.acmglobaltech.com/_functions/contact`.
-
-Use **either** Option A **or** Option B, not both.
+1. **Wix dashboard → App Market → install _Wix Bookings_.**
+2. **Bookings → Services → add an appointment service** (e.g. "Discovery Call",
+   30 min), assign a staff member, and set business / working hours.
+3. **Get the service id.** It's in the service's dashboard URL, or:
+   ```bash
+   curl -X POST https://www.wixapis.com/bookings/v2/services/query \
+     -H "Authorization: $WIX_API_KEY" \
+     -H "wix-account-id: 379fb1dd-5d55-4243-878f-d782b1397fbc" \
+     -H "wix-site-id: cb3bb9a2-6ded-4155-9463-a8eca41842b6" \
+     -H 'Content-Type: application/json' -d '{"query":{"paging":{"limit":10}}}'
+   ```
+4. **Set it on the Worker:** uncomment `BOOKINGS_SERVICE_ID` in `wrangler.toml`
+   with that id, then `npx wrangler deploy`.
+5. Done. `GET /slots` now returns real availability and the "Book a discovery
+   call" CTAs open a live time-picker that creates a real Wix booking (and
+   mirrors it into CRM). Verify: the health check shows `"bookings":true`.
 
 ---
 
-## Optional: real Wix Bookings / Payments / Members
+## Turn ON client login (Wix Members SSO) — owner setup
 
-The funnel-to-CRM model means none of these are required. If you later publish a
-full Wix site and want a button to deep-link instead of funneling to the form:
+Login + the client dashboard live on `/login/`. The dashboard renders after a
+real Wix member signs in. It stays in "request access" mode until a Headless
+OAuth client exists.
 
-- **Bookings:** Wix Apps → Wix Bookings → add a "Discovery Call" service (30 min),
-  then point the `data-cta="Discovery Call"` buttons at its `/book-online/<slug>` URL.
-- **Payments:** Wix Dashboard → Payments → Payment Links → new link; point
-  `data-cta="Deposit / Retainer"` at it.
-- **Members:** Wix Editor → Add → Members Area (login at `/account/login`); point
-  `data-cta="Client Portal Access"` at it.
+1. **Wix dashboard → Settings → Headless → create an OAuth client** (for
+   Visitors & Members). Copy the **Client ID** (no secret needed for OAuth).
+2. **Add allowed redirect/login URIs:** `https://acmglobaltech.com/login/`
+   (and `https://www.acmglobaltech.com/login/`). Add a logout URI of
+   `https://acmglobaltech.com/login/`.
+3. **Enable login** for the site's Members area and provision each client as a
+   Wix **Member**.
+4. **Set the client id** in `../script.js` → `WIX_CONFIG.WIX_CLIENT_ID`, rebuild
+   (`node build.mjs`), and push.
+5. Done. "Sign in to the portal" runs the Wix-managed OAuth flow; on return,
+   `members.getCurrentMember()` populates the dashboard greeting and the portal
+   reveals the client cards. Sign-out clears the session via Wix.
 
-Until then, every button captures the lead in your CRM.
+The login flow loads `@wix/sdk` + `@wix/members` on demand from a CDN
+(`esm.sh`) — only on `/login/`, only when `WIX_CLIENT_ID` is set.
+
+---
 
 ## CORS
-`wrangler.toml` → `ALLOWED_ORIGINS` lists who may POST the form. It currently
-allows `https://hanzoai.github.io` and the live domain. Edit + redeploy to change.
+`wrangler.toml → ALLOWED_ORIGINS` lists who may call the Worker: the live domain,
+`hanzoai.github.io`, and `127.0.0.1:8090` / `localhost:8090` for local dev. Edit
++ redeploy to change.
+
+## Rotate the Wix key
+`npx wrangler secret put WIX_API_KEY` with the new value, and update `.dev.vars`
+for local runs. Nothing else changes.

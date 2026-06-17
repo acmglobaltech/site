@@ -243,9 +243,11 @@
     //   POST {API}/contact   create/append a CRM lead (every form + CTA)
     //   GET  {API}/slots     Wix Bookings availability (scheduler)
     //   POST {API}/book      create a Wix Bookings booking
-    //   POST {API}/login     authenticate a client against Wix Members
     API: 'https://acm-contact.zeekay.workers.dev',
-    CONTACT_EMAIL: 'info@acmglobaltech.com'
+    CONTACT_EMAIL: 'info@acmglobaltech.com',
+    // Wix headless OAuth client id (Wix dashboard → Headless Settings) for client
+    // login (Wix Members). Empty → portal stays in request-access mode.
+    WIX_CLIENT_ID: ''
   };
   WIX_CONFIG.CONTACT_FORM_ENDPOINT = WIX_CONFIG.API + '/contact';
   // Live whenever the endpoint is a real https URL (no unresolved placeholder).
@@ -308,10 +310,17 @@
     }
   }
 
-  /* Every [data-cta] funnels into the contact form, tagged by intent. */
+  /* Scheduling-intent CTAs open the Wix Bookings scheduler; everything else
+     funnels into the contact form, tagged by intent. */
+  var SCHEDULE_INTENTS = { 'Discovery Call': 'Discovery Call', 'Book a Meeting': 'Discovery Call' };
   document.querySelectorAll('[data-cta]').forEach(function (el) {
     el.addEventListener('click', function (e) {
       var intent = el.getAttribute('data-cta') || 'Discovery Call';
+      if (SCHEDULE_INTENTS[intent] && window.acmOpenScheduler) {
+        e.preventDefault();
+        window.acmOpenScheduler(intent);
+        return;
+      }
       var spec = CTA_INTENT[intent] || CTA_INTENT['Discovery Call'];
       if (ctaField) ctaField.value = intent;
       if (ctaHint) {
@@ -755,5 +764,254 @@
         if ((window.scrollY + window.innerHeight) / de.scrollHeight > 0.7) softCapture();
       }, { passive: true });
     }
+  })();
+
+  /* --- Scheduler: Wix Bookings (availability → create booking) ---
+     Opened by scheduling CTAs (Discovery Call / Book a Meeting). Queries the
+     Worker for real Wix Bookings availability and creates a real booking.
+     Until the Wix Bookings service is configured (Worker BOOKINGS_SERVICE_ID),
+     it degrades gracefully to the contact form so nothing breaks. */
+  (function () {
+    var modal = document.getElementById('schedModal');
+    if (!modal) return;
+    var overlay = document.getElementById('schedOverlay');
+    var closeBtn = document.getElementById('schedClose');
+    var loading = document.getElementById('schedLoading');
+    var slotsBox = document.getElementById('schedSlots');
+    var sform = document.getElementById('schedForm');
+    var slotInput = document.getElementById('schedSlotInput');
+    var chosen = document.getElementById('schedChosen');
+    var backBtn = document.getElementById('schedBack');
+    var submitBtn = document.getElementById('schedSubmit');
+    var statusBox = document.getElementById('schedStatus');
+    var snote = document.getElementById('schedNote');
+    var lastFocus = null;
+
+    function show(el, on) { if (el) el.hidden = !on; }
+    function openModal() {
+      modal.hidden = false;
+      document.documentElement.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      modal.hidden = true;
+      document.documentElement.style.overflow = '';
+      if (lastFocus) { try { lastFocus.focus(); } catch (e) { /* noop */ } lastFocus = null; }
+    }
+    function reset() {
+      show(loading, false); show(slotsBox, false); show(sform, false);
+      show(statusBox, false); show(snote, false);
+      if (slotsBox) slotsBox.innerHTML = '';
+    }
+    /* Fall back to the contact form (homepage #contact, else /contact/). */
+    function toContact(msg) {
+      show(statusBox, true);
+      statusBox.innerHTML = (msg || '') +
+        ' <button type="button" class="btn btn-primary btn-sm" id="schedToContact">Use the contact form</button>';
+      var b = document.getElementById('schedToContact');
+      if (b) b.addEventListener('click', function () {
+        closeModal();
+        var c = document.getElementById('contact');
+        if (c) { c.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' }); }
+        else { window.location.href = '/contact/'; }
+      });
+    }
+
+    function fmtDay(d) { return d.toLocaleDateString(undefined, { weekday: 'long', month: 'short', day: 'numeric' }); }
+    function fmtTime(d) { return d.toLocaleTimeString(undefined, { hour: 'numeric', minute: '2-digit' }); }
+
+    function renderSlots(slots) {
+      var byDay = {};
+      slots.forEach(function (s) {
+        var d = new Date(s.startDate);
+        var key = d.toISOString().slice(0, 10);
+        (byDay[key] = byDay[key] || []).push(s);
+      });
+      var keys = Object.keys(byDay).sort();
+      slotsBox.innerHTML = '';
+      keys.forEach(function (k) {
+        var group = document.createElement('div');
+        group.className = 'sched-day';
+        var h = document.createElement('h4');
+        h.textContent = fmtDay(new Date(k + 'T00:00:00'));
+        group.appendChild(h);
+        var row = document.createElement('div');
+        row.className = 'sched-times';
+        byDay[k].forEach(function (s) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.className = 'sched-time';
+          b.textContent = fmtTime(new Date(s.startDate));
+          b.addEventListener('click', function () { pickSlot(s); });
+          row.appendChild(b);
+        });
+        group.appendChild(row);
+        slotsBox.appendChild(group);
+      });
+      show(slotsBox, true);
+    }
+
+    function pickSlot(slot) {
+      slotInput.value = JSON.stringify(slot);
+      var d = new Date(slot.startDate);
+      chosen.textContent = fmtDay(d) + ' at ' + fmtTime(d);
+      show(slotsBox, false);
+      show(sform, true);
+      var nm = sform.elements['name'];
+      if (nm) window.setTimeout(function () { nm.focus(); }, 60);
+    }
+
+    function load() {
+      reset();
+      show(loading, true);
+      fetch(WIX_CONFIG.API + '/slots?days=14')
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+        .then(function (d) {
+          show(loading, false);
+          if (!d.configured) { toContact('Online booking is being set up.'); return; }
+          if (!d.slots || !d.slots.length) { toContact('No open times in the next two weeks.'); return; }
+          renderSlots(d.slots);
+        })
+        .catch(function () { show(loading, false); toContact('We could not load the calendar just now.'); });
+    }
+
+    window.acmOpenScheduler = function (intent) {
+      lastFocus = document.activeElement;
+      openModal();
+      load();
+    };
+
+    if (overlay) overlay.addEventListener('click', closeModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (backBtn) backBtn.addEventListener('click', function () { show(sform, false); show(slotsBox, true); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+
+    sform.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!sform.checkValidity()) { sform.reportValidity(); return; }
+      if (sform.elements['website'] && sform.elements['website'].value) { closeModal(); return; }
+      var data = Object.fromEntries(new FormData(sform).entries());
+      var slot;
+      try { slot = JSON.parse(data.slot); } catch (err) { return; }
+      var payload = { name: data.name, email: data.email, phone: data.phone, company: data.company, message: data.message, slot: slot, website: data.website };
+      var orig = submitBtn.textContent;
+      submitBtn.disabled = true; submitBtn.textContent = 'Booking…';
+      fetch(WIX_CONFIG.API + '/book', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+        .then(function (res) {
+          acmTrackLead({ source: 'scheduler', opportunity: 'Discovery Call', hot: true, value: 100 });
+          show(sform, false);
+          show(snote, true);
+          var d = new Date(res.startDate || (slot && slot.startDate));
+          snote.textContent = "You're booked for " + fmtDay(d) + ' at ' + fmtTime(d) + ". A calendar invite is on its way to " + data.email + '.';
+        })
+        .catch(function () {
+          // Booking service hiccup: don't lose the lead — capture it in CRM.
+          acmSubmitLead({ name: data.name, email: data.email, phone: data.phone, company: data.company, cta: 'Discovery Call', goal: 'Book a meeting', preferredTime: chosen.textContent, message: data.message })
+            .then(function () { show(sform, false); show(snote, true); snote.textContent = "Thanks! We'll confirm " + chosen.textContent + ' and send your invite shortly.'; })
+            .catch(function () { show(sform, false); show(snote, true); snote.textContent = 'Thanks! Reach us at ' + WIX_CONFIG.CONTACT_EMAIL + ' to confirm your time.'; });
+        })
+        .finally(function () { submitBtn.disabled = false; submitBtn.textContent = orig; });
+    });
+  })();
+
+  /* --- Client portal: Wix Members (headless OAuth) login + dashboard ---
+     Activates only on the portal page (#clientPortal). When WIX_CLIENT_ID is
+     set, "Sign in" runs the Wix headless OAuth flow and, on return, renders the
+     client dashboard with the member's name. Until then it stays in
+     request-access mode (no broken login). */
+  (function () {
+    var root = document.getElementById('clientPortal');
+    if (!root) return;
+    var signInBtn = document.getElementById('portalSignIn');
+    var dash = document.getElementById('portalDashboard');
+    var gate = document.getElementById('portalGate');
+    var nameEl = document.getElementById('portalMemberName');
+    var signOutBtn = document.getElementById('portalSignOut');
+    var statusEl = document.getElementById('portalStatus');
+    var clientId = WIX_CONFIG.WIX_CLIENT_ID;
+    var TOKENS_KEY = 'acmWixTokens';
+    var OAUTH_KEY = 'acmWixOAuth';
+    var SDK = 'https://esm.sh/@wix/sdk@1';
+    var MEMBERS = 'https://esm.sh/@wix/members@1';
+
+    function setStatus(msg) { if (statusEl) { statusEl.hidden = !msg; statusEl.textContent = msg || ''; } }
+    function showDashboard(member) {
+      var contact = (member && member.contact) || {};
+      var profile = (member && member.profile) || {};
+      var name = contact.firstName || profile.nickname || '';
+      if (nameEl) nameEl.textContent = name ? (', ' + name) : '';
+      if (gate) gate.hidden = true;
+      if (dash) dash.hidden = false;
+    }
+    function showGate() {
+      if (dash) dash.hidden = true;
+      if (gate) gate.hidden = false;
+    }
+
+    // Not configured yet: leave the page in request-access mode.
+    if (!clientId) {
+      if (signInBtn) {
+        signInBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          setStatus('Client portal sign-in is being provisioned. Please use Request access and we will set up your account.');
+        });
+      }
+      return;
+    }
+
+    function loadClient() {
+      return Promise.all([import(SDK), import(MEMBERS)]).then(function (mods) {
+        var sdk = mods[0], membersMod = mods[1];
+        var tokens = null;
+        try { tokens = JSON.parse(localStorage.getItem(TOKENS_KEY) || 'null'); } catch (e) { /* noop */ }
+        return sdk.createClient({
+          modules: { members: membersMod.members },
+          auth: sdk.OAuthStrategy({ clientId: clientId, tokens: tokens || undefined })
+        });
+      });
+    }
+
+    function refresh(client) {
+      if (!client.auth.loggedIn()) { showGate(); return; }
+      client.members.getCurrentMember({ fieldsets: ['FULL'] })
+        .then(function (member) { showDashboard(member); })
+        .catch(function () { showGate(); });
+    }
+
+    loadClient().then(function (client) {
+      // Returning from the Wix login redirect?
+      var returned;
+      try { returned = client.auth.parseFromUrl(); } catch (e) { returned = null; }
+      if (returned && returned.code) {
+        var oauthData = null;
+        try { oauthData = JSON.parse(localStorage.getItem(OAUTH_KEY) || 'null'); } catch (e) { /* noop */ }
+        client.auth.getMemberTokens(returned.code, returned.state, oauthData)
+          .then(function (tokens) {
+            client.auth.setTokens(tokens);
+            try { localStorage.setItem(TOKENS_KEY, JSON.stringify(tokens)); } catch (e) { /* noop */ }
+            history.replaceState(null, '', window.location.pathname);
+            refresh(client);
+          })
+          .catch(function () { setStatus('Sign-in could not be completed. Please try again.'); showGate(); });
+      } else {
+        refresh(client);
+      }
+
+      if (signInBtn) signInBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        var redirectUri = window.location.origin + '/login/';
+        var oauthData = client.auth.generateOAuthData(redirectUri, window.location.href);
+        try { localStorage.setItem(OAUTH_KEY, JSON.stringify(oauthData)); } catch (err) { /* noop */ }
+        client.auth.getAuthUrl(oauthData).then(function (r) { window.location.href = r.authUrl; });
+      });
+      if (signOutBtn) signOutBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        try { localStorage.removeItem(TOKENS_KEY); } catch (err) { /* noop */ }
+        client.auth.logout(window.location.origin + '/login/').then(function (r) { window.location.href = r.logoutUrl; })
+          .catch(function () { showGate(); });
+      });
+    }).catch(function () {
+      setStatus('The sign-in module could not load. Please use Request access.');
+    });
   })();
 })();

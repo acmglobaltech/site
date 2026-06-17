@@ -18,7 +18,7 @@ import path from 'node:path';
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const SRC = path.join(ROOT, 'src', 'pages');
 const ORIGIN = 'https://acmglobaltech.com';
-const ASSET_V = 'v=12';
+const ASSET_V = 'v=13';
 
 /* ---------- Analytics & advertising (consent-gated, OFF by default) ----------
  * Paste your IDs to switch measurement on. Empty = nothing loads: no tags in
@@ -296,6 +296,38 @@ function leadModal() {
   </div>`;
 }
 
+function schedulerModal() {
+  return `<div class="sched-modal" id="schedModal" hidden>
+    <div class="sched-overlay" id="schedOverlay"></div>
+    <div class="sched-card glass" role="dialog" aria-modal="true" aria-labelledby="schedTitle">
+      <button class="lead-close" id="schedClose" aria-label="Close">&times;</button>
+      <span class="tag"><span class="dot"></span> Schedule</span>
+      <h3 class="lead-title" id="schedTitle">Book a discovery call</h3>
+      <p class="lead-sub" id="schedSub">Pick a time that suits you and we'll send a calendar invite.</p>
+      <div class="sched-loading" id="schedLoading" hidden>Loading available times&hellip;</div>
+      <div class="sched-slots" id="schedSlots" hidden></div>
+      <form class="lead-form sched-details" id="schedForm" hidden novalidate>
+        <input type="hidden" name="slot" id="schedSlotInput" />
+        <p class="sched-chosen" id="schedChosen"></p>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="lead-hp" />
+        <div class="field-row">
+          <label class="field"><span>Name</span><input type="text" name="name" required /></label>
+          <label class="field"><span>Work email</span><input type="email" name="email" required /></label>
+        </div>
+        <div class="field-row">
+          <label class="field"><span>Institution</span><input type="text" name="company" /></label>
+          <label class="field"><span>Phone</span><input type="tel" name="phone" /></label>
+        </div>
+        <label class="field"><span>Anything we should know?</span><textarea name="message" rows="2"></textarea></label>
+        <button type="submit" class="btn btn-primary btn-block" id="schedSubmit">Confirm booking</button>
+        <button type="button" class="sched-back" id="schedBack">&larr; Pick another time</button>
+      </form>
+      <div class="sched-status" id="schedStatus" hidden></div>
+      <p class="lead-note" id="schedNote" hidden></p>
+    </div>
+  </div>`;
+}
+
 function aiWidget() {
   return ''; // ACM AI assistant hidden until it's wired to index the site + docs; delete this line to restore
   return `<div class="ai-assistant" id="aiAssistant">
@@ -534,6 +566,7 @@ ${content}
   ${renderFooter()}
   ${aiWidget()}
   ${leadModal()}
+  ${schedulerModal()}
   ${consentBanner()}
   <script src="/script.js?${ASSET_V}"></script>
 </body>

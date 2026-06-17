@@ -9,4 +9,8 @@ WIX_ACCOUNT_ID   = "379fb1dd-5d55-4243-878f-d782b1397fbc"
 WIX_SITE_ID      = "cb3bb9a2-6ded-4155-9463-a8eca41842b6"
 MESSAGE_FIELD_KEY = "custom.acm-message-xnwsqpcqvzusxbypusvuucv"
 LEAD_LABEL_KEY    = "custom.website-lead"
+# Set this once the Wix Bookings app is installed and a "Discovery Call" service
+# exists (its service id). Enables GET /slots + POST /book. Empty → scheduler
+# degrades to the contact form. Set with:  npx wrangler deploy  (after editing)
+# BOOKINGS_SERVICE_ID = ""
 ALLOWED_ORIGINS  = "https://hanzoai.github.io,https://www.acmglobaltech.com,https://acmglobaltech.com,http://127.0.0.1:8090,http://localhost:8090"

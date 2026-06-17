@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=12" />
+  <link rel="stylesheet" href="/styles.css?v=13" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Scenario: cutting healthcare payment and revenue-cycle friction","description":"A representative scenario: how a health system or payer cuts payment and revenue-cycle friction with tokenized rails, liquidity, and automation.","url":"https://acmglobaltech.com/case-studies/healthcare-payments/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"Case Studies","item":"https://acmglobaltech.com/case-studies/"},{"@type":"ListItem","position":3,"name":"Scenario: cutting healthcare payment and revenue-cycle friction","item":"https://acmglobaltech.com/case-studies/healthcare-payments/"}]}</script>
@@ -301,7 +301,36 @@
       </form>
     </div>
   </div>
+  <div class="sched-modal" id="schedModal" hidden>
+    <div class="sched-overlay" id="schedOverlay"></div>
+    <div class="sched-card glass" role="dialog" aria-modal="true" aria-labelledby="schedTitle">
+      <button class="lead-close" id="schedClose" aria-label="Close">&times;</button>
+      <span class="tag"><span class="dot"></span> Schedule</span>
+      <h3 class="lead-title" id="schedTitle">Book a discovery call</h3>
+      <p class="lead-sub" id="schedSub">Pick a time that suits you and we'll send a calendar invite.</p>
+      <div class="sched-loading" id="schedLoading" hidden>Loading available times&hellip;</div>
+      <div class="sched-slots" id="schedSlots" hidden></div>
+      <form class="lead-form sched-details" id="schedForm" hidden novalidate>
+        <input type="hidden" name="slot" id="schedSlotInput" />
+        <p class="sched-chosen" id="schedChosen"></p>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="lead-hp" />
+        <div class="field-row">
+          <label class="field"><span>Name</span><input type="text" name="name" required /></label>
+          <label class="field"><span>Work email</span><input type="email" name="email" required /></label>
+        </div>
+        <div class="field-row">
+          <label class="field"><span>Institution</span><input type="text" name="company" /></label>
+          <label class="field"><span>Phone</span><input type="tel" name="phone" /></label>
+        </div>
+        <label class="field"><span>Anything we should know?</span><textarea name="message" rows="2"></textarea></label>
+        <button type="submit" class="btn btn-primary btn-block" id="schedSubmit">Confirm booking</button>
+        <button type="button" class="sched-back" id="schedBack">&larr; Pick another time</button>
+      </form>
+      <div class="sched-status" id="schedStatus" hidden></div>
+      <p class="lead-note" id="schedNote" hidden></p>
+    </div>
+  </div>
   
-  <script src="/script.js?v=12"></script>
+  <script src="/script.js?v=13"></script>
 </body>
 </html>
