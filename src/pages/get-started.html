@@ -42,26 +42,28 @@
       <label class="field"><span>Work email</span><input type="email" name="email" required /></label>
       <label class="field"><span>Phone</span><input type="tel" name="phone" /></label>
     </div>
-    <div class="field">
-      <span>Where are you in your journey?</span>
-      <div class="chips-group" role="radiogroup" aria-label="Where are you in your journey?">
-        <label class="chip-radio"><input type="radio" name="goal" value="Exploring options" /><span>Exploring options</span></label>
-        <label class="chip-radio"><input type="radio" name="goal" value="Planning a project" /><span>Planning a project</span></label>
-        <label class="chip-radio"><input type="radio" name="goal" value="Ready to build" /><span>Ready to build</span></label>
-        <label class="chip-radio"><input type="radio" name="goal" value="Existing client" /><span>Existing client</span></label>
-      </div>
-    </div>
-    <div class="field">
-      <span>Products of interest</span>
-      <div class="chips-group" role="radiogroup" aria-label="Products of interest">
-        <label class="chip-radio"><input type="radio" name="interest" value="Banking Core" /><span>Banking Core</span></label>
-        <label class="chip-radio"><input type="radio" name="interest" value="Mobile Wallet" /><span>Mobile Wallet</span></label>
-        <label class="chip-radio"><input type="radio" name="interest" value="Exchange &amp; FX" /><span>Exchange &amp; FX</span></label>
-        <label class="chip-radio"><input type="radio" name="interest" value="RWA Tokenization" /><span>RWA Tokenization</span></label>
-        <label class="chip-radio"><input type="radio" name="interest" value="Payments &amp; Stablecoins" /><span>Payments &amp; Stablecoins</span></label>
-        <label class="chip-radio"><input type="radio" name="interest" value="Healthcare Finance" /><span>Healthcare Finance</span></label>
-        <label class="chip-radio"><input type="radio" name="interest" value="The full ecosystem" /><span>The full ecosystem</span></label>
-      </div>
+    <div class="field-row">
+      <label class="field"><span>Where are you in your journey?</span>
+        <select name="goal" class="select">
+          <option value="" selected>Select an option&hellip;</option>
+          <option value="Exploring options">Exploring options</option>
+          <option value="Planning a project">Planning a project</option>
+          <option value="Ready to build">Ready to build</option>
+          <option value="Existing client">Existing client</option>
+        </select>
+      </label>
+      <label class="field"><span>Products of interest</span>
+        <select name="interest" class="select">
+          <option value="" selected>Select an option&hellip;</option>
+          <option value="Banking Core">Banking Core</option>
+          <option value="Mobile Wallet">Mobile Wallet</option>
+          <option value="Exchange &amp; FX">Exchange &amp; FX</option>
+          <option value="RWA Tokenization">RWA Tokenization</option>
+          <option value="Payments &amp; Stablecoins">Payments &amp; Stablecoins</option>
+          <option value="Healthcare Finance">Healthcare Finance</option>
+          <option value="The full ecosystem">The full ecosystem</option>
+        </select>
+      </label>
     </div>
     <label class="field"><span>Tell us about your institution</span><textarea name="message" rows="4" placeholder="Asset size, current core system, timeline, and what you most want to modernize…"></textarea></label>
     <p class="form-cta-hint" id="ctaHint" hidden></p>
