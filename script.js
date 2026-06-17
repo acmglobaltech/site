@@ -245,9 +245,11 @@
     //   POST {API}/book      create a Wix Bookings booking
     API: 'https://acm-contact.zeekay.workers.dev',
     CONTACT_EMAIL: 'info@acmglobaltech.com',
-    // Wix headless OAuth client id (Wix dashboard → Headless Settings) for client
-    // login (Wix Members). Empty → portal stays in request-access mode.
-    WIX_CLIENT_ID: ''
+    // Native Wix Members client portal (its own Wix site on a subdomain). The
+    // "Sign in" buttons link straight here — Wix owns login + the dashboard, so
+    // there's no auth code on the static site. Goes live when the subdomain is
+    // connected in Wix; until then it resolves once DNS propagates.
+    PORTAL_URL: 'https://portal.acmglobaltech.com'
   };
   WIX_CONFIG.CONTACT_FORM_ENDPOINT = WIX_CONFIG.API + '/contact';
   // Live whenever the endpoint is a real https URL (no unresolved placeholder).
@@ -263,6 +265,13 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     }).then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); });
+  }
+
+  /* Point every portal link at the configured Wix Members portal (one source). */
+  if (WIX_CONFIG.PORTAL_URL) {
+    document.querySelectorAll('[data-portal]').forEach(function (a) {
+      a.setAttribute('href', WIX_CONFIG.PORTAL_URL);
+    });
   }
 
   var form = document.getElementById('contactForm');
@@ -911,107 +920,6 @@
             .catch(function () { show(sform, false); show(snote, true); snote.textContent = 'Thanks! Reach us at ' + WIX_CONFIG.CONTACT_EMAIL + ' to confirm your time.'; });
         })
         .finally(function () { submitBtn.disabled = false; submitBtn.textContent = orig; });
-    });
-  })();
-
-  /* --- Client portal: Wix Members (headless OAuth) login + dashboard ---
-     Activates only on the portal page (#clientPortal). When WIX_CLIENT_ID is
-     set, "Sign in" runs the Wix headless OAuth flow and, on return, renders the
-     client dashboard with the member's name. Until then it stays in
-     request-access mode (no broken login). */
-  (function () {
-    var root = document.getElementById('clientPortal');
-    if (!root) return;
-    var signInBtn = document.getElementById('portalSignIn');
-    var dash = document.getElementById('portalDashboard');
-    var gate = document.getElementById('portalGate');
-    var nameEl = document.getElementById('portalMemberName');
-    var signOutBtn = document.getElementById('portalSignOut');
-    var statusEl = document.getElementById('portalStatus');
-    var clientId = WIX_CONFIG.WIX_CLIENT_ID;
-    var TOKENS_KEY = 'acmWixTokens';
-    var OAUTH_KEY = 'acmWixOAuth';
-    var SDK = 'https://esm.sh/@wix/sdk@1';
-    var MEMBERS = 'https://esm.sh/@wix/members@1';
-
-    function setStatus(msg) { if (statusEl) { statusEl.hidden = !msg; statusEl.textContent = msg || ''; } }
-    function showDashboard(member) {
-      var contact = (member && member.contact) || {};
-      var profile = (member && member.profile) || {};
-      var name = contact.firstName || profile.nickname || '';
-      if (nameEl) nameEl.textContent = name ? (', ' + name) : '';
-      if (gate) gate.hidden = true;
-      if (dash) dash.hidden = false;
-    }
-    function showGate() {
-      if (dash) dash.hidden = true;
-      if (gate) gate.hidden = false;
-    }
-
-    // Not configured yet: leave the page in request-access mode.
-    if (!clientId) {
-      if (signInBtn) {
-        signInBtn.addEventListener('click', function (e) {
-          e.preventDefault();
-          setStatus('Client portal sign-in is being provisioned. Please use Request access and we will set up your account.');
-        });
-      }
-      return;
-    }
-
-    function loadClient() {
-      return Promise.all([import(SDK), import(MEMBERS)]).then(function (mods) {
-        var sdk = mods[0], membersMod = mods[1];
-        var tokens = null;
-        try { tokens = JSON.parse(localStorage.getItem(TOKENS_KEY) || 'null'); } catch (e) { /* noop */ }
-        return sdk.createClient({
-          modules: { members: membersMod.members },
-          auth: sdk.OAuthStrategy({ clientId: clientId, tokens: tokens || undefined })
-        });
-      });
-    }
-
-    function refresh(client) {
-      if (!client.auth.loggedIn()) { showGate(); return; }
-      client.members.getCurrentMember({ fieldsets: ['FULL'] })
-        .then(function (member) { showDashboard(member); })
-        .catch(function () { showGate(); });
-    }
-
-    loadClient().then(function (client) {
-      // Returning from the Wix login redirect?
-      var returned;
-      try { returned = client.auth.parseFromUrl(); } catch (e) { returned = null; }
-      if (returned && returned.code) {
-        var oauthData = null;
-        try { oauthData = JSON.parse(localStorage.getItem(OAUTH_KEY) || 'null'); } catch (e) { /* noop */ }
-        client.auth.getMemberTokens(returned.code, returned.state, oauthData)
-          .then(function (tokens) {
-            client.auth.setTokens(tokens);
-            try { localStorage.setItem(TOKENS_KEY, JSON.stringify(tokens)); } catch (e) { /* noop */ }
-            history.replaceState(null, '', window.location.pathname);
-            refresh(client);
-          })
-          .catch(function () { setStatus('Sign-in could not be completed. Please try again.'); showGate(); });
-      } else {
-        refresh(client);
-      }
-
-      if (signInBtn) signInBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        var redirectUri = window.location.origin + '/login/';
-        var oauthData = client.auth.generateOAuthData(redirectUri, window.location.href);
-        try { localStorage.setItem(OAUTH_KEY, JSON.stringify(oauthData)); } catch (err) { /* noop */ }
-        client.auth.getAuthUrl(oauthData).then(function (r) { window.location.href = r.authUrl; });
-      });
-      if (signOutBtn) signOutBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        try { localStorage.removeItem(TOKENS_KEY); } catch (err) { /* noop */ }
-        client.auth.logout(window.location.origin + '/login/').then(function (r) { window.location.href = r.logoutUrl; })
-          .catch(function () { showGate(); });
-      });
-    }).catch(function () {
-      setStatus('The sign-in module could not load. Please use Request access.');
     });
   })();
 })();

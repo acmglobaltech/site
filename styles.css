@@ -845,13 +845,8 @@ a.sol-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-soft); bor
 .btn-sm { padding: 7px 14px; font-size: .85rem; }
 @media (max-width: 480px) { .sched-card { padding: 24px 20px; } .sched-details .field-row { grid-template-columns: 1fr; } }
 
-/* ===== Client portal ===== */
-.portal-signin { max-width: 640px; margin: 0 auto 48px; padding: 36px; text-align: center; }
-.portal-signin .hero-cta { justify-content: center; margin-top: 22px; }
-.portal-status { margin-top: 16px; padding: 12px 14px; background: rgba(var(--rgb-blue), 0.08); border: 1px solid rgba(var(--rgb-blue), 0.3); border-radius: 11px; color: var(--ink); font-weight: 600; font-size: .9rem; }
+/* ===== Client portal (login gateway: "what's inside" teaser) ===== */
 .portal-fineprint { margin-top: 16px; font-size: .8rem; color: var(--mute); }
-.portal-inside { margin-top: 8px; }
-.portal-welcome { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin-bottom: 28px; }
 .portal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
 .portal-card { padding: 24px; display: flex; flex-direction: column; gap: 8px; }
 .portal-card-kind { font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--blue); }
