@@ -1,0 +1,74 @@
+<!--META
+{"title":"MPC Crypto Custody (Non-Custodial) | ACM Global Tech","metaDescription":"Non-custodial digital asset custody via 2-of-3 MPC threshold signing (CGGMP21 + FROST), HSM attestation, key rotation and resharing without changing addresses, and post-quantum identity. Open source you can read and verify.","keywords":["MPC custody","crypto custody","threshold signing","non-custodial custody","digital asset custody","key management"],"jsonldType":"WebPage","group":"Platform"}
+-->
+  <!-- ============ CUSTODY HERO ============ -->
+  <section class="section" id="custody-hero">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> MPC custody</span>
+      <h1 class="section-title">Hold the keys, <span class="grad">without holding the risk.</span></h1>
+      <p class="section-lead">Non-custodial digital asset custody built on 2-of-3 MPC threshold signing, with no single point of compromise and no private key ever assembled in one place. The hardest part of custody, distributed signing, is exactly what we built.</p>
+      <div class="hero-cta">
+        <a href="/contact/" class="btn btn-primary btn-lg" data-cta="Custody: book call">Book a discovery call &rarr;</a>
+        <a href="#custody-proof" class="btn btn-ghost btn-lg">See the proof</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PROBLEM ============ -->
+  <section class="section surface">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> The problem</span>
+      <h2 class="section-title">A single key is a single point of failure.</h2>
+      <p class="section-lead">Traditional custody concentrates control in one private key or one hardware module. Whoever holds it holds everything, and losing it, leaking it, or having it seized is catastrophic and irreversible. Operations make it worse: rotating keys usually means moving every asset to new addresses.</p>
+      <div class="problem-grid">
+        <div class="prob-card"><span class="prob-k">Single key</span><h3>One secret to steal</h3><p>A lone private key is the whole castle. Compromise it once and every asset under it is gone, with no recourse.</p></div>
+        <div class="prob-card"><span class="prob-k">Custodial</span><h3>Counterparty exposure</h3><p>Handing assets to a third-party custodian replaces key risk with counterparty risk: their insolvency or breach becomes yours.</p></div>
+        <div class="prob-card"><span class="prob-k">Rotation</span><h3>Key changes break addresses</h3><p>Conventional schemes force an on-chain move to new addresses just to rotate a key, disrupting integrations and reconciliation.</p></div>
+        <div class="prob-card"><span class="prob-k">Quantum</span><h3>Identity at long-term risk</h3><p>The signatures proving who controls an account rest on cryptography a future quantum computer can break.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT WE DELIVER ============ -->
+  <section class="section" id="custody-do">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> What we deliver</span>
+      <h2 class="section-title">Threshold custody, <span class="grad">no single point of compromise.</span></h2>
+      <p class="section-lead">Not a key in a vault: a private key that is never whole, split across parties and reconstituted only as signatures, never as a secret.</p>
+      <div class="focus-grid">
+        <article class="glass focus-card"><h3>2-of-3 threshold signing</h3><p>Three independent shares, any two of which sign. No single party can move funds, and no single party can lose them.</p></article>
+        <article class="glass focus-card focus-hl"><h3>CGGMP21 + FROST</h3><p>Threshold ECDSA via CGGMP21 and threshold Schnorr via FROST, so the key exists only as distributed shares. This is the frontier, and the hardest part.</p></article>
+        <article class="glass focus-card"><h3>HSM attestation</h3><p>Shares are generated and held under hardware security modules with cryptographic attestation of their integrity.</p></article>
+        <article class="glass focus-card"><h3>Rotation without new addresses</h3><p>Rotate and reshare key material on a schedule while the public addresses stay exactly the same.</p></article>
+        <article class="glass focus-card"><h3>Resharing on demand</h3><p>Add, remove, or refresh signers by resharing, with no asset movement and no change to who can transact.</p></article>
+        <article class="glass focus-card"><h3>Post-quantum identity</h3><p>ML-DSA-based identity and attestation so the proof of who controls an account survives the quantum transition.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PROOF ============ -->
+  <section class="section surface" id="custody-proof">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> The proof</span>
+      <h2 class="section-title">Proprietary IP. <span class="grad">Open source. Auditable.</span></h2>
+      <p class="section-lead">Real cryptography you can read and verify, not slideware.</p>
+      <div class="lic-grid">
+        <div class="glass lic-card"><h3>Non-custodial by construction</h3><p>The full private key never exists in one place, so there is no master secret for anyone, including us, to hold or hand over.</p></div>
+        <div class="glass lic-card"><h3>Battle-tested protocols</h3><p>CGGMP21 and FROST are peer-reviewed threshold signing schemes, implemented in the open rather than behind a curtain.</p></div>
+        <div class="glass lic-card"><h3>Proprietary IP, open source</h3><p>Our key-management innovations are auditable in public repositories, so the security model is verifiable end to end.</p></div>
+      </div>
+      <div class="focus-repos" style="justify-content:center;margin-top:22px">
+        <a href="https://github.com/luxfi/kms" target="_blank" rel="noopener noreferrer">luxfi/kms</a>
+        <a href="https://github.com/luxfi/pulsar" target="_blank" rel="noopener noreferrer">luxfi/pulsar</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section cta-band" id="custody-cta">
+    <div class="container">
+      <h2 class="section-title">Custody assets without a master key.</h2>
+      <p class="section-lead">License the IP, resell it under your brand, or co-build with our team. Deployable into any regulated market.</p>
+      <a href="/contact/" class="btn btn-primary btn-lg" data-cta="Custody: book call">Book a discovery call &rarr;</a>
+    </div>
+  </section>

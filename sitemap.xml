@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://acmglobaltech.com/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/agents/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/ai-data/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/ai-gateway/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/aml/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/ats/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/banking-payments/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/broker-dealer/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/capabilities/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/capabilities/agile-speed-framework/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/capabilities/ai-data/</loc><changefreq>weekly</changefreq></url>
@@ -27,8 +34,14 @@
   <url><loc>https://acmglobaltech.com/company/team/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/company/ventures/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/company/vision/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/compliance/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/contact/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/custody/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/data-platform/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/dex/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/digital-securities/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/docs/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/fhe/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/get-started/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/industries/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/industries/broker-dealers/</loc><changefreq>weekly</changefreq></url>
@@ -37,11 +50,15 @@
   <url><loc>https://acmglobaltech.com/industries/credit-unions/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/industries/fintechs/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/industries/healthcare/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/inference/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/kyc/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/login/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/news/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/news/ecosystem-hanzo-lux/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/news/post-quantum-standards/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/news/psp-baas/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/paas/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/post-quantum/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/privacy/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/products/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/products/baas/</loc><changefreq>weekly</changefreq></url>
@@ -74,5 +91,7 @@
   <url><loc>https://acmglobaltech.com/solutions/member-engagement/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/support/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/terms/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/transfer-agent/</loc><changefreq>weekly</changefreq></url>
   <url><loc>https://acmglobaltech.com/trust/</loc><changefreq>weekly</changefreq></url>
+  <url><loc>https://acmglobaltech.com/white-label/</loc><changefreq>weekly</changefreq></url>
 </urlset>

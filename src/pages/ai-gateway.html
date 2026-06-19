@@ -1,0 +1,74 @@
+<!--META
+{"title":"High-Performance AI Gateway | ACM Global Tech","metaDescription":"A model-agnostic AI gateway that routes across OpenAI, Anthropic, Google, Llama, Mistral, and local models, with caching, failover, rate limiting, observability, and post-quantum-secured keys. Backed by 40+ proprietary innovations and open source. Deployable into any market.","keywords":["AI gateway","LLM gateway","model routing","model-agnostic","AI API gateway","inference routing"],"jsonldType":"WebPage","group":"Capabilities"}
+-->
+  <!-- ============ GW HERO ============ -->
+  <section class="section" id="gw-hero">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> AI gateway</span>
+      <h1 class="section-title">One gateway for every model, <span class="grad">in production.</span></h1>
+      <p class="section-lead">A model-agnostic AI gateway that routes a single API across OpenAI, Anthropic, Google, Llama, Mistral, and your own local models, with caching, failover, rate limiting, observability, and post-quantum-secured keys. Swap providers without rewriting your application.</p>
+      <div class="hero-cta">
+        <a href="/contact/" class="btn btn-primary btn-lg" data-cta="AI Gateway: book call">Book a discovery call &rarr;</a>
+        <a href="#gw-do" class="btn btn-ghost btn-lg">See the platform</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PROBLEM ============ -->
+  <section class="section surface">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> The problem</span>
+      <h2 class="section-title">Every model is a <span class="grad">separate integration.</span></h2>
+      <p class="section-lead">Banks want the best model for each task, but every provider has its own API, its own keys, and its own failure modes. Wiring each one directly hard-codes a vendor into your application, leaves outages unhandled, and scatters credentials and cost across teams with no single place to govern them.</p>
+      <div class="problem-grid">
+        <div class="prob-card"><span class="prob-k">Lock-in</span><h3>One vendor, hard-coded</h3><p>Calling a provider SDK directly ties your application to that vendor. Changing models means a code change, a review, and a redeploy.</p></div>
+        <div class="prob-card"><span class="prob-k">Fragility</span><h3>No failover path</h3><p>A single provider outage or rate-limit ceiling takes your feature down. There is no automatic route to a healthy backup.</p></div>
+        <div class="prob-card"><span class="prob-k">Cost</span><h3>Spend with no controls</h3><p>Repeated and redundant calls run up the bill, and without shared caching or limits, usage is impossible to cap or attribute.</p></div>
+        <div class="prob-card"><span class="prob-k">Keys</span><h3>Credentials everywhere</h3><p>Provider keys copied into every service widen the blast radius of a leak and frustrate the controls an examiner expects.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHAT WE DELIVER ============ -->
+  <section class="section" id="gw-do">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> What we deliver</span>
+      <h2 class="section-title">One API, <span class="grad">every provider.</span></h2>
+      <p class="section-lead">A single gateway that fronts every model behind one interface, with the routing, resilience, and governance a regulated institution needs built into the same layer.</p>
+      <div class="focus-grid">
+        <article class="glass focus-card"><h3>Model-agnostic routing</h3><p>One API call reaches OpenAI, Anthropic, Google, Llama, Mistral, or a local model. Choose the right model per task without touching application code.</p></article>
+        <article class="glass focus-card focus-hl"><h3>Intelligent failover</h3><p>When a provider degrades, rate-limits, or errors, requests reroute automatically to a healthy alternative. This is the hard part, and where uptime is won.</p></article>
+        <article class="glass focus-card"><h3>Response caching</h3><p>Identical and semantically similar requests are served from cache, cutting latency and spend without changing behavior.</p></article>
+        <article class="glass focus-card"><h3>Rate limiting &amp; quotas</h3><p>Per-team, per-key, and per-model limits keep spend bounded and protect upstreams from runaway usage.</p></article>
+        <article class="glass focus-card"><h3>Observability</h3><p>Every request is logged, traced, and attributed, so latency, cost, and errors are visible per model, team, and route.</p></article>
+        <article class="glass focus-card"><h3>Post-quantum-secured keys</h3><p>Provider credentials are held centrally and protected with post-quantum cryptography, so secrets never sprawl across services.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ THE PROOF ============ -->
+  <section class="section surface" id="gw-ip">
+    <div class="container">
+      <span class="tag"><span class="dot"></span> The proof</span>
+      <h2 class="section-title">Proprietary IP. Open source. <span class="grad">Battle-tested.</span></h2>
+      <p class="section-lead">Real infrastructure you can read and run, not slideware.</p>
+      <div class="lic-grid">
+        <div class="glass lic-card"><h3>40+ proprietary innovations</h3><p>Across AI infrastructure, model routing, inference, and post-quantum key protection.</p></div>
+        <div class="glass lic-card"><h3>Open-source core</h3><p>The gateway and its provider adapters are published in the open, so the routing layer can be audited rather than trusted on faith.</p></div>
+        <div class="glass lic-card"><h3>Model-agnostic by design</h3><p>Frontier and open-weight models behind one interface, so you are never locked to a single provider.</p></div>
+      </div>
+      <div class="focus-repos" style="justify-content:center;margin-top:22px">
+        <a href="https://github.com/hanzoai" target="_blank" rel="noopener noreferrer">github.com/hanzoai</a>
+        <a href="https://github.com/zenlm" target="_blank" rel="noopener noreferrer">github.com/zenlm</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section class="section cta-band" id="gw-cta">
+    <div class="container">
+      <h2 class="section-title">Put every model behind one gateway.</h2>
+      <p class="section-lead">License the IP, resell it under your brand, or co-build with our team. Deployable into any regulated market.</p>
+      <a href="/contact/" class="btn btn-primary btn-lg" data-cta="AI Gateway: book call">Book a discovery call &rarr;</a>
+    </div>
+  </section>

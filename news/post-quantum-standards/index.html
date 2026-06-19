@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=24" />
+  <link rel="stylesheet" href="/styles.css?v=31" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Building on the 2024 NIST post-quantum standards","description":"Why post-quantum cryptography matters now and how ACM Global Tech aligns to the 2024 NIST standards, ML-KEM, ML-DSA, and SLH-DSA, for long-lived financial records.","url":"https://acmglobaltech.com/news/post-quantum-standards/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"News","item":"https://acmglobaltech.com/news/"},{"@type":"ListItem","position":3,"name":"Building on the 2024 NIST post-quantum standards","item":"https://acmglobaltech.com/news/post-quantum-standards/"}]}</script>
@@ -32,18 +32,21 @@
   <header class="header" id="header">
     <div class="container nav-wrap">
       <a href="/" class="logo" aria-label="ACM Global Tech home">
-        <span class="logo-mark" aria-hidden="true">
-          <svg viewBox="0 0 40 40" width="34" height="34" fill="none">
-            <path d="M20 3 34 11v18L20 37 6 29V11z" stroke="url(#hexg)" stroke-width="1.6" opacity=".5"/>
-            <path d="M20 9 29 14v10l-9 5-9-5V14z" stroke="url(#hexg)" stroke-width="1.6" opacity=".8"/>
-            <circle cx="20" cy="20" r="4.4" fill="url(#hexg)"/>
-            <defs><linearGradient id="hexg" x1="6" y1="3" x2="34" y2="37" gradientUnits="userSpaceOnUse">
-              <stop stop-color="#1F4FFF"/><stop offset="1" stop-color="#19C8D6"/></linearGradient></defs>
-          </svg>
-        </span>
-        <span class="logo-text"><strong>ACM</strong><span class="logo-suffix"><span class="logo-accent">Global</span> Tech</span></span>
+        <span class="logo-wordmark" aria-hidden="true">acm</span>
       </a>
       <nav class="nav" id="primary-nav" aria-label="Primary">
+        <div class="nav-group">
+          <button class="nav-top" data-href="/post-quantum/" aria-expanded="false">Platform<span class="caret"></span></button>
+          <div class="nav-panel">
+            <a href="/post-quantum/">Post-Quantum</a>
+            <a href="/digital-securities/">Digital Securities</a>
+            <a href="/banking-payments/">Banking &amp; Payments</a>
+            <a href="/ai-data/">AI &amp; Data</a>
+            <a href="/fhe/">Privacy &amp; FHE</a>
+            <a href="/white-label/">White-Label Builder</a>
+            <a href="/post-quantum/" class="nav-all">All Platform &rarr;</a>
+          </div>
+        </div>
         <div class="nav-group">
           <button class="nav-top" data-href="/products/" aria-expanded="false">Products<span class="caret"></span></button>
           <div class="nav-panel">
@@ -163,7 +166,7 @@
   <section class="partners-band"><div class="container">
       <span class="tag"><span class="dot"></span> Ecosystem Partners</span>
       <h2 class="partners-title">Backed by a world-class ecosystem</h2>
-      <p class="partners-lead">ACM Global Tech is an ecosystem partner of Hanzo.ai and Lux Network, pairing enterprise-grade agentic AI with institutional tokenized-finance and settlement infrastructure.</p>
+      <p class="partners-lead">ACM Global Tech is an ecosystem partner of Hanzo.ai and Lux Network and a member of the W3A (Web3 Alliance), pairing enterprise-grade agentic AI with institutional tokenized-finance and settlement infrastructure.</p>
       <div class="partners-grid">
         <a class="partner-card" href="https://hanzo.ai/" target="_blank" rel="noopener noreferrer" aria-label="Visit Hanzo.ai">
           <span class="partner-logo"><svg class="partner-mark-svg" viewBox="0 0 67 67" aria-hidden="true"><path d="M22.21 67V44.6369H0V67H22.21Z" fill="#fff"/><path d="M66.7038 22.3184H22.2534L0.0878906 44.6367H44.4634L66.7038 22.3184Z" fill="#fff"/><path d="M22.21 0H0V22.3184H22.21V0Z" fill="#fff"/><path d="M66.7198 0H44.5098V22.3184H66.7198V0Z" fill="#fff"/><path d="M66.7198 67V44.6369H44.5098V67H66.7198Z" fill="#fff"/></svg><span class="partner-name">Hanzo</span></span>
@@ -172,6 +175,10 @@
         <a class="partner-card" href="https://lux.network/" target="_blank" rel="noopener noreferrer" aria-label="Visit Lux Network">
           <span class="partner-logo"><svg class="partner-mark-svg" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 85 L15 25 L85 25 Z" fill="#fff"/></svg><span class="partner-name">Lux Network</span></span>
           <p>Institutional tokenized-finance, exchange, and settlement rails behind ACM's RWA &amp; FX.</p>
+        </a>
+        <a class="partner-card" href="https://w3a.foundation" target="_blank" rel="noopener noreferrer" aria-label="Visit W3A, the Web3 Alliance">
+          <span class="partner-logo"><svg class="partner-mark-svg" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="5" r="2.3" fill="#fff"/><circle cx="5" cy="18.5" r="2.3" fill="#fff"/><circle cx="19" cy="18.5" r="2.3" fill="#fff"/><path d="M12 5 5 18.5M12 5l7 13.5M5 18.5h14" stroke="#fff" stroke-width="1.3"/></svg><span class="partner-name">W3A</span></span>
+          <p>The Web3 Alliance, advancing shared standards and IP for regulated, post-quantum finance infrastructure.</p>
         </a>
       </div>
     </div></section>
@@ -205,6 +212,15 @@
           <a href="/login/" class="footer-login">Client Login &rarr;</a>
         </div>
       </div>
+        <div class="footer-col">
+          <h4><a href="/post-quantum/">Platform</a></h4>
+          <a href="/post-quantum/">Post-Quantum</a>
+          <a href="/digital-securities/">Digital Securities</a>
+          <a href="/banking-payments/">Banking &amp; Payments</a>
+          <a href="/ai-data/">AI &amp; Data</a>
+          <a href="/fhe/">Privacy &amp; FHE</a>
+          <a href="/white-label/">White-Label Builder</a>
+        </div>
         <div class="footer-col">
           <h4><a href="/products/">Products</a></h4>
           <a href="/products/banking-core/">Banking Core</a>
@@ -356,6 +372,6 @@
     </div>
   </div>
   
-  <script src="/script.js?v=24"></script>
+  <script src="/script.js?v=31"></script>
 </body>
 </html>
