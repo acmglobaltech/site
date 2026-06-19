@@ -273,7 +273,7 @@
      fall back to Request access so "Sign in" is never a dead link (one source). */
   (function () {
     var live = !!(WIX_CONFIG.PORTAL_LIVE && WIX_CONFIG.PORTAL_URL);
-    var dest = live ? WIX_CONFIG.PORTAL_URL : '/get-started/';
+    var dest = live ? WIX_CONFIG.PORTAL_URL : '/get-started/#contactForm';
     document.querySelectorAll('[data-portal]').forEach(function (a) {
       a.setAttribute('href', dest);
       // While dormant, relabel standalone primary buttons so "Sign in" is never
