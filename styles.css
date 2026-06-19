@@ -1039,3 +1039,24 @@ a.sol-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-soft); bor
 .tf-delta { font-size: .74rem; color: var(--green); font-weight: 700; }
 .tf-spark { width: 100%; height: 30px; margin-top: 6px; }
 @media (max-width: 860px) { .bento-split { grid-template-columns: 1fr; } .track-wrap { justify-content: center; } .track-float { position: static; margin-bottom: 14px; } }
+
+/* ===== Post-quantum section ===== */
+.pq-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin: 36px 0 24px; }
+.pq-card { padding: 28px; }
+.pq-card h3 { font-family: var(--display); font-weight: 700; font-size: 1.18rem; color: var(--ink); margin: 14px 0 8px; }
+.pq-card > p { font-size: .95rem; color: var(--body); line-height: 1.55; }
+.pq-card > p strong { color: var(--ink); font-weight: 700; }
+.pq-ic { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(31,79,255,.14), rgba(124,92,255,.18)); color: var(--blue); }
+.pq-card-hl { border-color: rgba(31,79,255,.35); background: linear-gradient(180deg, rgba(31,79,255,.06), var(--white)); box-shadow: 0 22px 48px -28px rgba(31,79,255,.5); }
+.pq-card-hl .pq-ic { background: var(--grad-blue); color: #fff; }
+.pq-proof { display: grid; grid-template-columns: .92fr 1.08fr; gap: 30px; align-items: center; margin-top: 14px; padding: 30px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--white); box-shadow: var(--shadow-soft); }
+.pq-proof-copy h3 { font-family: var(--display); font-weight: 700; font-size: 1.28rem; color: var(--ink); margin: 0 0 10px; letter-spacing: -.3px; }
+.pq-proof-copy > p { font-size: .96rem; color: var(--body); line-height: 1.55; }
+.pq-proof-copy p.pq-research { margin-top: 14px; font-size: .9rem; font-weight: 600; color: var(--mute); }
+.pq-research a { color: var(--blue); }
+.pq-repos { display: flex; flex-direction: column; gap: 12px; }
+.pq-repo { display: block; padding: 13px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); transition: border-color .2s, transform .2s, box-shadow .2s; }
+.pq-repo:hover { border-color: var(--blue-300); transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+.pq-repo-top { display: flex; align-items: center; gap: 9px; font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-weight: 700; font-size: .9rem; color: var(--ink); }
+.pq-repo-desc { display: block; font-size: .81rem; color: var(--mute); margin-top: 5px; line-height: 1.5; }
+@media (max-width: 880px) { .pq-grid { grid-template-columns: 1fr; } .pq-proof { grid-template-columns: 1fr; } }
