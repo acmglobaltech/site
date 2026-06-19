@@ -272,8 +272,16 @@
   /* Point every portal link at the Wix Members portal once it's live; until then
      fall back to Request access so "Sign in" is never a dead link (one source). */
   (function () {
-    var dest = (WIX_CONFIG.PORTAL_LIVE && WIX_CONFIG.PORTAL_URL) ? WIX_CONFIG.PORTAL_URL : '/get-started/';
-    document.querySelectorAll('[data-portal]').forEach(function (a) { a.setAttribute('href', dest); });
+    var live = !!(WIX_CONFIG.PORTAL_LIVE && WIX_CONFIG.PORTAL_URL);
+    var dest = live ? WIX_CONFIG.PORTAL_URL : '/get-started/';
+    document.querySelectorAll('[data-portal]').forEach(function (a) {
+      a.setAttribute('href', dest);
+      // While dormant, relabel standalone primary buttons so "Sign in" is never
+      // misleading; reverts to the original label once PORTAL_LIVE is true.
+      if (!live && a.classList.contains('btn') && a.classList.contains('btn-primary')) {
+        a.textContent = 'Request portal access';
+      }
+    });
   })();
 
   var form = document.getElementById('contactForm');

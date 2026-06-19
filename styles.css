@@ -1138,7 +1138,7 @@ a.hero-badge:hover { border-color: var(--blue-300); transform: translateY(-1px);
 .cta-band { background: linear-gradient(135deg, #0B1422 0%, #16265f 48%, #1F4FFF 100%); border-block: 0; text-align: center; position: relative; overflow: hidden; }
 .cta-band::after { content: ''; position: absolute; inset: 0; background: radial-gradient(55% 120% at 82% -10%, rgba(25,200,214,.28), transparent 60%); pointer-events: none; }
 .cta-band > .container { position: relative; z-index: 1; }
-.cta-band .section-title { color: #fff; }
+.cta-band .section-title { color: #fff; margin-left: auto; margin-right: auto; }
 .cta-band .section-lead { color: rgba(255,255,255,.85); margin-left: auto; margin-right: auto; }
 .cta-band .btn { margin-top: 22px; }
 .cta-band .btn-primary { background: #fff; color: var(--blue); box-shadow: 0 16px 40px -16px rgba(0,0,0,.55); }

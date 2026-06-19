@@ -18,7 +18,7 @@ import path from 'node:path';
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const SRC = path.join(ROOT, 'src', 'pages');
 const ORIGIN = 'https://acmglobaltech.com';
-const ASSET_V = 'v=31';
+const ASSET_V = 'v=33';
 
 /* ---------- Analytics & advertising (consent-gated, OFF by default) ----------
  * Paste your IDs to switch measurement on. Empty = nothing loads: no tags in
@@ -64,6 +64,12 @@ const NAV = [
     ['AI & Data', '/ai-data/'],
     ['Privacy & FHE', '/fhe/'],
     ['White-Label Builder', '/white-label/'],
+    ['Alternative Trading System', '/ats/'],
+    ['Broker-Dealer', '/broker-dealer/'],
+    ['Transfer Agent', '/transfer-agent/'],
+    ['MPC Custody', '/custody/'],
+    ['Built-In DEX', '/dex/'],
+    ['Platform-as-a-Service', '/paas/'],
   ]},
   { label: 'Products', href: '/products/', items: [
     ['Banking Core', '/products/banking-core/'],
@@ -101,6 +107,13 @@ const NAV = [
     ['Hyperautomation', '/capabilities/hyperautomation/'],
     ['Agile Speed Framework', '/capabilities/agile-speed-framework/'],
     ['White-Label & Ownership', '/capabilities/white-label/'],
+    ['Real-Time AML', '/aml/'],
+    ['KYC & Identity', '/kyc/'],
+    ['Compliance', '/compliance/'],
+    ['AI Gateway', '/ai-gateway/'],
+    ['AI Inference', '/inference/'],
+    ['Agentic AI', '/agents/'],
+    ['Data Platform', '/data-platform/'],
   ]},
   { label: 'Resources', href: '/docs/', items: [
     ['Documentation', '/docs/'],
