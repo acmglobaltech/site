@@ -18,7 +18,7 @@ import path from 'node:path';
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const SRC = path.join(ROOT, 'src', 'pages');
 const ORIGIN = 'https://acmglobaltech.com';
-const ASSET_V = 'v=37';
+const ASSET_V = 'v=38';
 
 /* ---------- Analytics & advertising (consent-gated, OFF by default) ----------
  * Paste your IDs to switch measurement on. Empty = nothing loads: no tags in
@@ -188,7 +188,7 @@ function renderHeader(activeGroup) {
 
 /* ---------- Footer (CTA band + multi-column + newsletter + badges) ---------- */
 function renderFooter() {
-  const cols = NAV.map((g) => {
+  const cols = NAV.filter((g) => g.label !== 'Solutions').map((g) => {
     const links = g.items.map(([l, h]) => `<a href="${h}">${esc(l)}</a>`).join('\n          ');
     return `<div class="footer-col">
           <h4><a href="${g.href}">${esc(g.label)}</a></h4>
