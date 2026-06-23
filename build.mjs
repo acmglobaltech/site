@@ -18,7 +18,7 @@ import path from 'node:path';
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const SRC = path.join(ROOT, 'src', 'pages');
 const ORIGIN = 'https://acmglobaltech.com';
-const ASSET_V = 'v=38';
+const ASSET_V = 'v=39';
 
 /* ---------- Analytics & advertising (consent-gated, OFF by default) ----------
  * Paste your IDs to switch measurement on. Empty = nothing loads: no tags in
@@ -178,7 +178,7 @@ function renderHeader(activeGroup) {
         ${groups}
       </nav>
       <a href="/login/" class="nav-login">Client Login</a>
-      <a href="/contact/" class="btn btn-primary btn-nav" data-cta="Discovery Call">Get in Touch</a>
+      <a href="/get-started/#contactForm" class="btn btn-primary btn-nav" data-cta="Discovery Call">Get in Touch</a>
       <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -201,7 +201,7 @@ function renderFooter() {
         <p>Talk to ACM about a regulated, white-label banking stack, core, payments, wallets, exchange, and tokenized finance you own.</p>
       </div>
       <div class="footer-cta-actions">
-        <a href="/contact/" class="btn btn-primary btn-lg" data-cta="Discovery Call">Schedule a Discovery Call</a>
+        <a href="/get-started/#contactForm" class="btn btn-primary btn-lg" data-cta="Discovery Call">Schedule a Discovery Call</a>
         <a href="/get-started/" class="btn btn-ghost btn-lg">Get Started</a>
       </div>
     </div></section>
@@ -392,7 +392,7 @@ function partnerBanner() {
           <p>Institutional tokenized-finance, exchange, and settlement rails behind ACM's RWA &amp; FX.</p>
         </a>
         <a class="partner-card" href="https://w3a.foundation" target="_blank" rel="noopener noreferrer" aria-label="Visit W3A, the Web3 Alliance">
-          <span class="partner-logo"><svg class="partner-mark-svg" viewBox="0 0 48 48" aria-hidden="true"><text x="24" y="31" text-anchor="middle" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="19" font-weight="900" letter-spacing="-1.5" fill="#fff">W3A</text></svg><span class="partner-name">W3A</span></span>
+          <span class="partner-logo"><svg class="partner-mark-svg" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16.000" cy="3.000" r="1.7" fill="#fff"/><circle cx="22.041" cy="4.489" r="1.7" fill="#fff"/><circle cx="26.699" cy="8.615" r="1.7" fill="#fff"/><circle cx="28.905" cy="14.433" r="1.7" fill="#fff"/><circle cx="28.155" cy="20.610" r="1.7" fill="#fff"/><circle cx="24.621" cy="25.731" r="1.7" fill="#fff"/><circle cx="19.111" cy="28.622" r="1.7" fill="#fff"/><circle cx="12.889" cy="28.622" r="1.7" fill="#fff"/><circle cx="7.379" cy="25.731" r="1.7" fill="#fff"/><circle cx="3.845" cy="20.610" r="1.7" fill="#fff"/><circle cx="3.095" cy="14.433" r="1.7" fill="#fff"/><circle cx="5.301" cy="8.615" r="1.7" fill="#fff"/><circle cx="9.959" cy="4.489" r="1.7" fill="#fff"/></svg><span class="partner-name">W3A</span></span>
           <p>The Web3 Alliance, advancing shared standards and IP for regulated, post-quantum finance infrastructure.</p>
         </a>
       </div>

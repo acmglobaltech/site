@@ -1132,7 +1132,7 @@ a.hero-badge:hover { border-color: var(--blue-300); transform: translateY(-1px);
 .lic-w3a { font-size: .95rem; color: var(--body); }
 .lic-w3a a { color: var(--blue); font-weight: 600; }
 .w3a-badge { display: inline-flex; align-items: center; vertical-align: -5px; margin-right: 8px; }
-.w3a-badge img { height: 21px; width: auto; display: block; }
+.w3a-badge img { height: 20px; width: 20px; display: block; }
 @media (max-width: 860px) { .lic-grid { grid-template-columns: 1fr; } }
 
 /* ===== Areas-of-focus funnel link ===== */
