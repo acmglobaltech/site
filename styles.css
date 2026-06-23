@@ -763,8 +763,7 @@ img { max-width: 100%; display: block; }
 .ai-input button { flex: 0 0 auto; width: 42px; border: 0; border-radius: 12px; background: var(--grad-blue); color: #fff; font-size: 1.1rem; cursor: pointer; }
 @media (max-width: 600px) { .ai-launcher span { display: none; } .ai-launcher { padding: 14px; } .footer-cta-inner { padding: 40px 18px; } }
 
-/* --- "ACM" wordmark: hover-revealed "Global Tech" + condensed header --- */
-.nav-wrap{ height: 60px; }
+/* --- "ACM" wordmark: hover-revealed "Global Tech" (footer logo) --- */
 .logo-text{ white-space: nowrap; }
 .logo-suffix{
   display: inline-block; max-width: 0; opacity: 0; overflow: hidden;
