@@ -1098,6 +1098,7 @@ a.sol-card:hover{ transform:translateY(-3px); box-shadow:var(--shadow-soft); bor
 .hero-badges { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
 .hero-badge { display: inline-flex; align-items: center; gap: 7px; font-size: .82rem; color: var(--body); background: var(--white); border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; box-shadow: var(--shadow-soft); }
 .hero-badge strong { color: var(--ink); font-weight: 700; }
+.hero-badge-logo { height: 13px; width: auto; display: block; }
 a.hero-badge { transition: border-color .2s, transform .2s; }
 a.hero-badge:hover { border-color: var(--blue-300); transform: translateY(-1px); }
 /* ===== Problem ===== */
