@@ -18,7 +18,7 @@ import path from 'node:path';
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const SRC = path.join(ROOT, 'src', 'pages');
 const ORIGIN = 'https://acmglobaltech.com';
-const ASSET_V = 'v=35';
+const ASSET_V = 'v=36';
 
 /* ---------- Analytics & advertising (consent-gated, OFF by default) ----------
  * Paste your IDs to switch measurement on. Empty = nothing loads: no tags in
@@ -172,7 +172,7 @@ function renderHeader(activeGroup) {
   return `<header class="header" id="header">
     <div class="container nav-wrap">
       <a href="/" class="logo" aria-label="ACM Global Tech home">
-        <span class="logo-wordmark" aria-hidden="true">acm</span>
+        <img class="logo-wordmark" src="/assets/acm.svg?v=36" alt="" aria-hidden="true" width="138" height="34" />
       </a>
       <nav class="nav" id="primary-nav" aria-label="Primary">
         ${groups}
