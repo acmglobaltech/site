@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.svg?v=41" type="image/svg+xml" />
-  <link rel="icon" href="/favicon-32.png?v=41" sizes="32x32" type="image/png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=41" />
+  <link rel="icon" href="/favicon.svg?v=42" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png?v=42" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=42" />
   <meta name="theme-color" content="#1F4FFF" />
+  <script>try{if(localStorage.getItem('acm-announce-closed'))document.documentElement.style.setProperty('--announce-h','0px')}catch(e){}</script>
   <title>Banking Core White Paper | ACM Global Tech</title>
   <meta name="description" content="A technical white paper on ACM's cloud-native banking core: real-time ledger, deposits and lending, post-quantum security, deployment, and honest outcomes." />
   <meta name="keywords" content="cloud-native core banking, banking core white paper, real-time ledger, deposits and lending platform, post-quantum core banking, core banking architecture, regulated-first banking technology, core modernization" />
@@ -25,14 +26,14 @@
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=41" />
+  <link rel="stylesheet" href="/styles.css?v=42" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"ACM Banking Core: A Cloud-Native Core for Regulated Institutions","description":"A technical white paper on ACM's cloud-native banking core: real-time ledger, deposits and lending, post-quantum security, deployment, and honest outcomes.","url":"https://acmglobaltech.com/research/banking-core/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://acmglobaltech.com/research/"},{"@type":"ListItem","position":3,"name":"ACM Banking Core: A Cloud-Native Core for Regulated Institutions","item":"https://acmglobaltech.com/research/banking-core/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this banking core actually cloud-native, or a hosted legacy system?","acceptedAnswer":{"@type":"Answer","text":"It is cloud-native by design: independently deployable, containerized services built around a single real-time ledger, with deposits, lending, and payments sharing one data model. It is engineered to scale with transaction volume rather than fixed mainframe capacity, which is what lets ACM target up to 95% lower infrastructure cost than legacy cores. It is not a legacy platform wrapped in hosting."}},{"@type":"Question","name":"How does the core handle post-quantum security without a full re-platform?","acceptedAnswer":{"@type":"Answer","text":"Cryptographic primitives are abstracted from the application layer and run in a hybrid classical-plus-post-quantum mode, so they can be rotated as standards mature without rebuilding dependent systems. ACM builds toward the NIST post-quantum standards finalized in 2024 (ML-KEM / FIPS 203, ML-DSA / FIPS 204, SLH-DSA / FIPS 205) and prioritizes long-lived, high-sensitivity records first. These standards are recent, so ACM frames the work as aligning to and building on them, with no core surgery required."}},{"@type":"Question","name":"Can we migrate incrementally instead of a single cutover?","acceptedAnswer":{"@type":"Answer","text":"Yes. The core is API-first and designed to run alongside your existing system of record. Books move incrementally while shared posting events keep the legacy ledger and the ACM ledger in agreement, so finance closes against one set of balances during dual-running. A sandbox mirrors your configuration for integration testing and examiner review before any go-live."}}]}</script>
 </head>
 <body>
-  <a class="announce" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a>
+  <div class="announce" id="announceBar"><a class="announce-link" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a><button class="announce-x" type="button" aria-label="Dismiss announcement" onclick="try{localStorage.setItem('acm-announce-closed','1')}catch(e){}document.documentElement.style.setProperty('--announce-h','0px')">&times;</button></div>
   <div class="bg-floaties" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   <header class="header" id="header">
     <div class="container nav-wrap">
@@ -364,6 +365,6 @@
     </div>
   </div>
   
-  <script src="/script.js?v=41"></script>
+  <script src="/script.js?v=42"></script>
 </body>
 </html>

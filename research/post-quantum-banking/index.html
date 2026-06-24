@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.svg?v=41" type="image/svg+xml" />
-  <link rel="icon" href="/favicon-32.png?v=41" sizes="32x32" type="image/png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=41" />
+  <link rel="icon" href="/favicon.svg?v=42" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png?v=42" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=42" />
   <meta name="theme-color" content="#1F4FFF" />
+  <script>try{if(localStorage.getItem('acm-announce-closed'))document.documentElement.style.setProperty('--announce-h','0px')}catch(e){}</script>
   <title>Post-Quantum Banking White Paper | ACM Global Tech</title>
   <meta name="description" content="A white paper on post-quantum banking: NIST PQC standards (ML-KEM, ML-DSA, SLH-DSA), threshold key management, and consensus for regulated institutions." />
   <meta name="keywords" content="post-quantum banking, NIST post-quantum cryptography, ML-KEM FIPS 203, ML-DSA FIPS 204, SLH-DSA FIPS 205, harvest now decrypt later, threshold cryptography, non-custodial key management" />
@@ -25,14 +26,14 @@
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=41" />
+  <link rel="stylesheet" href="/styles.css?v=42" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Post-Quantum Banking: Securing Regulated Institutions for the Cryptographic Transition","description":"A white paper on post-quantum banking: NIST PQC standards (ML-KEM, ML-DSA, SLH-DSA), threshold key management, and consensus for regulated institutions.","url":"https://acmglobaltech.com/research/post-quantum-banking/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://acmglobaltech.com/research/"},{"@type":"ListItem","position":3,"name":"Post-Quantum Banking: Securing Regulated Institutions for the Cryptographic Transition","item":"https://acmglobaltech.com/research/post-quantum-banking/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Are the NIST post-quantum standards final, and does ACM use them?","acceptedAnswer":{"@type":"Answer","text":"Yes. In 2024, NIST finalized its first post-quantum cryptography standards: ML-KEM (FIPS 203) for key encapsulation, ML-DSA (FIPS 204) for digital signatures, and SLH-DSA (FIPS 205) as a hash-based signature alternative. ACM builds toward these standards and designs for crypto-agility, so algorithms can be rotated as guidance continues to evolve. Because the standards are recent, ACM frames its work as aligning to and building on them, not as a completed or certified migration."}},{"@type":"Question","name":"What do threshold cryptography and non-custodial key management add beyond post-quantum algorithms?","acceptedAnswer":{"@type":"Answer","text":"Post-quantum algorithms protect data confidentiality and signature integrity against future quantum attack. Threshold cryptography splits signing authority across multiple parties so that a defined quorum, rather than any single holder, is required to authorize an operation, removing single points of compromise. Non-custodial key management keeps control of key material with the institution rather than a single custodian. Together they harden how high-value approvals are made, not just how data is encrypted."}},{"@type":"Question","name":"Do we have to replace our core to adopt post-quantum banking?","acceptedAnswer":{"@type":"Answer","text":"No. ACM uses a phased, hybrid approach that runs post-quantum algorithms alongside classical ones and prioritizes your highest-value, longest-lived data first. Post-quantum primitives attach at the interfaces you already operate, including HSMs, TLS channels, and data stores behind existing APIs, so cryptographic upgrades proceed without ripping out the core or disrupting daily operations."}}]}</script>
 </head>
 <body>
-  <a class="announce" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a>
+  <div class="announce" id="announceBar"><a class="announce-link" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a><button class="announce-x" type="button" aria-label="Dismiss announcement" onclick="try{localStorage.setItem('acm-announce-closed','1')}catch(e){}document.documentElement.style.setProperty('--announce-h','0px')">&times;</button></div>
   <div class="bg-floaties" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   <header class="header" id="header">
     <div class="container nav-wrap">
@@ -362,6 +363,6 @@
     </div>
   </div>
   
-  <script src="/script.js?v=41"></script>
+  <script src="/script.js?v=42"></script>
 </body>
 </html>

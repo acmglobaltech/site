@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.svg?v=41" type="image/svg+xml" />
-  <link rel="icon" href="/favicon-32.png?v=41" sizes="32x32" type="image/png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=41" />
+  <link rel="icon" href="/favicon.svg?v=42" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png?v=42" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=42" />
   <meta name="theme-color" content="#1F4FFF" />
+  <script>try{if(localStorage.getItem('acm-announce-closed'))document.documentElement.style.setProperty('--announce-h','0px')}catch(e){}</script>
   <title>Documentation | ACM Global Tech</title>
   <meta name="description" content="Public docs for ACM Global Tech banking technology: platform concepts, APIs, SDKs, integration and security guides. Full reference via the client portal." />
   <meta name="keywords" content="ACM documentation, banking API docs, fintech SDK, integration guides" />
@@ -25,14 +26,14 @@
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=41" />
+  <link rel="stylesheet" href="/styles.css?v=42" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"ACM Global Tech documentation","description":"Public docs for ACM Global Tech banking technology: platform concepts, APIs, SDKs, integration and security guides. Full reference via the client portal.","url":"https://acmglobaltech.com/docs/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"ACM Global Tech documentation","item":"https://acmglobaltech.com/docs/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is the full API reference public?","acceptedAnswer":{"@type":"Answer","text":"The overviews on this page are public so you can scope a project before signing. The complete API reference, OpenAPI specifications, webhook catalogs, and step-by-step integration guides are provisioned to your team in the secure client portal during onboarding, alongside environment-specific details for your deployment."}},{"@type":"Question","name":"How do we get sandbox credentials and API keys?","acceptedAnswer":{"@type":"Answer","text":"Sandbox keys are issued to named engineers through the client portal after onboarding begins. Each institution receives isolated sandbox and production environments, scoped credentials, and rotation controls, so you can build and test against your own tenant before going live."}},{"@type":"Question","name":"Which SDK languages does ACM support?","acceptedAnswer":{"@type":"Answer","text":"ACM publishes first-party SDKs for TypeScript, Python, Go, and Rust, covering core banking, payments, exchange and FX, cards, and tokenization endpoints. Every SDK targets the same versioned REST API, so behavior is consistent regardless of the language your stack uses."}},{"@type":"Question","name":"Where are security and compliance details documented?","acceptedAnswer":{"@type":"Answer","text":"Security and compliance documentation covers our regulated-first architecture, post-quantum cryptography, key management, and how the platform is designed to support SOC 2, ISO 27001, and PCI-DSS requirements. Control narratives and audit-support materials are shared with your risk and audit teams through the client portal."}}]}</script>
 </head>
 <body>
-  <a class="announce" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a>
+  <div class="announce" id="announceBar"><a class="announce-link" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a><button class="announce-x" type="button" aria-label="Dismiss announcement" onclick="try{localStorage.setItem('acm-announce-closed','1')}catch(e){}document.documentElement.style.setProperty('--announce-h','0px')">&times;</button></div>
   <div class="bg-floaties" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   <header class="header" id="header">
     <div class="container nav-wrap">
@@ -357,6 +358,6 @@
     </div>
   </div>
   
-  <script src="/script.js?v=41"></script>
+  <script src="/script.js?v=42"></script>
 </body>
 </html>

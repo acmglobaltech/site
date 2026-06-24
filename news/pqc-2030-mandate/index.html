@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.svg?v=41" type="image/svg+xml" />
-  <link rel="icon" href="/favicon-32.png?v=41" sizes="32x32" type="image/png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=41" />
+  <link rel="icon" href="/favicon.svg?v=42" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png?v=42" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=42" />
   <meta name="theme-color" content="#1F4FFF" />
+  <script>try{if(localStorage.getItem('acm-announce-closed'))document.documentElement.style.setProperty('--announce-h','0px')}catch(e){}</script>
   <title>The Clock Started: The 2030 Federal Post-Quantum Mandate, and Why ACM Is the Partner for Immediate PQ Readiness | ACM Global Tech</title>
   <meta name="description" content="Executive Order 'Securing the Nation against Advanced Cryptographic Attacks' (June 22, 2026) sets hard post-quantum deadlines: key establishment by 2030, signatures by 2031, a NIST pilot by 2027, and FAR rules for contractors. Here is what it requires and why ACM delivers immediate PQ readiness." />
   <meta name="keywords" content="post-quantum cryptography mandate, 2030 PQC deadline, executive order securing the nation advanced cryptographic attacks, ML-KEM FIPS 203, ML-DSA FIPS 204, CBOM cryptographic bill of materials, FAR PQC, crypto-agility, harvest now decrypt later, immediate post-quantum readiness" />
@@ -25,14 +26,14 @@
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=41" />
+  <link rel="stylesheet" href="/styles.css?v=42" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"The clock started: the 2030 federal post-quantum mandate","description":"Executive Order 'Securing the Nation against Advanced Cryptographic Attacks' (June 22, 2026) sets hard post-quantum deadlines: key establishment by 2030, signatures by 2031, a NIST pilot by 2027, and FAR rules for contractors. Here is what it requires and why ACM delivers immediate PQ readiness.","url":"https://acmglobaltech.com/news/pqc-2030-mandate/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"News","item":"https://acmglobaltech.com/news/"},{"@type":"ListItem","position":3,"name":"The clock started: the 2030 federal post-quantum mandate","item":"https://acmglobaltech.com/news/pqc-2030-mandate/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does Executive Order 'Securing the Nation against Advanced Cryptographic Attacks' require?","acceptedAnswer":{"@type":"Answer","text":"Signed June 22, 2026, the order requires federal high-value assets and high-impact systems to transition to post-quantum cryptography for key establishment by December 31, 2030 and for digital signatures by December 31, 2031. Agencies must name a PQC migration lead within 30 days and submit migration plans; NIST runs a pilot to be completed by December 31, 2027; CISA and NIST publish minimum elements for a cryptographic bill of materials (CBOM) within 270 days; and the FAR Council proposes rules requiring covered contractors to meet FIPS PQC requirements by December 31, 2030 and to run vulnerability-disclosure programs covering cryptographic weaknesses."}},{"@type":"Question","name":"Does this reach private institutions like banks?","acceptedAnswer":{"@type":"Answer","text":"Yes, indirectly but firmly. Sector Risk Management Agencies and CISA are directed to help critical infrastructure owners and operators, which includes financial services, build migration plans, and the FAR rules pull covered contractors into the same 2030 deadline. Combined with the harvest-now-decrypt-later risk to long-lived financial records, regulated institutions have every reason to move on the federal timeline."}},{"@type":"Question","name":"How does ACM deliver immediate post-quantum readiness?","acceptedAnswer":{"@type":"Answer","text":"ACM's regulated stack already deploys the NIST post-quantum algorithms, ML-KEM (FIPS 203), ML-DSA (FIPS 204), and SLH-DSA (FIPS 205), as native primitives, with hybrid classical-plus-post-quantum migration, crypto-agility so algorithms rotate, and the inventory tooling a CBOM requires. Institutions partner with ACM to stand where the mandate points, today, instead of starting a multi-year project from zero."}}]}</script>
 </head>
 <body>
-  <a class="announce" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a>
+  <div class="announce" id="announceBar"><a class="announce-link" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a><button class="announce-x" type="button" aria-label="Dismiss announcement" onclick="try{localStorage.setItem('acm-announce-closed','1')}catch(e){}document.documentElement.style.setProperty('--announce-h','0px')">&times;</button></div>
   <div class="bg-floaties" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   <header class="header" id="header">
     <div class="container nav-wrap">
@@ -411,6 +412,6 @@
     </div>
   </div>
   
-  <script src="/script.js?v=41"></script>
+  <script src="/script.js?v=42"></script>
 </body>
 </html>

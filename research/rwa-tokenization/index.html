@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.svg?v=41" type="image/svg+xml" />
-  <link rel="icon" href="/favicon-32.png?v=41" sizes="32x32" type="image/png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=41" />
+  <link rel="icon" href="/favicon.svg?v=42" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png?v=42" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=42" />
   <meta name="theme-color" content="#1F4FFF" />
+  <script>try{if(localStorage.getItem('acm-announce-closed'))document.documentElement.style.setProperty('--announce-h','0px')}catch(e){}</script>
   <title>RWA Tokenization White Paper | ACM Global Tech</title>
   <meta name="description" content="A technical white paper on ACM's approach to real-world asset tokenization: architecture, compliance logic, post-quantum security, honest outcomes." />
   <meta name="keywords" content="RWA tokenization white paper, real-world asset tokenization architecture, tokenized asset settlement, compliance-ready tokenization, post-quantum tokenization security, on-chain registry for banks, stablecoin settlement, white-label tokenization platform" />
@@ -25,14 +26,14 @@
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=41" />
+  <link rel="stylesheet" href="/styles.css?v=42" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"RWA Tokenization: A Technical White Paper for Regulated Institutions","description":"A technical white paper on ACM's approach to real-world asset tokenization: architecture, compliance logic, post-quantum security, honest outcomes.","url":"https://acmglobaltech.com/research/rwa-tokenization/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://acmglobaltech.com/research/"},{"@type":"ListItem","position":3,"name":"RWA Tokenization: A Technical White Paper for Regulated Institutions","item":"https://acmglobaltech.com/research/rwa-tokenization/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is a tokenization white paper different from the RWA Tokenization product page?","acceptedAnswer":{"@type":"Answer","text":"This paper is written for architects and risk teams who need to understand the mechanism before they evaluate the offering. It explains how ACM models an asset, where compliance logic actually lives, how settlement reaches finality, and how the platform connects to your systems of record. The companion product page at /products/rwa-tokenization/ covers packaging, the asset types supported, and how to begin a project. Read this first if your question is 'how does it work,' and read the product page if your question is 'what do we get.'"}},{"@type":"Question","name":"Where does compliance enforcement live in ACM's tokenization model?","acceptedAnswer":{"@type":"Answer","text":"In the asset itself. Eligibility, transfer restrictions, and reporting hooks are encoded in the token's logic and checked at the moment of transfer, rather than reconciled after the fact in a separate downstream system. That logic calls out to your existing KYC/AML, sanctions, and identity providers for the decision, so policy stays under your control while enforcement becomes deterministic and auditable. ACM is regulated-first and compliance-ready by design; we do not represent specific licenses or charters."}},{"@type":"Question","name":"Why does post-quantum cryptography matter for tokenized assets specifically?","acceptedAnswer":{"@type":"Answer","text":"A tokenized asset's authoritative record, including signatures and identity bindings, may need to remain verifiable and confidential for the full life of the instrument, which can be years or decades. Under a harvest-now, decrypt-later threat, data captured today could be exposed once quantum-capable machines mature. ACM aligns to the NIST post-quantum standards finalized in 2024 (ML-KEM/FIPS 203, ML-DSA/FIPS 204, SLH-DSA/FIPS 205) and designs for crypto-agility so primitives can be rotated as standards evolve."}}]}</script>
 </head>
 <body>
-  <a class="announce" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a>
+  <div class="announce" id="announceBar"><a class="announce-link" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a><button class="announce-x" type="button" aria-label="Dismiss announcement" onclick="try{localStorage.setItem('acm-announce-closed','1')}catch(e){}document.documentElement.style.setProperty('--announce-h','0px')">&times;</button></div>
   <div class="bg-floaties" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   <header class="header" id="header">
     <div class="container nav-wrap">
@@ -366,6 +367,6 @@
     </div>
   </div>
   
-  <script src="/script.js?v=41"></script>
+  <script src="/script.js?v=42"></script>
 </body>
 </html>

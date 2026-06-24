@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.svg?v=41" type="image/svg+xml" />
-  <link rel="icon" href="/favicon-32.png?v=41" sizes="32x32" type="image/png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=41" />
+  <link rel="icon" href="/favicon.svg?v=42" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png?v=42" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=42" />
   <meta name="theme-color" content="#1F4FFF" />
+  <script>try{if(localStorage.getItem('acm-announce-closed'))document.documentElement.style.setProperty('--announce-h','0px')}catch(e){}</script>
   <title>Exchange &amp; FX White Paper | ACM Global Tech</title>
   <meta name="description" content="A technical white paper on ACM's white-label Exchange &amp; FX: the cross-border problem, architecture, post-quantum security, compliance, and honest outcomes." />
   <meta name="keywords" content="exchange and FX white paper, multi-currency exchange architecture, cross-border settlement, white-label FX platform, post-quantum FX security, stablecoin settlement, banking core FX integration, regulated FX infrastructure" />
@@ -25,14 +26,14 @@
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=41" />
+  <link rel="stylesheet" href="/styles.css?v=42" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Exchange & FX: A White Paper on Multi-Currency Exchange and Cross-Border Settlement","description":"A technical white paper on ACM's white-label Exchange & FX: the cross-border problem, architecture, post-quantum security, compliance, and honest outcomes.","url":"https://acmglobaltech.com/research/exchange-fx/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://acmglobaltech.com/research/"},{"@type":"ListItem","position":3,"name":"Exchange & FX: A White Paper on Multi-Currency Exchange and Cross-Border Settlement","item":"https://acmglobaltech.com/research/exchange-fx/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is this white paper different from the Exchange & FX product page?","acceptedAnswer":{"@type":"Answer","text":"The product page describes what the platform delivers and how to buy it. This paper is written for technical and risk evaluators: it analyzes the structural problems in rented cross-border FX, sets out the layered architecture of ACM's exchange engine, details the security and compliance posture including post-quantum cryptography, and frames outcomes as design intent rather than marketing claims."}},{"@type":"Question","name":"Does ACM claim SOC 2, ISO 27001, PCI-DSS, or HIPAA certification for Exchange & FX?","acceptedAnswer":{"@type":"Answer","text":"No. ACM is regulated-first and compliance-ready by design, with controls mapped to support SOC 2, ISO 27001, PCI-DSS, and HIPAA-aligned requirements. ACM does not hold those as certifications on the institution's behalf; the platform is engineered so the institution can evidence its own program during examination."}},{"@type":"Question","name":"What post-quantum standards does the exchange layer build toward?","acceptedAnswer":{"@type":"Answer","text":"It builds toward the standards NIST finalized in 2024: FIPS 203 (ML-KEM) for key encapsulation, FIPS 204 (ML-DSA) for digital signatures, and FIPS 205 (SLH-DSA) as a hash-based alternative. These standards are recent, so ACM frames its work as building on and aligning to them, using a crypto-agile design that lets algorithms be rotated as the standards evolve."}}]}</script>
 </head>
 <body>
-  <a class="announce" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a>
+  <div class="announce" id="announceBar"><a class="announce-link" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a><button class="announce-x" type="button" aria-label="Dismiss announcement" onclick="try{localStorage.setItem('acm-announce-closed','1')}catch(e){}document.documentElement.style.setProperty('--announce-h','0px')">&times;</button></div>
   <div class="bg-floaties" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   <header class="header" id="header">
     <div class="container nav-wrap">
@@ -398,6 +399,6 @@
     </div>
   </div>
   
-  <script src="/script.js?v=41"></script>
+  <script src="/script.js?v=42"></script>
 </body>
 </html>

@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.svg?v=41" type="image/svg+xml" />
-  <link rel="icon" href="/favicon-32.png?v=41" sizes="32x32" type="image/png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=41" />
+  <link rel="icon" href="/favicon.svg?v=42" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png?v=42" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=42" />
   <meta name="theme-color" content="#1F4FFF" />
+  <script>try{if(localStorage.getItem('acm-announce-closed'))document.documentElement.style.setProperty('--announce-h','0px')}catch(e){}</script>
   <title>Mobile Wallet White Paper | ACM Global Tech</title>
   <meta name="description" content="A white paper on ACM's white-label mobile wallet: deposits, cards, transfers, in-app FX, and post-quantum security for regulated institutions." />
   <meta name="keywords" content="white-label mobile wallet, mobile wallet white paper, mobile banking architecture, post-quantum mobile security, in-app FX, stablecoin wallet, mobile wallet for credit unions, non-custodial key management" />
@@ -25,14 +26,14 @@
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=41" />
+  <link rel="stylesheet" href="/styles.css?v=42" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"A White Paper on ACM's White-Label Mobile Wallet for Regulated Institutions","description":"A white paper on ACM's white-label mobile wallet: deposits, cards, transfers, in-app FX, and post-quantum security for regulated institutions.","url":"https://acmglobaltech.com/research/mobile-wallet/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://acmglobaltech.com/research/"},{"@type":"ListItem","position":3,"name":"A White Paper on ACM's White-Label Mobile Wallet for Regulated Institutions","item":"https://acmglobaltech.com/research/mobile-wallet/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is this white paper based on a specific client deployment?","acceptedAnswer":{"@type":"Answer","text":"No. It describes ACM's architecture and design approach for the mobile wallet, and states outcomes as targets to plan against and design goals rather than reported results from named clients. Figures such as up to 95% lower infrastructure cost versus legacy core systems are objectives to validate against your environment, and any compliance posture is described as designed to support SOC 2, ISO 27001, PCI-DSS, and HIPAA requirements."}},{"@type":"Question","name":"Why does a mobile wallet need post-quantum cryptography now?","acceptedAnswer":{"@type":"Answer","text":"Because a wallet protects identities, credentials, and transaction histories that stay sensitive for years, it is exposed to harvest-now-decrypt-later risk, where data captured today is decrypted once quantum computers mature. NIST finalized the first post-quantum standards in 2024 (ML-KEM/FIPS 203, ML-DSA/FIPS 204, SLH-DSA/FIPS 205). ACM builds on and aligns to these recent standards, deploying post-quantum algorithms in a hybrid configuration alongside classical ones and protecting the longest-lived data first."}},{"@type":"Question","name":"How does the wallet connect to our existing core and vendors?","acceptedAnswer":{"@type":"Answer","text":"It binds to your environment rather than forcing a rip-and-replace. ACM exposes documented REST APIs and mobile SDKs, federates sign-in through OIDC and SAML, and hands identity verification to your existing KYC and AML provider. Cards, payments, and FX are reached through one platform, so you configure a single ecosystem instead of integrating separate vendors, with delivery sequenced through the Agile Speed Framework."}}]}</script>
 </head>
 <body>
-  <a class="announce" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a>
+  <div class="announce" id="announceBar"><a class="announce-link" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a><button class="announce-x" type="button" aria-label="Dismiss announcement" onclick="try{localStorage.setItem('acm-announce-closed','1')}catch(e){}document.documentElement.style.setProperty('--announce-h','0px')">&times;</button></div>
   <div class="bg-floaties" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   <header class="header" id="header">
     <div class="container nav-wrap">
@@ -366,6 +367,6 @@
     </div>
   </div>
   
-  <script src="/script.js?v=41"></script>
+  <script src="/script.js?v=42"></script>
 </body>
 </html>

@@ -18,7 +18,7 @@ import path from 'node:path';
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const SRC = path.join(ROOT, 'src', 'pages');
 const ORIGIN = 'https://acmglobaltech.com';
-const ASSET_V = 'v=41';
+const ASSET_V = 'v=42';
 
 /* ---------- Analytics & advertising (consent-gated, OFF by default) ----------
  * Paste your IDs to switch measurement on. Empty = nothing loads: no tags in
@@ -525,7 +525,7 @@ function balanceGrids(html) {
   return out + html.slice(last);
 }
 function announceBar() {
-  return `<a class="announce" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a>`;
+  return `<div class="announce" id="announceBar"><a class="announce-link" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a><button class="announce-x" type="button" aria-label="Dismiss announcement" onclick="try{localStorage.setItem('acm-announce-closed','1')}catch(e){}document.documentElement.style.setProperty('--announce-h','0px')">&times;</button></div>`;
 }
 function trustStrip() {
   return '<div class="trust-strip"><div class="container"><span>Regulated-first architecture</span><span>Post-quantum cryptography</span><span>White-label &amp; client-owned</span><span>Hanzo.ai &amp; Lux Network ecosystem</span></div></div>';
@@ -554,6 +554,7 @@ function renderPage(page) {
   <link rel="icon" href="/favicon-32.png?${ASSET_V}" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?${ASSET_V}" />
   <meta name="theme-color" content="#1F4FFF" />
+  <script>try{if(localStorage.getItem('acm-announce-closed'))document.documentElement.style.setProperty('--announce-h','0px')}catch(e){}</script>
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(page.metaDescription)}" />
   ${page.keywords && page.keywords.length ? `<meta name="keywords" content="${esc(page.keywords.join(', '))}" />` : ''}

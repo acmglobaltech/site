@@ -3,10 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="/favicon.svg?v=41" type="image/svg+xml" />
-  <link rel="icon" href="/favicon-32.png?v=41" sizes="32x32" type="image/png" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=41" />
+  <link rel="icon" href="/favicon.svg?v=42" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png?v=42" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=42" />
   <meta name="theme-color" content="#1F4FFF" />
+  <script>try{if(localStorage.getItem('acm-announce-closed'))document.documentElement.style.setProperty('--announce-h','0px')}catch(e){}</script>
   <title>Banking-as-a-Service White Paper | ACM Global Tech</title>
   <meta name="description" content="A technical white paper on ACM Banking-as-a-Service: embeddable accounts, cards, and payments via API, built regulated-first with post-quantum security." />
   <meta name="keywords" content="Banking-as-a-Service, BaaS API, embedded finance, white-label banking, post-quantum cryptography, card issuing API, program management, ledger API" />
@@ -25,14 +26,14 @@
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=41" />
+  <link rel="stylesheet" href="/styles.css?v=42" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Banking-as-a-Service: Embeddable Accounts, Cards, and Payments via API","description":"A technical white paper on ACM Banking-as-a-Service: embeddable accounts, cards, and payments via API, built regulated-first with post-quantum security.","url":"https://acmglobaltech.com/research/baas/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://acmglobaltech.com/research/"},{"@type":"ListItem","position":3,"name":"Banking-as-a-Service: Embeddable Accounts, Cards, and Payments via API","item":"https://acmglobaltech.com/research/baas/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does ACM's Banking-as-a-Service include?","acceptedAnswer":{"@type":"Answer","text":"It is a white-label platform that lets institutions embed accounts, cards, and payments through a single, versioned API. It includes a double-entry ledger, virtual and physical card issuing with spend controls, inbound and outbound payment rails with settlement orchestration, and program-management tooling for KYC/AML, transaction monitoring, and disputes. Components are modular, so you can adopt one capability and add others over time."}},{"@type":"Question","name":"How does ACM address post-quantum security in BaaS?","acceptedAnswer":{"@type":"Answer","text":"ACM builds on the NIST post-quantum standards finalized in 2024: ML-KEM (FIPS 203), ML-DSA (FIPS 204), and SLH-DSA (FIPS 205). Because banking and identity records are long-lived, aligning to these standards helps address harvest-now, decrypt-later risk. Threshold cryptography and non-custodial key management are used so no single component holds unilateral control of sensitive keys. These standards are recent, so ACM frames its work as building on and aligning to them."}},{"@type":"Question","name":"Does ACM provide regulatory certifications or charters?","acceptedAnswer":{"@type":"Answer","text":"No. ACM does not claim certifications or charters on your behalf. The platform is designed to support SOC 2, ISO 27001, PCI-DSS, and HIPAA requirements by providing controls, immutable logging, and audit evidence. Your institution remains responsible for its own compliance programs and examinations; ACM's role is to make meeting those obligations a reporting task rather than a forensic one."}}]}</script>
 </head>
 <body>
-  <a class="announce" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a>
+  <div class="announce" id="announceBar"><a class="announce-link" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a><button class="announce-x" type="button" aria-label="Dismiss announcement" onclick="try{localStorage.setItem('acm-announce-closed','1')}catch(e){}document.documentElement.style.setProperty('--announce-h','0px')">&times;</button></div>
   <div class="bg-floaties" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   <header class="header" id="header">
     <div class="container nav-wrap">
@@ -366,6 +367,6 @@
     </div>
   </div>
   
-  <script src="/script.js?v=41"></script>
+  <script src="/script.js?v=42"></script>
 </body>
 </html>
