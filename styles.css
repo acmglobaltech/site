@@ -1160,11 +1160,10 @@ a.hero-badge:hover { border-color: var(--blue-300); transform: translateY(-1px);
 /* ===== Areas of focus ===== */
 .focus-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 36px; }
 .focus-card { padding: 26px; display: flex; flex-direction: column; }
-.focus-ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: linear-gradient(135deg, rgba(31,79,255,.14), rgba(124,92,255,.18)); color: var(--blue); margin-bottom: 14px; }
+.focus-ic { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; background: var(--grad-blue); color: #fff; margin-bottom: 14px; }
 .focus-card h3 { font-family: var(--display); font-weight: 700; font-size: 1.12rem; color: var(--ink); margin-bottom: 8px; }
 .focus-card > p { font-size: .92rem; color: var(--body); line-height: 1.5; flex: 1; }
 .focus-hl { border-color: rgba(31,79,255,.35); background: linear-gradient(180deg, rgba(31,79,255,.05), var(--white)); }
-.focus-hl .focus-ic { background: var(--grad-blue); color: #fff; }
 .focus-repos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .focus-repos a { font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: .76rem; font-weight: 600; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 4px 9px; transition: border-color .2s, color .2s; }
 .focus-repos a::after { content: ' \2197'; opacity: .5; }
