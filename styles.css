@@ -610,8 +610,8 @@ img { max-width: 100%; display: block; }
 .crumbs [aria-current] { color: var(--ink); font-weight: 600; }
 .crumb-sep { margin: 0 8px; opacity: .5; }
 
-/* ----- Page hero (subpages) ----- */
-.page-hero { position: relative; z-index: 2; padding: 40px 0 18px; }
+/* ----- Page hero (subpages): fills the viewport so the trust-strip sits at the fold ----- */
+.page-hero { position: relative; z-index: 2; padding: 40px 0 18px; min-height: calc(100svh - var(--announce-h) - 168px); display: flex; flex-direction: column; justify-content: center; }
 .crumbs + main .page-hero { padding-top: 22px; }
 .page-lead-title { font-family: var(--display); font-weight: 800; font-size: clamp(2.1rem, 4.6vw, 3.3rem); line-height: 1.06; letter-spacing: -1.2px; color: var(--ink); max-width: 16ch; margin-bottom: 8px; }
 .page-lead { font-size: clamp(1.05rem, 1.6vw, 1.22rem); color: var(--body); max-width: 640px; margin: 26px 0 32px; }

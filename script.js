@@ -340,6 +340,10 @@
         window.acmOpenScheduler(intent);
         return;
       }
+      // Real navigation links (page/resource hrefs) must navigate; only in-page
+      // hash CTAs (e.g. #contact) trigger the contact-form scroll/prefill below.
+      var ctaHref = el.getAttribute('href') || '';
+      if (ctaHref && ctaHref.charAt(0) !== '#') return;
       var spec = CTA_INTENT[intent] || CTA_INTENT['Discovery Call'];
       if (ctaField) ctaField.value = intent;
       if (ctaHint) {
