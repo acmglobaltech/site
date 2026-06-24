@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/favicon.svg?v=41" type="image/svg+xml" />
+  <link rel="icon" href="/favicon-32.png?v=41" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=41" />
+  <meta name="theme-color" content="#1F4FFF" />
   <title>Payments &amp; Stablecoins White Paper | ACM Global Tech</title>
   <meta name="description" content="A technical white paper on ACM's fiat and stablecoin settlement rails: architecture, finality, post-quantum security, and integration for regulated banks." />
   <meta name="keywords" content="stablecoin settlement, payment rails architecture, real-time payments, post-quantum payments security, banking-as-a-service payments, cross-border settlement, white-label PSP, atomic settlement" />
@@ -21,13 +25,14 @@
   <link rel="preconnect" href="https://api.fontshare.com" />
   <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
   <link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="/styles.css?v=40" />
+  <link rel="stylesheet" href="/styles.css?v=41" />
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ACM Global Tech","url":"https://acmglobaltech.com/","logo":"https://acmglobaltech.com/assets/og.png","description":"White-label banking technology and a complete banking ecosystem for credit unions, mid-sized banks, and healthcare.","email":"info@acmglobaltech.com","telephone":"+1-407-279-0314","address":{"@type":"PostalAddress","addressLocality":"Jacksonville","addressRegion":"FL","addressCountry":"US"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","name":"Payments and Stablecoin Settlement: An ACM Global Tech White Paper","description":"A technical white paper on ACM's fiat and stablecoin settlement rails: architecture, finality, post-quantum security, and integration for regulated banks.","url":"https://acmglobaltech.com/research/payments-stablecoins/","isPartOf":{"@type":"WebSite","name":"ACM Global Tech","url":"https://acmglobaltech.com/"}}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://acmglobaltech.com/"},{"@type":"ListItem","position":2,"name":"Research","item":"https://acmglobaltech.com/research/"},{"@type":"ListItem","position":3,"name":"Payments and Stablecoin Settlement: An ACM Global Tech White Paper","item":"https://acmglobaltech.com/research/payments-stablecoins/"}]}</script>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How is this white paper different from the Payments & Stablecoins product page?","acceptedAnswer":{"@type":"Answer","text":"The product page describes the capabilities you can buy and brand. This paper goes a layer deeper into the engineering: how settlement finality is modeled across fiat and on-chain rails, how the unified ledger and orchestration layer fit together, and how post-quantum cryptography and inline controls are applied. It is written for architects and risk evaluators who need to understand the design, not just the feature list."}},{"@type":"Question","name":"Does adopting stablecoin settlement mean giving up custody of funds?","acceptedAnswer":{"@type":"Answer","text":"No. ACM supports non-custodial key management using threshold cryptography, so an institution can retain control of keys and funds where its risk and regulatory posture require it. On- and off-ramp conversions between fiat and regulated stablecoins are governed by approval workflows, limits, and whitelists, and traditional rails can run first with stablecoin settlement added once internal controls clear review."}},{"@type":"Question","name":"Why does post-quantum cryptography matter for payments specifically?","acceptedAnswer":{"@type":"Answer","text":"Payment and settlement records stay sensitive for years, and under harvest-now, decrypt-later attacks, data captured today could be decrypted once a capable quantum computer exists. ACM builds toward the NIST post-quantum standards finalized in 2024, ML-KEM (FIPS 203), ML-DSA (FIPS 204), and SLH-DSA (FIPS 205), and applies them first to long-lived records and keys, using a hybrid, crypto-agile approach so algorithms can rotate as the standards evolve."}}]}</script>
 </head>
 <body>
+  <a class="announce" href="/news/pqc-2030-mandate/" data-cta="Announce: 2030 PQC Mandate"><span class="announce-dot" aria-hidden="true"></span><strong>New</strong> The White House set a 2030 post-quantum deadline, see how ACM delivers immediate PQ readiness <span class="announce-arrow" aria-hidden="true">&rarr;</span></a>
   <div class="bg-floaties" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
   <header class="header" id="header">
     <div class="container nav-wrap">
@@ -359,6 +364,6 @@
     </div>
   </div>
   
-  <script src="/script.js?v=40"></script>
+  <script src="/script.js?v=41"></script>
 </body>
 </html>
