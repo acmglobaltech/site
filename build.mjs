@@ -18,7 +18,7 @@ import path from 'node:path';
 const ROOT = path.dirname(new URL(import.meta.url).pathname);
 const SRC = path.join(ROOT, 'src', 'pages');
 const ORIGIN = 'https://acmglobaltech.com';
-const ASSET_V = 'v=46';
+const ASSET_V = 'v=47';
 
 /* ---------- Analytics & advertising (consent-gated, OFF by default) ----------
  * Paste your IDs to switch measurement on. Empty = nothing loads: no tags in
@@ -197,19 +197,7 @@ function renderFooter() {
   }).join('\n        ');
   return `<section class="footer-cta"><div class="container footer-cta-inner">
       <div class="footer-cta-copy">
-        <h2>Ready to modernize your institution?</h2>
-        <p>Talk to ACM about a regulated, white-label banking stack, core, payments, wallets, exchange, and tokenized finance you own.</p>
-      </div>
-      <div class="footer-cta-actions">
-        <a href="/get-started/#contactForm" class="btn btn-primary btn-lg" data-cta="Discovery Call">Schedule a Discovery Call</a>
-        <a href="/get-started/" class="btn btn-ghost btn-lg">Get Started</a>
-      </div>
-    </div></section>
-  <footer class="footer">
-    <div class="container footer-grid">
-      <div class="footer-brand">
-        <a href="/" class="logo logo-footer"><span class="logo-text"><strong>ACM</strong><span class="logo-suffix"><span class="logo-accent">Global</span> Tech</span></span></a>
-        <p class="footer-tag">A complete, white-label banking ecosystem for credit unions, banks &amp; healthcare.</p>
+        <h2>Powering global transformation<br>for banks, credit unions &amp; healthcare.</h2>
         <form class="footer-news" id="footerNews" novalidate aria-label="Newsletter signup">
           <label for="footerNewsEmail">Get ACM insights &amp; release notes</label>
           <div class="footer-news-row">
@@ -218,16 +206,35 @@ function renderFooter() {
           </div>
           <p class="footer-news-note" id="footerNewsNote" hidden></p>
         </form>
-        <p class="footer-meta">Orlando &amp; Jacksonville, FL &middot; Powering Global Transformation</p>
         <div class="footer-contact">
+          <span class="footer-loc">Orlando &amp; Jacksonville, FL</span>
           <a href="tel:+14072790314">+1 (407) 279-0314</a>
           <a href="mailto:info@acmglobaltech.com">info@acmglobaltech.com</a>
           <a href="/login/" class="footer-login">Client Login &rarr;</a>
         </div>
       </div>
+    </div></section>
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo logo-footer" aria-label="ACM Global Tech home"><img class="logo-wordmark" src="/assets/acm.svg?${ASSET_V}" alt="" aria-hidden="true" width="150" height="38" /></a>
+        <p class="footer-tag">A complete, white-label banking ecosystem for credit unions, banks &amp; healthcare.</p>
+        <div class="footer-contact">
+          <span class="footer-loc">Orlando &amp; Jacksonville, FL</span>
+          <a href="tel:+14072790314">+1 (407) 279-0314</a>
+          <a href="mailto:info@acmglobaltech.com">info@acmglobaltech.com</a>
+          <a href="/login/" class="footer-login">Client Login &rarr;</a>
+        </div>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/company/acmglobaltech" target="_blank" rel="noopener noreferrer" aria-label="ACM Global Tech on LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.64h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.08 1.4-2.08 2.85V21h-4z"/></svg></a>
+          <a href="https://x.com/acmglobaltech" target="_blank" rel="noopener noreferrer" aria-label="ACM Global Tech on X"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.9 2H22l-7.27 8.3L23 22h-6.56l-5.14-6.72L5.4 22H2.3l7.77-8.88L1.5 2h6.72l4.65 6.15zm-1.15 18h1.78L7.33 3.9H5.42z"/></svg></a>
+          <a href="https://www.youtube.com/@acmglobaltech" target="_blank" rel="noopener noreferrer" aria-label="ACM Global Tech on YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.53a3.01 3.01 0 0 0-2.12-2.13C19.01 4.9 12 4.9 12 4.9s-7.01 0-8.88.5A3.01 3.01 0 0 0 1 7.53 31.4 31.4 0 0 0 .5 12a31.4 31.4 0 0 0 .5 4.47 3.01 3.01 0 0 0 2.12 2.13c1.87.5 8.88.5 8.88.5s7.01 0 8.88-.5A3.01 3.01 0 0 0 23 16.47 31.4 31.4 0 0 0 23.5 12 31.4 31.4 0 0 0 23 7.53zM9.75 15.3V8.7l5.7 3.3z"/></svg></a>
+          <a href="/contact/" aria-label="Contact ACM Global Tech"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-12.6 7.4L3 21l2.1-5.4A8.5 8.5 0 1 1 21 11.5z"/></svg></a>
+        </div>
+      </div>
         ${cols}
     </div>
-    <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; <a href="/privacy/">Privacy</a> &middot; <a href="/terms/">Terms</a> &middot; <a href="/trust/">Trust &amp; Security</a> &middot; Powering Global Transformation</div>
+    <div class="container copyright">&copy; <span id="year"></span> ACM Global Tech. All rights reserved. &middot; <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a> &middot; <a href="/trust/">Trust Center</a></div>
   </footer>`;
 }
 
